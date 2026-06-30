@@ -22,7 +22,7 @@ export default function Home() {
         <div className="hero-grid">
           <div>
             <div className="kick">Tuesday · On the road to Imola</div>
-            <h1>Merhaba,<br />{firstName}.</h1>
+            <h1>Hello,<br />{firstName}.</h1>
             <p className="sub">Race day is coming. Here is everything for your trip to Imola and the A2RL autonomous racing finals.</p>
             <div style={{ display: 'flex', gap: 12, marginTop: 24, flexWrap: 'wrap' }}>
               <Link to="/agenda" className="btn btn-red">View the agenda</Link>
