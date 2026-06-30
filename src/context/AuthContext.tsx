@@ -5,16 +5,12 @@ export type User = { name: string; role: Role }
 
 type AuthCtx = {
   user: User | null
-  login: (name: string, code: string) => { ok: boolean; error?: string }
+  login: (name: string, role: Role) => { ok: boolean; error?: string }
   logout: () => void
 }
 
 const Ctx = createContext<AuthCtx>(null as unknown as AuthCtx)
 const KEY = 'cxa2rl.user'
-
-// Demo access codes — gated, invite-only feel. Swap for a real backend later.
-const VIP_CODE = 'IMOLA26'
-const ADMIN_CODE = 'CONTROL26'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
@@ -26,13 +22,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     else localStorage.removeItem(KEY)
   }, [user])
 
-  function login(name: string, code: string) {
+  // For now: just pick a role and enter a name (no access code).
+  function login(name: string, role: Role) {
     const n = name.trim()
     if (!n) return { ok: false, error: 'Please enter your name.' }
-    const c = code.trim().toUpperCase()
-    if (c === ADMIN_CODE) { setUser({ name: n, role: 'admin' }); return { ok: true } }
-    if (c === VIP_CODE) { setUser({ name: n, role: 'vip' }); return { ok: true } }
-    return { ok: false, error: 'That access code is not recognised. Check your invitation.' }
+    setUser({ name: n, role })
+    return { ok: true }
   }
 
   function logout() { setUser(null) }

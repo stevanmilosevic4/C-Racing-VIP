@@ -7,14 +7,12 @@ export default function Login() {
   const { login } = useAuth()
   const nav = useNavigate()
   const [name, setName] = useState('')
-  const [code, setCode] = useState('')
   const [err, setErr] = useState<string | null>(null)
 
-  function submit(e: React.FormEvent) {
-    e.preventDefault()
-    const res = login(name, code)
+  function enter(role: 'vip' | 'admin') {
+    const res = login(name, role)
     if (!res.ok) { setErr(res.error ?? 'Login failed'); return }
-    nav('/')
+    nav(role === 'admin' ? '/admin' : '/')
   }
 
   return (
@@ -41,25 +39,23 @@ export default function Login() {
         <div className="login-box">
           <div className="private">● Members only</div>
           <h2>Welcome to the crew.</h2>
-          <p className="hint">Enter your name and the access code from your invitation.</p>
+          <p className="hint">Enter your name, then choose how you’re joining.</p>
 
-          <form onSubmit={submit}>
+          <form onSubmit={(e) => { e.preventDefault(); enter('vip') }}>
             {err && <div className="login-err">{err}</div>}
             <label className="field">
               <span>Your name</span>
               <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Alex" autoFocus />
             </label>
-            <label className="field">
-              <span>Access code</span>
-              <input value={code} onChange={(e) => { setCode(e.target.value); setErr(null) }} placeholder="From your invite" />
-            </label>
-            <button className="btn btn-red" style={{ width: '100%' }} type="submit">Enter the paddock →</button>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
+              <button type="submit" className="btn btn-red">Enter as Guest</button>
+              <button type="button" className="btn btn-dark" onClick={() => enter('admin')}>Enter as Organiser</button>
+            </div>
           </form>
 
           <div className="demo-creds">
-            <div><b>Demo access</b></div>
-            VIP guest — code <code>IMOLA26</code><br />
-            Organizer (admin) — code <code>CONTROL26</code>
+            <b>Guest</b> — the VIP experience (home, agenda, ticket, book a visit).<br />
+            <b>Organiser</b> — the event-control board and guest records.
           </div>
         </div>
       </section>
