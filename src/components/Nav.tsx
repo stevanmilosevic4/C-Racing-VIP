@@ -32,8 +32,7 @@ export default function Nav() {
     <nav className="nav">
       <div className="wrap nav-inner">
         <NavLink to={user.role === 'admin' ? '/admin' : '/'} className="brand">
-          <Logo />
-          <small>Constructor</small>
+          <Logo size={22} />
         </NavLink>
 
         <div className={`nav-links ${open ? 'open' : ''}`} onClick={() => setOpen(false)}>

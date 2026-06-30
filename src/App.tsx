@@ -70,7 +70,7 @@ export default function App() {
 function NotFound() {
   return (
     <div className="wrap" style={{ textAlign: 'center', padding: '80px 0' }}>
-      <Logo size={56} />
+      <div style={{ display: 'inline-block' }}><Logo size={26} /></div>
       <h1 className="page-title" style={{ marginTop: 20 }}>Off track</h1>
       <p className="page-sub" style={{ margin: '12px auto 0' }}>This page isn’t on the map. Head back to the paddock.</p>
     </div>
