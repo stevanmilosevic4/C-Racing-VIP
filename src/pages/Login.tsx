@@ -47,7 +47,7 @@ export default function Login() {
             {err && <div className="login-err">{err}</div>}
             <label className="field">
               <span>Your name</span>
-              <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Öznur" autoFocus />
+              <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Alex" autoFocus />
             </label>
             <label className="field">
               <span>Access code</span>

@@ -32,15 +32,15 @@ function t(id: string, cat: string, title: string, owner: string, due: string, p
 
 export const SEED_TASKS: Task[] = [
   // Strategy & dates
-  t('s1', 'Strategy', 'Confirm budget / target for the series', 'Bojana', '04 Jul', 'High', 'week'),
-  t('s2', 'Strategy', 'Confirm 25th-anniversary coupling for Sept', 'Bojana', '04 Jul', 'High', 'week'),
-  t('s3', 'Strategy', 'Confirm Abu Dhabi date (October)', 'Bojana', '11 Jul', 'High', 'backlog'),
+  t('s1', 'Strategy', 'Confirm budget / target for the series', 'Jordan', '04 Jul', 'High', 'week'),
+  t('s2', 'Strategy', 'Confirm 25th-anniversary coupling for Sept', 'Jordan', '04 Jul', 'High', 'week'),
+  t('s3', 'Strategy', 'Confirm Abu Dhabi date (October)', 'Jordan', '11 Jul', 'High', 'backlog'),
   // External outreach
-  t('o1', 'Outreach', 'Finalise full ecosystem distribution list', 'Bojana', '02 Jul', 'High', 'progress'),
+  t('o1', 'Outreach', 'Finalise full ecosystem distribution list', 'Jordan', '02 Jul', 'High', 'progress'),
   t('o2', 'Outreach', 'Create calendar blockers (.ics / Outlook holds)', 'Marketing', '03 Jul', 'High', 'week'),
-  t('o3', 'Outreach', 'Send calendar blockers to whole ecosystem', 'Bojana', '04 Jul', 'High', 'week'),
-  t('o4', 'Outreach', 'Ask recipients to forward to their partners', 'Bojana', '04 Jul', 'Med', 'backlog'),
-  t('o5', 'Outreach', 'Track outreach & responses', 'Bojana', 'Ongoing', 'Med', 'backlog'),
+  t('o3', 'Outreach', 'Send calendar blockers to whole ecosystem', 'Jordan', '04 Jul', 'High', 'week'),
+  t('o4', 'Outreach', 'Ask recipients to forward to their partners', 'Jordan', '04 Jul', 'Med', 'backlog'),
+  t('o5', 'Outreach', 'Track outreach & responses', 'Jordan', 'Ongoing', 'Med', 'backlog'),
   // Digital
   t('d1', 'Digital', 'Build invite-only landing page (this app)', 'Design', '11 Jul', 'High', 'progress'),
   t('d2', 'Digital', 'Add RSVP / registration capture to page', 'Design', '11 Jul', 'High', 'progress'),
@@ -53,18 +53,18 @@ export const SEED_TASKS: Task[] = [
   t('c4', 'Content', 'Brief A2RL teams to amplify (toolkit)', 'Marketing', '15 Jul', 'Med', 'backlog'),
   t('c5', 'Content', 'Press / amplification plan for finals', 'Marketing', '21 Aug', 'Med', 'backlog'),
   // Guest & VIP mgmt
-  t('g1', 'Guests', 'Build master guest list (tiered)', 'Bojana', '09 Jul', 'High', 'progress'),
-  t('g2', 'Guests', 'Set up VIP RSVP & ticket tracker (16)', 'Bojana', '11 Jul', 'High', 'backlog'),
-  t('g3', 'Guests', 'Lock VIP headcount for finals', 'Bojana', '14 Aug', 'High', 'backlog'),
-  t('g4', 'Guests', 'Allocate 16 VIP race-day tickets', 'Bojana', '21 Aug', 'High', 'backlog'),
+  t('g1', 'Guests', 'Build master guest list (tiered)', 'Jordan', '09 Jul', 'High', 'progress'),
+  t('g2', 'Guests', 'Set up VIP RSVP & ticket tracker (16)', 'Jordan', '11 Jul', 'High', 'backlog'),
+  t('g3', 'Guests', 'Lock VIP headcount for finals', 'Jordan', '14 Aug', 'High', 'backlog'),
+  t('g4', 'Guests', 'Allocate 16 VIP race-day tickets', 'Jordan', '21 Aug', 'High', 'backlog'),
   t('g5', 'Guests', 'VIP dinner seating / guest plan', 'Event ops', '28 Aug', 'Med', 'backlog'),
   // Testing days
   t('t1', 'Testing', 'Prepare garage-day invite (relaxed)', 'Marketing', '16 Jul', 'High', 'week'),
-  t('t2', 'Testing', 'Send testing-window 1 invites', 'Bojana', '16 Jul', 'High', 'backlog'),
+  t('t2', 'Testing', 'Send testing-window 1 invites', 'Jordan', '16 Jul', 'High', 'backlog'),
   t('t3', 'Testing', 'Prepare partner presentation (autonomous racing)', 'Marketing', '18 Jul', 'Med', 'backlog'),
   t('t4', 'Testing', 'On-site host + garage tours — window 1', 'Event ops', '21 Jul', 'Med', 'backlog'),
   t('t5', 'Testing', 'Content capture — window 1', 'Marketing', '27 Jul', 'Med', 'backlog'),
-  t('t6', 'Testing', 'Send testing-window 2 invites', 'Bojana', '30 Jul', 'Med', 'backlog'),
+  t('t6', 'Testing', 'Send testing-window 2 invites', 'Jordan', '30 Jul', 'Med', 'backlog'),
   t('t7', 'Testing', 'On-site host + garage tours — window 2', 'Event ops', '02 Aug', 'Med', 'backlog'),
   // Event operations (finals)
   t('e1', 'Event ops', 'Decide suite/lodge (if VIPs > 16)', 'Event ops', '15 Aug', 'High', 'backlog'),
@@ -74,9 +74,9 @@ export const SEED_TASKS: Task[] = [
   t('e5', 'Event ops', 'Confirm AV / hosting / logistics', 'Event ops', '31 Aug', 'Med', 'backlog'),
   t('e6', 'Event ops', 'Finals week — 31 Aug–5 Sep (race day)', 'Event ops', '05 Sep', 'High', 'backlog'),
   // Abu Dhabi
-  t('a1', 'Abu Dhabi', 'Confirm AD date & venue access', 'Bojana', '11 Jul', 'High', 'backlog'),
+  t('a1', 'Abu Dhabi', 'Confirm AD date & venue access', 'Jordan', '11 Jul', 'High', 'backlog'),
   t('a2', 'Abu Dhabi', 'Abu Dhabi save-the-date', 'Design', '18 Jul', 'Med', 'backlog'),
-  t('a3', 'Abu Dhabi', 'Abu Dhabi guest list (parallel track)', 'Bojana', 'TBC', 'Med', 'backlog'),
+  t('a3', 'Abu Dhabi', 'Abu Dhabi guest list (parallel track)', 'Jordan', 'TBC', 'Med', 'backlog'),
 ]
 
 export const COLUMNS: { key: Column; label: string; bar: string }[] = [
@@ -101,21 +101,21 @@ export const MILESTONES = [
 ]
 
 export const DECISIONS = [
-  { decision: 'Set budget / target for series', owner: 'Bojana', by: '04 Jul', status: 'Open', notes: 'Unblocks lodge + dinner' },
-  { decision: 'Couple finals with 25th anniversary?', owner: 'Bojana', by: '04 Jul', status: 'Open', notes: 'Drives Sept programme & budget' },
-  { decision: 'Confirm Abu Dhabi October date', owner: 'Bojana', by: '11 Jul', status: 'Open', notes: 'Needed for series save-the-date' },
+  { decision: 'Set budget / target for series', owner: 'Jordan', by: '04 Jul', status: 'Open', notes: 'Unblocks lodge + dinner' },
+  { decision: 'Couple finals with 25th anniversary?', owner: 'Jordan', by: '04 Jul', status: 'Open', notes: 'Drives Sept programme & budget' },
+  { decision: 'Confirm Abu Dhabi October date', owner: 'Jordan', by: '11 Jul', status: 'Open', notes: 'Needed for series save-the-date' },
   { decision: 'Rent dedicated suite/lodge? (if VIPs > 16)', owner: 'Event ops', by: '15 Aug', status: 'Open', notes: 'Booking lead time — critical path' },
   { decision: 'VIP dinner date (eve of race / 4 Sep?)', owner: 'Event ops', by: '14 Aug', status: 'Open', notes: 'Confirm with venue' },
 ]
 
 // Demo guest list for the admin Guests view.
 export const GUESTS = [
-  { name: 'Oznur', tier: 'Organizer', city: 'Bremen', status: 'Confirmed' },
-  { name: 'Ilknur', tier: 'VIP', city: 'Istanbul', status: 'Confirmed' },
-  { name: 'Arden', tier: 'VIP', city: 'London', status: 'Invited' },
-  { name: 'Sasha', tier: 'VIP', city: 'Berlin', status: 'Pending' },
-  { name: 'Mujgan', tier: 'VIP', city: 'Ankara', status: 'Invited' },
-  { name: 'Demir', tier: 'Public', city: 'Milan', status: 'Confirmed' },
-  { name: 'Elif', tier: 'VIP', city: 'Munich', status: 'Pending' },
-  { name: 'Kaan', tier: 'Public', city: 'Bologna', status: 'Invited' },
+  { name: 'Alex', tier: 'Organizer', city: 'Bremen', status: 'Confirmed' },
+  { name: 'Maya', tier: 'VIP', city: 'Istanbul', status: 'Confirmed' },
+  { name: 'Liam', tier: 'VIP', city: 'London', status: 'Invited' },
+  { name: 'Noah', tier: 'VIP', city: 'Berlin', status: 'Pending' },
+  { name: 'Emma', tier: 'VIP', city: 'Ankara', status: 'Invited' },
+  { name: 'Lucas', tier: 'Public', city: 'Milan', status: 'Confirmed' },
+  { name: 'Sofia', tier: 'VIP', city: 'Munich', status: 'Pending' },
+  { name: 'Jonas', tier: 'Public', city: 'Bologna', status: 'Invited' },
 ]
