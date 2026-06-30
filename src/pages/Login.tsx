@@ -21,7 +21,7 @@ export default function Login() {
     <div className="login-screen">
       <aside className="login-aside">
         <div className="brand" style={{ color: '#fff' }}>
-          <Logo />
+          <Logo size={34} onDark />
           <small style={{ color: 'rgba(255,255,255,.6)' }}>Constructor × A2RL</small>
         </div>
         <div>

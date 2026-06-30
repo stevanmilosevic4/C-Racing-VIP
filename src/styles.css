@@ -3,17 +3,18 @@
    Navy + red dominant, cool-blue accent. Mobile-first.
    ============================================================ */
 :root {
-  --navy-900: #060f24;
-  --navy-800: #0a1733;
-  --navy-700: #0f2147;
-  --navy-600: #16305f;
-  --navy-500: #1d3d76;
-  --red: #e23026;
-  --red-dark: #b71f17;
-  --red-soft: #fde7e5;
-  --blue: #1e9bf0;
-  --blue-dark: #1075c4;
-  --blue-soft: #e6f3fd;
+  /* Official Constructor brand palette: Blue #008CE2 · Red #DB4E3D · Navy #1C2747 */
+  --navy-900: #0a1226;
+  --navy-800: #131d39;
+  --navy-700: #1c2747;
+  --navy-600: #25355f;
+  --navy-500: #314a82;
+  --red: #db4e3d;
+  --red-dark: #b73a2b;
+  --red-soft: #fbe9e6;
+  --blue: #008ce2;
+  --blue-dark: #0072bd;
+  --blue-soft: #e2f2fd;
   --green: #16b981;
   --green-soft: #dcf6ec;
   --amber: #f2a93b;
@@ -107,7 +108,7 @@ ul { margin: 0; }
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .nav-inner { display: flex; align-items: center; gap: 18px; height: 66px; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: .04em; }
-.brand .logo { width: 38px; height: 38px; }
+.brand .logo { height: 30px; width: auto; }
 .brand small { font-size: 11px; letter-spacing: .22em; color: var(--muted-2); font-weight: 800; text-transform: uppercase; }
 .nav-links { display: flex; gap: 4px; margin-left: 8px; flex: 1; overflow-x: auto; scrollbar-width: none; }
 .nav-links::-webkit-scrollbar { display: none; }
