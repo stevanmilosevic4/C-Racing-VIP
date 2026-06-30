@@ -27,7 +27,7 @@ export const TEAMS: Team[] = [
     color: '#e23026',
     est: '2001',
     lastYear: '5th',
-    drivers: 'Autonomy stack: Constructor Fabric',
+    drivers: 'First-ever autonomous overtake',
     blurb: 'The home team. Constructor University (formerly Jacobs University Bremen) marks 25 years in 2026 and brings its own autonomy stack to the grid — research-led, full-stack, and unmistakably navy & red.',
   },
   {
