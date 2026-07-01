@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth, type Role } from './context/AuthContext'
+import { logActivity } from './activity'
 import Nav from './components/Nav'
 import Logo from './components/Logo'
 
@@ -15,6 +17,25 @@ import Booking from './pages/Booking'
 import AdminBoard from './pages/admin/AdminBoard'
 import AdminGuests from './pages/admin/AdminGuests'
 import AdminPlan from './pages/admin/AdminPlan'
+import AdminActivity from './pages/admin/AdminActivity'
+
+// Friendly names for each route, used in the activity log.
+const PAGE_NAMES: Record<string, string> = {
+  '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola',
+  '/predict': 'Podium Bet', '/ticket': 'Ticket', '/crew': 'Crew', '/book': 'Book a Visit',
+  '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity',
+}
+
+// Records a page view for the signed-in user on every route change.
+function ActivityTracker() {
+  const { user } = useAuth()
+  const loc = useLocation()
+  useEffect(() => {
+    if (!user || loc.pathname === '/login') return
+    logActivity(user.name, user.role, 'Viewed', PAGE_NAMES[loc.pathname] || loc.pathname)
+  }, [loc.pathname, user?.name])
+  return null
+}
 
 function Protected({ role, children }: { role?: Role; children: JSX.Element }) {
   const { user, viewRole } = useAuth()
@@ -70,6 +91,7 @@ export default function App() {
   return (
     <div className="app">
       <Nav />
+      <ActivityTracker />
       <PreviewBanner />
       <main className="app-main">
         <BackBar />
@@ -90,6 +112,7 @@ export default function App() {
           <Route path="/admin" element={<Protected role="admin"><AdminBoard /></Protected>} />
           <Route path="/admin/guests" element={<Protected role="admin"><AdminGuests /></Protected>} />
           <Route path="/admin/plan" element={<Protected role="admin"><AdminPlan /></Protected>} />
+          <Route path="/admin/activity" element={<Protected role="admin"><AdminActivity /></Protected>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

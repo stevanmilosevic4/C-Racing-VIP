@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { usePersisted, useToast } from '../hooks'
+import { logActivity } from '../activity'
 
 type Slot = { id: string; date: string; window: string; time: string; cap: number }
 
@@ -32,6 +33,7 @@ export default function Booking() {
     if (!selected) { show('Pick a slot first'); return }
     setBooking({ slotId: selected, people, interest, note })
     show('Garage visit booked ✓')
+    if (user && slot) logActivity(user.name, user.role, 'Booked a garage visit', `${slot.date} · ${booking ? 'updated' : 'new'}`)
   }
   function cancel() { setBooking(null); setSelected(null); show('Booking cancelled') }
 

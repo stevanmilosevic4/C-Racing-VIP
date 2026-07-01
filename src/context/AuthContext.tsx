@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { logActivity } from '../activity'
 
 export type Role = 'vip' | 'admin'
 export type User = { name: string; role: Role }
@@ -40,6 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!n) return { ok: false, error: 'Please enter your name.' }
     setPreviewGuest(false)
     setUser({ name: n, role })
+    logActivity(n, role, 'Signed in', role === 'admin' ? 'as Organiser' : 'as Guest')
     return { ok: true }
   }
 

@@ -1,11 +1,14 @@
 import { TEAMS } from '../data/participants'
 import { usePersisted, useToast } from '../hooks'
+import { useAuth } from '../context/AuthContext'
+import { logActivity } from '../activity'
 
 const MEDAL = ['🥇', '🥈', '🥉']
 const POS_CLASS = ['p1', 'p2', 'p3']
 
 export default function Predict() {
   const { msg, show } = useToast()
+  const { user } = useAuth()
   // store ordered list of team ids
   const [order, setOrder] = usePersisted<string[]>('cxa2rl.predict', TEAMS.map((t) => t.id))
   const [locked, setLocked] = usePersisted<boolean>('cxa2rl.predictLocked', false)
@@ -22,7 +25,10 @@ export default function Predict() {
     setOrder(next)
   }
   function reset() { setOrder(TEAMS.map((t) => t.id)); setLocked(false); show('Bet cleared') }
-  function lock() { setLocked(true); show('Bet locked in ✓') }
+  function lock() {
+    setLocked(true); show('Bet locked in ✓')
+    if (user) logActivity(user.name, user.role, 'Locked in podium bet', `P1 ${podium[0]?.name ?? ''}`)
+  }
   function edit() { setLocked(false); show('Bet unlocked — make your changes') }
 
   return (
