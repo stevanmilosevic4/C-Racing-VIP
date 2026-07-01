@@ -28,6 +28,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: '300+ km/h, no one behind the wheel',
     body: 'The autonomous land-speed record fell during the series — proof that the cars are getting genuinely, alarmingly fast on the straights.',
     meta: 'Record run · 2024',
+    img: '/Formula on track.webp',
   },
   {
     id: 's3',
@@ -36,6 +37,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: 'First autonomous overtake under racing conditions',
     body: 'The moment the field stopped doing laps and started racing each other. Software making a real, committed pass at speed.',
     meta: 'Highlight reel',
+    img: '/Formula CT.jpg',
   },
   {
     id: 's4',
