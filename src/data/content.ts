@@ -59,7 +59,7 @@ export type Crew = {
 }
 
 export const CREW: Crew[] = [
-  { id: 'c1', name: 'Jordan', role: 'Series Lead', color: '#0a1733', fact: 'Runs the whole campaign — guest list, outreach, and the final call on everything. Reviews every message before it goes out.' },
+  { id: 'c1', name: 'Bojana', role: 'Series Lead', color: '#0a1733', fact: 'Runs the whole campaign — guest list, outreach, and the final call on everything. Reviews every message before it goes out.' },
   { id: 'c2', name: 'Marco', role: 'Race Engineer', color: '#e23026', fact: 'Talks to the car more than to people. Can read a telemetry trace like a novel and will happily explain every line on a garage tour.' },
   { id: 'c3', name: 'Aiko', role: 'Autonomy Lead', color: '#1e9bf0', fact: 'Owns the perception + planning stack. Believes the best lap is the one the car finds that no human would have dared.' },
   { id: 'c4', name: 'Luca', role: 'Performance & Sim', color: '#16b981', fact: 'Lives in the simulator. Has driven more virtual Imola laps than anyone alive — and the car has driven even more.' },

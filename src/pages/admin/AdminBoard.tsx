@@ -3,7 +3,7 @@ import { SEED_TASKS, COLUMNS, type Task, type Column } from '../../data/tasks'
 import { usePersisted } from '../../hooks'
 
 const CATS = ['All', 'Strategy', 'Outreach', 'Digital', 'Content', 'Guests', 'Testing', 'Event ops', 'Abu Dhabi']
-const OWNERS = ['All', 'Jordan', 'Marketing', 'Design', 'Event ops']
+const OWNERS = ['All', 'Bojana', 'Marketing', 'Design', 'Event ops']
 
 export default function AdminBoard() {
   const [tasks, setTasks] = usePersisted<Task[]>('cxa2rl.tasks', SEED_TASKS)
@@ -31,7 +31,7 @@ export default function AdminBoard() {
     const title = newTitle.trim()
     if (!title) return
     const id = 'n' + Date.now()
-    setTasks((ts) => [{ id, cat: newCat, catTag: SEED_TASKS.find((x) => x.cat === newCat)?.catTag ?? 'tag-navy', title, owner: 'Jordan', due: 'TBC', priority: 'Med', col: 'backlog' } as Task, ...ts])
+    setTasks((ts) => [{ id, cat: newCat, catTag: SEED_TASKS.find((x) => x.cat === newCat)?.catTag ?? 'tag-navy', title, owner: 'Bojana', due: 'TBC', priority: 'Med', col: 'backlog' } as Task, ...ts])
     setNewTitle('')
   }
   function reset() { setTasks(SEED_TASKS) }
