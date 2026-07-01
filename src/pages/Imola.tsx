@@ -26,7 +26,7 @@ export default function Imola() {
       <div className="grid cols-3">
         {IMOLA.gallery.map((g) => (
           <div key={g.caption} className="card spot">
-            <div className="media" style={g.img ? { backgroundImage: `url(${g.img})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+            <div className="media" style={g.img ? { backgroundImage: `url("${encodeURI(g.img)}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
               {!g.img && <span className="ph">{g.caption}</span>}
             </div>
           </div>

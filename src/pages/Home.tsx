@@ -62,7 +62,7 @@ export default function Home() {
       <div className="grid cols-4">
         {SPOTLIGHTS.map((s) => (
           <article key={s.id} className="card spot">
-            <div className="media" style={s.img ? { backgroundImage: `url(${s.img})`, backgroundSize: 'cover' } : undefined}>
+            <div className="media" style={s.img ? { backgroundImage: `url("${encodeURI(s.img)}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
               <span className={`tag ${s.badgeClass} badge`}>{s.badge}</span>
               {!s.img && <span className="ph">Add photo</span>}
             </div>

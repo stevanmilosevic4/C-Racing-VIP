@@ -19,6 +19,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: 'Yas Marina — the inaugural A2RL race',
     body: 'Eight university teams, no drivers, full-send. The first A2RL race set the benchmark for autonomous wheel-to-wheel racing. Constructor were in the mix.',
     meta: 'Abu Dhabi · 2024',
+    img: '/Yas Marina.jpg',
   },
   {
     id: 's2',
