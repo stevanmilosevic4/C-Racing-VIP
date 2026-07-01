@@ -282,6 +282,11 @@ ul { margin: 0; }
 .uni-banner { display: flex; align-items: center; gap: 20px; padding: 22px 26px; border-radius: 18px; color: #fff;
   background: linear-gradient(120deg, var(--red-dark), var(--red)); position: relative; overflow: hidden; }
 .uni-banner .yrs { font-size: 46px; font-weight: 900; line-height: 1; flex: none; }
+.uni-banner .cu-seal { flex: none; width: 84px; height: 84px; border-radius: 50%; border: 2px solid rgba(255,255,255,.75);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; line-height: 1; gap: 3px; position: relative; z-index: 1; }
+.uni-banner .cu-seal .cu { font-size: 14px; font-weight: 900; letter-spacing: .14em; }
+.uni-banner .cu-seal .n { font-size: 30px; font-weight: 900; }
+.uni-banner .cu-seal .y { font-size: 9px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; opacity: .85; }
 .uni-banner .uni-copy { position: relative; z-index: 1; }
 .uni-banner .uni-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; }
 .uni-banner h3 { font-size: 18px; font-weight: 900; }

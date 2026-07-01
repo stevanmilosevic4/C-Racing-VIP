@@ -43,11 +43,15 @@ export default function Home() {
 
       {/* 25 YEARS BANNER */}
       <div className="uni-banner" style={{ marginTop: 22 }}>
-        <div className="yrs">25</div>
+        <div className="cu-seal">
+          <span className="cu">CU</span>
+          <span className="n">25</span>
+          <span className="y">Years</span>
+        </div>
         <div className="uni-copy">
-          <div className="uni-eyebrow">Constructor University · Est. 2001 · Constructing the future</div>
-          <h3>25 years, pointed at the future.</h3>
-          <p>A quarter-century in, the story isn’t the years behind us — it’s what they were building toward. Constructor University was founded to bring <b>physics, computer science, engineering and business</b> together under one roof, and autonomous racing is where those disciplines collide at 300 km/h. Imola is our proving ground: real science, real engineering, and the next generation of talent taking navy &amp; red onto the grid — <b>constructing the future</b>, on track.</p>
+          <div className="uni-eyebrow">Constructor University · Bremen · Est. 2001</div>
+          <h3>Celebrating 25 years of Constructor University.</h3>
+          <p>For twenty-five years, Constructor University in Bremen has been an international, English-language campus bringing <b>physics, computer science, engineering and business</b> together — teaching across disciplines and turning research into real-world impact. A quarter-century on, the mission holds: educate boldly, research fearlessly, and keep <b>constructing the future</b>. It’s also proudly the home of our A2RL autonomous racing team.</p>
         </div>
         <div className="seal">25</div>
       </div>
