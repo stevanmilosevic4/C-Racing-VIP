@@ -24,9 +24,11 @@ export default function Imola() {
       {/* PHOTOS placeholder */}
       <div className="section-head"><div><div className="eyebrow">Gallery</div><h2 style={{ marginTop: 8 }}>Imola in pictures</h2></div><span className="label">Add your photos to /public</span></div>
       <div className="grid cols-3">
-        {['The Autodromo', 'Old town & Rocca', 'Emilia-Romagna'].map((c) => (
-          <div key={c} className="card spot">
-            <div className="media"><span className="ph">{c}</span></div>
+        {IMOLA.gallery.map((g) => (
+          <div key={g.caption} className="card spot">
+            <div className="media" style={g.img ? { backgroundImage: `url(${g.img})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+              {!g.img && <span className="ph">{g.caption}</span>}
+            </div>
           </div>
         ))}
       </div>
