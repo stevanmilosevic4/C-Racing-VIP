@@ -108,14 +108,10 @@ export const DECISIONS = [
   { decision: 'VIP dinner date (eve of race / 4 Sep?)', owner: 'Event ops', by: '14 Aug', status: 'Open', notes: 'Confirm with venue' },
 ]
 
-// Demo guest list for the admin Guests view.
-export const GUESTS = [
-  { name: 'Alex', tier: 'Organizer', city: 'Bremen', status: 'Confirmed' },
-  { name: 'Maya', tier: 'VIP', city: 'Istanbul', status: 'Confirmed' },
-  { name: 'Liam', tier: 'VIP', city: 'London', status: 'Invited' },
-  { name: 'Noah', tier: 'VIP', city: 'Berlin', status: 'Pending' },
-  { name: 'Emma', tier: 'VIP', city: 'Ankara', status: 'Invited' },
-  { name: 'Lucas', tier: 'Public', city: 'Milan', status: 'Confirmed' },
-  { name: 'Sofia', tier: 'VIP', city: 'Munich', status: 'Pending' },
-  { name: 'Jonas', tier: 'Public', city: 'Bologna', status: 'Invited' },
+// Guest list for the admin Guests view. Seed = the organising team;
+// more guests are added through the app (persisted to localStorage).
+export type Guest = { name: string; dept: string; tier: string; status: string }
+export const GUESTS: Guest[] = [
+  { name: 'Bojana Gecic', dept: "Chairwoman's office", tier: 'Organiser', status: 'Confirmed' },
+  { name: 'Stevan Milosevic', dept: 'University recruitment', tier: 'Organiser', status: 'Confirmed' },
 ]

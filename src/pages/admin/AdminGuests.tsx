@@ -1,40 +1,84 @@
-import { GUESTS } from '../../data/tasks'
+import { useState } from 'react'
+import { GUESTS, type Guest } from '../../data/tasks'
 import { EVENT } from '../../data/event'
+import { usePersisted, useToast } from '../../hooks'
+
+const TIERS = ['Organiser', 'VIP', 'Public']
+const STATUSES = ['Confirmed', 'Invited', 'Pending']
+
+function tierClass(tier: string) {
+  return tier === 'VIP' ? 'tag-red' : tier === 'Organiser' ? 'tag-navy' : 'tag-blue'
+}
 
 export default function AdminGuests() {
-  const vip = GUESTS.filter((g) => g.tier === 'VIP').length
-  const confirmed = GUESTS.filter((g) => g.status === 'Confirmed').length
+  const { msg, show } = useToast()
+  const [guests, setGuests] = usePersisted<Guest[]>('cxa2rl.guests', GUESTS)
+  const [name, setName] = useState('')
+  const [dept, setDept] = useState('')
+  const [tier, setTier] = useState('VIP')
+  const [status, setStatus] = useState('Invited')
+
+  const vip = guests.filter((g) => g.tier === 'VIP').length
+  const confirmed = guests.filter((g) => g.status === 'Confirmed').length
+
+  function addGuest(e: React.FormEvent) {
+    e.preventDefault()
+    if (!name.trim()) { show('Enter a name first'); return }
+    setGuests((gs) => [...gs, { name: name.trim(), dept: dept.trim() || '—', tier, status }])
+    setName(''); setDept(''); show('Guest added ✓')
+  }
+  function remove(i: number) {
+    setGuests((gs) => gs.filter((_, idx) => idx !== i))
+    show('Guest removed')
+  }
+  function reset() { setGuests(GUESTS); show('Guest list reset') }
 
   return (
     <div className="wrap">
       <div className="eyebrow">Organizer</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Guest Records</h1>
-      <p className="page-sub">{GUESTS.length} people · VIP capacity is {EVENT.vipCapacity}. Trigger a suite/lodge booking if confirmed VIPs exceed {EVENT.vipCapacity}.</p>
+      <p className="page-sub">{guests.length} {guests.length === 1 ? 'person' : 'people'} · VIP capacity is {EVENT.vipCapacity}. Add guests below — trigger a suite/lodge booking if confirmed VIPs exceed {EVENT.vipCapacity}.</p>
 
       <div className="stat-cards" style={{ marginTop: 24 }}>
-        <div className="stat-card"><div className="num">{GUESTS.length}</div><div className="cap">On the list</div></div>
+        <div className="stat-card"><div className="num">{guests.length}</div><div className="cap">On the list</div></div>
         <div className="stat-card"><div className="num">{vip}/{EVENT.vipCapacity}</div><div className="cap">VIP allocated</div></div>
         <div className="stat-card"><div className="num">{confirmed}</div><div className="cap">Confirmed</div></div>
-        <div className="stat-card"><div className="num">{GUESTS.filter((g) => g.status === 'Pending').length}</div><div className="cap">Pending</div></div>
+        <div className="stat-card"><div className="num">{guests.filter((g) => g.status === 'Pending').length}</div><div className="cap">Pending</div></div>
       </div>
 
-      <div style={{ marginTop: 26, overflowX: 'auto' }}>
+      {/* Add guest */}
+      <form className="board-toolbar" onSubmit={addGuest} style={{ marginTop: 20 }}>
+        <input style={{ flex: 2, minWidth: 150 }} placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
+        <input style={{ flex: 2, minWidth: 150 }} placeholder="Office / role (optional)" value={dept} onChange={(e) => setDept(e.target.value)} />
+        <select value={tier} onChange={(e) => setTier(e.target.value)}>{TIERS.map((t) => <option key={t}>{t}</option>)}</select>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>{STATUSES.map((s) => <option key={s}>{s}</option>)}</select>
+        <button className="btn btn-blue btn-sm" type="submit">Add guest</button>
+        <button className="btn btn-ghost btn-sm" type="button" onClick={reset}>Reset</button>
+      </form>
+
+      <div style={{ marginTop: 18, overflowX: 'auto' }}>
         <table className="table">
           <thead>
-            <tr><th>Name</th><th>Tier</th><th>Travels from</th><th>RSVP</th></tr>
+            <tr><th>Name</th><th>Office / role</th><th>Tier</th><th>RSVP</th><th></th></tr>
           </thead>
           <tbody>
-            {GUESTS.map((g) => (
-              <tr key={g.name}>
+            {guests.map((g, i) => (
+              <tr key={i}>
                 <td style={{ fontWeight: 700 }}>{g.name}</td>
-                <td><span className={`tag ${g.tier === 'VIP' ? 'tag-red' : g.tier === 'Organizer' ? 'tag-navy' : 'tag-blue'}`}>{g.tier}</span></td>
-                <td className="muted">{g.city}</td>
+                <td className="muted">{g.dept}</td>
+                <td><span className={`tag ${tierClass(g.tier)}`}>{g.tier}</span></td>
                 <td><span className={`st ${g.status}`}>{g.status}</span></td>
+                <td style={{ textAlign: 'right' }}>
+                  <button className="icon-btn" title="Remove" onClick={() => remove(i)} style={{ width: 30, height: 30 }}>✕</button>
+                </td>
               </tr>
             ))}
+            {guests.length === 0 && <tr><td colSpan={5} className="muted" style={{ textAlign: 'center', padding: 30 }}>No guests yet — add the first above.</td></tr>}
           </tbody>
         </table>
       </div>
+
+      {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
   )
 }

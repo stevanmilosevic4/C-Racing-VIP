@@ -225,20 +225,20 @@ ul { margin: 0; }
 .predict-row .pmove button:hover { color: var(--blue); border-color: var(--blue); }
 
 /* ---------- bet slip (predict) ---------- */
-.betslip { margin-top: 26px; background: linear-gradient(135deg, var(--navy-900), var(--navy-700)); color: #fff; border-radius: 18px; padding: 20px 22px; max-width: 640px; }
+.betslip { margin-top: 26px; background: linear-gradient(135deg, var(--navy-900), var(--navy-700)); color: #fff; border-radius: 18px; padding: 26px 28px; }
 .betslip-head { display: flex; align-items: center; justify-content: space-between; font-weight: 800; font-size: 14px; }
 .betslip-status { font-size: 12px; font-weight: 800; color: rgba(255,255,255,.5); }
 .betslip-status.on { color: var(--green); }
 .podium-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
 @media (max-width: 520px) { .podium-cards { grid-template-columns: 1fr; } }
-.podium-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 14px; text-align: center; position: relative; }
+.podium-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 26px 20px; text-align: center; position: relative; }
 .podium-card.p1 { border-color: rgba(245,197,66,.6); }
 .podium-card.p2 { border-color: rgba(199,204,214,.5); }
 .podium-card.p3 { border-color: rgba(214,138,78,.5); }
-.podium-card .pc-medal { font-size: 22px; }
-.podium-card .pc-crest { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; font-weight: 900; font-size: 14px; margin: 8px auto 10px; }
-.podium-card .pc-name { font-weight: 800; font-size: 14px; line-height: 1.25; }
-.podium-card .pc-pos { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.55); font-weight: 800; margin-top: 6px; }
+.podium-card .pc-medal { font-size: 34px; }
+.podium-card .pc-crest { width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; font-weight: 900; font-size: 19px; margin: 12px auto 12px; }
+.podium-card .pc-name { font-weight: 800; font-size: 17px; line-height: 1.25; }
+.podium-card .pc-pos { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 800; margin-top: 8px; }
 
 /* ---------- ticket ---------- */
 .ticket { color: #fff; border-radius: 22px; overflow: hidden; background:

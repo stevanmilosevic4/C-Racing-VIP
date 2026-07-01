@@ -26,18 +26,16 @@ function Protected({ role, children }: { role?: Role; children: JSX.Element }) {
 
 // Back / Home bar shown on inner pages (not on the two landing pages or login).
 function BackBar() {
-  const { user, viewRole } = useAuth()
+  const { user } = useAuth()
   const loc = useLocation()
   const nav = useNavigate()
   if (!user) return null
   const landing = ['/login', '/', '/admin']
   if (landing.includes(loc.pathname)) return null
-  const home = viewRole === 'admin' ? '/admin' : '/'
   return (
     <div className="wrap">
       <div className="backbar">
         <button className="backbtn" onClick={() => nav(-1)}>← Back</button>
-        <button className="backbtn" onClick={() => nav(home)}>⌂ Home</button>
       </div>
     </div>
   )
