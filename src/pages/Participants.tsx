@@ -3,9 +3,9 @@ import { TEAMS } from '../data/participants'
 export default function Participants() {
   return (
     <div className="wrap">
-      <div className="eyebrow">The Grid</div>
-      <h1 className="page-title" style={{ marginTop: 10 }}>Participants</h1>
-      <p className="page-sub">The A2RL teams — seeded from last year’s grid. We’ll confirm the full 2026 Imola line-up as entries are locked.</p>
+      <div className="eyebrow">The Grid · Racing Teams</div>
+      <h1 className="page-title" style={{ marginTop: 10 }}>Race Teams</h1>
+      <p className="page-sub">The autonomous-racing teams competing in the A2RL series — the cars and crews on the grid at Imola. Seeded from last year’s field; the full 2026 line-up firms up as entries are locked.</p>
 
       <div className="grid cols-3" style={{ marginTop: 30 }}>
         {TEAMS.map((tm) => (

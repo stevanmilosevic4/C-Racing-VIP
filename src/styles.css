@@ -126,6 +126,19 @@ ul { margin: 0; }
 .icon-btn { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: transparent; border: 1px solid var(--line); color: var(--muted); }
 .icon-btn:hover { color: var(--red); border-color: var(--red); }
 .mobile-toggle { display: none; }
+
+/* organiser → guest preview banner */
+.preview-bar { position: sticky; top: 66px; z-index: 40; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+  background: linear-gradient(90deg, var(--navy-700), var(--navy-600)); color: #fff; padding: 10px 18px; font-size: 13px; font-weight: 600; }
+.preview-bar b { font-weight: 800; }
+.preview-bar button { background: #fff; color: var(--navy-700); border: 0; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; }
+.preview-bar button:hover { background: var(--blue-soft); }
+
+/* back / home bar on inner pages */
+.backbar { display: flex; gap: 10px; margin-bottom: 6px; }
+.backbtn { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line); color: var(--muted);
+  padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; transition: all .12s ease; }
+.backbtn:hover { color: var(--blue-dark); border-color: var(--blue); background: var(--blue-soft); }
 @media (max-width: 860px) {
   .nav-links { position: fixed; inset: 66px 0 auto 0; flex-direction: column; background: #fff; padding: 10px 16px 16px; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); transform: translateY(-130%); transition: transform .2s ease; }
   .nav-links.open { transform: none; }
@@ -266,12 +279,16 @@ ul { margin: 0; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
 
 /* banners */
-.uni-banner { display: flex; align-items: center; gap: 20px; padding: 22px 26px; border-radius: 18px; color: #fff;
+.uni-banner { display: flex; align-items: center; gap: 30px; padding: 34px 38px; border-radius: 20px; color: #fff;
   background: linear-gradient(120deg, var(--red-dark), var(--red)); position: relative; overflow: hidden; }
-.uni-banner .yrs { font-size: 46px; font-weight: 900; line-height: 1; }
-.uni-banner h3 { font-size: 18px; }
-.uni-banner p { color: rgba(255,255,255,.85); font-size: 13px; margin-top: 5px; max-width: 520px; }
-.uni-banner .seal { position: absolute; right: -20px; bottom: -30px; font-size: 150px; font-weight: 900; opacity: .12; }
+.uni-banner .yrs { font-size: 82px; font-weight: 900; line-height: 1; flex: none; }
+.uni-banner .uni-copy { position: relative; z-index: 1; }
+.uni-banner .uni-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 8px; }
+.uni-banner h3 { font-size: 27px; font-weight: 900; }
+.uni-banner p { color: rgba(255,255,255,.9); font-size: 15.5px; line-height: 1.55; margin-top: 10px; max-width: 680px; }
+.uni-banner p b { color: #fff; font-weight: 800; }
+.uni-banner .seal { position: absolute; right: -24px; bottom: -40px; font-size: 200px; font-weight: 900; opacity: .12; line-height: 1; }
+@media (max-width: 620px) { .uni-banner { flex-direction: column; align-items: flex-start; gap: 12px; padding: 26px 24px; } .uni-banner .yrs { font-size: 60px; } .uni-banner h3 { font-size: 22px; } }
 
 /* ---------- login ---------- */
 .login-screen { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }

@@ -6,7 +6,7 @@ import Logo from './Logo'
 const VIP_LINKS = [
   { to: '/', label: 'Home', end: true },
   { to: '/agenda', label: 'Agenda' },
-  { to: '/participants', label: 'Participants' },
+  { to: '/participants', label: 'Teams' },
   { to: '/imola', label: 'Imola' },
   { to: '/predict', label: 'Predict' },
   { to: '/ticket', label: 'Ticket' },
@@ -21,17 +21,18 @@ const ADMIN_LINKS = [
 ]
 
 export default function Nav() {
-  const { user, logout } = useAuth()
+  const { user, viewRole, previewGuest, setPreviewGuest, logout } = useAuth()
   const nav = useNavigate()
   const [open, setOpen] = useState(false)
   if (!user) return null
-  const links = user.role === 'admin' ? ADMIN_LINKS : VIP_LINKS
+  const links = viewRole === 'admin' ? ADMIN_LINKS : VIP_LINKS
   const initials = user.name.trim().slice(0, 1).toUpperCase()
+  const isAdmin = user.role === 'admin'
 
   return (
     <nav className="nav">
       <div className="wrap nav-inner">
-        <NavLink to={user.role === 'admin' ? '/admin' : '/'} className="brand">
+        <NavLink to={viewRole === 'admin' ? '/admin' : '/'} className="brand">
           <Logo size={22} />
         </NavLink>
 
@@ -44,10 +45,22 @@ export default function Nav() {
         </div>
 
         <div className="nav-user">
+          {/* Organiser: toggle between the guest preview and the admin view */}
+          {isAdmin && (
+            previewGuest ? (
+              <button className="btn btn-dark btn-sm hide-sm" onClick={() => { setPreviewGuest(false); nav('/admin') }}>
+                ← Organiser
+              </button>
+            ) : (
+              <button className="btn btn-ghost btn-sm hide-sm" onClick={() => { setPreviewGuest(true); nav('/') }}>
+                👁 View as guest
+              </button>
+            )
+          )}
           <div className="avatar">{initials}</div>
           <div className="hide-sm">
             <div className="nav-name">{user.name}</div>
-            <div className="nav-role">{user.role === 'admin' ? 'Organizer' : 'VIP Crew'}</div>
+            <div className="nav-role">{isAdmin ? (previewGuest ? 'Guest preview' : 'Organizer') : 'VIP Crew'}</div>
           </div>
           <button className="icon-btn" title="Sign out" onClick={() => { logout(); nav('/login') }}>⎋</button>
           <button className="icon-btn mobile-toggle" onClick={() => setOpen((o) => !o)} title="Menu">{open ? '✕' : '≡'}</button>

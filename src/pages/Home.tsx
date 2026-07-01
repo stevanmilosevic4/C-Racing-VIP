@@ -44,9 +44,10 @@ export default function Home() {
       {/* 25 YEARS BANNER */}
       <div className="uni-banner" style={{ marginTop: 22 }}>
         <div className="yrs">25</div>
-        <div>
-          <h3>25 Years of Constructor University</h3>
-          <p>2026 marks a quarter-century for Constructor University, Bremen — and the home team is on the A2RL grid. The Imola series doubles as our anniversary moment.</p>
+        <div className="uni-copy">
+          <div className="uni-eyebrow">Constructor University · Est. 2001</div>
+          <h3>History, pointed at the future.</h3>
+          <p>Twenty-five years isn’t the story — where it leads is. Constructor University was built for <b>physics, computer science and business</b>, and autonomous racing is exactly where they meet. Imola is that future on track: our science, our engineering, our people.</p>
         </div>
         <div className="seal">25</div>
       </div>

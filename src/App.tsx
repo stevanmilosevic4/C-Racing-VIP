@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth, type Role } from './context/AuthContext'
 import Nav from './components/Nav'
 import Logo from './components/Logo'
@@ -17,11 +17,43 @@ import AdminGuests from './pages/admin/AdminGuests'
 import AdminPlan from './pages/admin/AdminPlan'
 
 function Protected({ role, children }: { role?: Role; children: JSX.Element }) {
-  const { user } = useAuth()
+  const { user, viewRole } = useAuth()
   const loc = useLocation()
   if (!user) return <Navigate to="/login" state={{ from: loc }} replace />
-  if (role && user.role !== role) return <Navigate to={user.role === 'admin' ? '/admin' : '/'} replace />
+  if (role && viewRole !== role) return <Navigate to={viewRole === 'admin' ? '/admin' : '/'} replace />
   return children
+}
+
+// Back / Home bar shown on inner pages (not on the two landing pages or login).
+function BackBar() {
+  const { user, viewRole } = useAuth()
+  const loc = useLocation()
+  const nav = useNavigate()
+  if (!user) return null
+  const landing = ['/login', '/', '/admin']
+  if (landing.includes(loc.pathname)) return null
+  const home = viewRole === 'admin' ? '/admin' : '/'
+  return (
+    <div className="wrap">
+      <div className="backbar">
+        <button className="backbtn" onClick={() => nav(-1)}>← Back</button>
+        <button className="backbtn" onClick={() => nav(home)}>⌂ Home</button>
+      </div>
+    </div>
+  )
+}
+
+// Slim banner shown while an organiser is previewing the guest experience.
+function PreviewBanner() {
+  const { user, previewGuest, setPreviewGuest } = useAuth()
+  const nav = useNavigate()
+  if (!user || user.role !== 'admin' || !previewGuest) return null
+  return (
+    <div className="preview-bar">
+      <span>👁 Previewing the <b>guest experience</b> as an organiser</span>
+      <button onClick={() => { setPreviewGuest(false); nav('/admin') }}>Back to Event Control →</button>
+    </div>
+  )
 }
 
 function Footer() {
@@ -40,7 +72,9 @@ export default function App() {
   return (
     <div className="app">
       <Nav />
+      <PreviewBanner />
       <main className="app-main">
+        <BackBar />
         <Routes>
           <Route path="/login" element={user ? <Navigate to={user.role === 'admin' ? '/admin' : '/'} replace /> : <Login />} />
 
