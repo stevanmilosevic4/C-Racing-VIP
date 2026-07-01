@@ -45,9 +45,9 @@ export default function Home() {
       <div className="uni-banner" style={{ marginTop: 22 }}>
         <div className="yrs">25</div>
         <div className="uni-copy">
-          <div className="uni-eyebrow">Constructor University · Est. 2001</div>
-          <h3>History, pointed at the future.</h3>
-          <p>Twenty-five years isn’t the story — where it leads is. Constructor University was built for <b>physics, computer science and business</b>, and autonomous racing is exactly where they meet. Imola is that future on track: our science, our engineering, our people.</p>
+          <div className="uni-eyebrow">Constructor University · Est. 2001 · Constructing the future</div>
+          <h3>25 years, pointed at the future.</h3>
+          <p>A quarter-century in, the story isn’t the years behind us — it’s what they were building toward. Constructor University was founded to bring <b>physics, computer science, engineering and business</b> together under one roof, and autonomous racing is where those disciplines collide at 300 km/h. Imola is our proving ground: real science, real engineering, and the next generation of talent taking navy &amp; red onto the grid — <b>constructing the future</b>, on track.</p>
         </div>
         <div className="seal">25</div>
       </div>
