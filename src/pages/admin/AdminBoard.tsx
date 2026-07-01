@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
 import { SEED_TASKS, COLUMNS, type Task, type Column } from '../../data/tasks'
-import { usePersisted } from '../../hooks'
+import { useSynced } from '../../hooks'
 
 const CATS = ['All', 'Strategy', 'Outreach', 'Digital', 'Content', 'Guests', 'Testing', 'Event ops', 'Abu Dhabi']
 const OWNERS = ['All', 'Bojana', 'Marketing', 'Design', 'Event ops']
 
 export default function AdminBoard() {
-  const [tasks, setTasks] = usePersisted<Task[]>('cxa2rl.tasks', SEED_TASKS)
+  const [tasks, setTasks] = useSynced<Task[]>('cxa2rl.tasks', SEED_TASKS)
   const [cat, setCat] = useState('All')
   const [owner, setOwner] = useState('All')
   const [q, setQ] = useState('')

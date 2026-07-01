@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { GUESTS, type Guest } from '../../data/tasks'
 import { EVENT } from '../../data/event'
-import { usePersisted, useToast } from '../../hooks'
+import { useSynced, useToast } from '../../hooks'
 
 const TIERS = ['Organiser', 'VIP', 'Public']
 const STATUSES = ['Confirmed', 'Invited', 'Pending']
@@ -12,7 +12,7 @@ function tierClass(tier: string) {
 
 export default function AdminGuests() {
   const { msg, show } = useToast()
-  const [guests, setGuests] = usePersisted<Guest[]>('cxa2rl.guests', GUESTS)
+  const [guests, setGuests] = useSynced<Guest[]>('cxa2rl.guests', GUESTS)
   const [name, setName] = useState('')
   const [dept, setDept] = useState('')
   const [tier, setTier] = useState('VIP')

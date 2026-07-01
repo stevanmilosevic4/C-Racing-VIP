@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { usePersisted, useToast } from '../hooks'
+import { useSynced, useToast } from '../hooks'
 import { logActivity } from '../activity'
 
 type Slot = { id: string; date: string; window: string; time: string; cap: number }
@@ -20,7 +20,7 @@ type Booking = { slotId: string; people: number; interest: string; note: string 
 export default function Booking() {
   const { user } = useAuth()
   const { msg, show } = useToast()
-  const [booking, setBooking] = usePersisted<Booking | null>('cxa2rl.booking', null)
+  const [booking, setBooking] = useSynced<Booking | null>(`cxa2rl.booking:${user?.name ?? 'guest'}`, null)
   const [selected, setSelected] = useState<string | null>(booking?.slotId ?? null)
   const [people, setPeople] = useState(booking?.people ?? 1)
   const [interest, setInterest] = useState(booking?.interest ?? 'See the car run')

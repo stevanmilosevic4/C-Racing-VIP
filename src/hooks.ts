@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { dbEnabled, getState, setState, subscribeState, lsGet, lsSet } from './db'
 
 // Persist a piece of state to localStorage.
 export function usePersisted<T>(key: string, initial: T) {
@@ -9,6 +10,38 @@ export function usePersisted<T>(key: string, initial: T) {
     try { localStorage.setItem(key, JSON.stringify(val)) } catch { /* ignore */ }
   }, [key, val])
   return [val, setVal] as const
+}
+
+// Like usePersisted, but backed by the shared backend when configured
+// (live-synced across devices via realtime), with localStorage fallback.
+export function useSynced<T>(key: string, initial: T) {
+  const [val, setValState] = useState<T>(() => lsGet<T>(key, initial))
+  const valRef = useRef(val)
+  valRef.current = val
+
+  useEffect(() => {
+    if (!dbEnabled) return
+    let active = true
+    getState<T>(key).then((remote) => {
+      if (!active) return
+      if (remote !== undefined) { setValState(remote); lsSet(key, remote) }
+      else { setState(key, valRef.current) } // seed the shared baseline once
+    })
+    const unsub = subscribeState<T>(key, (remote) => { if (active) { setValState(remote); lsSet(key, remote) } })
+    return () => { active = false; unsub() }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key])
+
+  function update(next: T | ((prev: T) => T)) {
+    setValState((prev) => {
+      const value = typeof next === 'function' ? (next as (p: T) => T)(prev) : next
+      lsSet(key, value)
+      if (dbEnabled) setState(key, value)
+      return value
+    })
+  }
+
+  return [val, update] as const
 }
 
 // A live countdown to a target ISO date. Returns days/hours/mins/secs and a `past` flag.

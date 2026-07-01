@@ -1,5 +1,5 @@
 import { TEAMS } from '../data/participants'
-import { usePersisted, useToast } from '../hooks'
+import { useSynced, useToast } from '../hooks'
 import { useAuth } from '../context/AuthContext'
 import { logActivity } from '../activity'
 
@@ -9,9 +9,10 @@ const POS_CLASS = ['p1', 'p2', 'p3']
 export default function Predict() {
   const { msg, show } = useToast()
   const { user } = useAuth()
-  // store ordered list of team ids
-  const [order, setOrder] = usePersisted<string[]>('cxa2rl.predict', TEAMS.map((t) => t.id))
-  const [locked, setLocked] = usePersisted<boolean>('cxa2rl.predictLocked', false)
+  const uk = user?.name ?? 'guest'
+  // per-user, synced to the backend so a VIP's bet follows them across devices
+  const [order, setOrder] = useSynced<string[]>(`cxa2rl.predict:${uk}`, TEAMS.map((t) => t.id))
+  const [locked, setLocked] = useSynced<boolean>(`cxa2rl.predictLocked:${uk}`, false)
 
   const teams = order.map((id) => TEAMS.find((t) => t.id === id)!).filter(Boolean)
   const podium = teams.slice(0, 3)

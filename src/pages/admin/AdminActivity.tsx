@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
-import { getActivity, clearActivity, timeAgo, fmtTime, type Activity } from '../../activity'
+import { useEffect, useMemo, useState } from 'react'
+import { timeAgo, fmtTime, type Activity } from '../../activity'
+import { fetchActivity, subscribeActivity, clearActivity, dbEnabled } from '../../db'
 import { useToast } from '../../hooks'
 
 type Person = { name: string; role: 'vip' | 'admin'; events: number; logins: number; last: number; first: number }
@@ -24,15 +25,23 @@ const ICON: Record<string, string> = {
 
 export default function AdminActivity() {
   const { msg, show } = useToast()
-  const [nonce, setNonce] = useState(0) // force refresh after clear
   const [scope, setScope] = useState<'guests' | 'all'>('guests')
-  const all = useMemo(() => getActivity(), [nonce])
+  const [all, setAll] = useState<Activity[]>([])
+
+  async function load() { setAll(await fetchActivity()) }
+  useEffect(() => {
+    load()
+    const unsub = subscribeActivity(() => load())       // live updates when backend is on
+    const iv = dbEnabled ? undefined : window.setInterval(load, 4000) // poll local mirror otherwise
+    return () => { unsub(); if (iv) window.clearInterval(iv) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const filtered = scope === 'guests' ? all.filter((a) => a.role === 'vip') : all
   const feed = [...filtered].reverse() // newest first
-  const people = summarise(filtered)
+  const people = useMemo(() => summarise(filtered), [filtered])
 
-  function clear() { clearActivity(); setNonce((n) => n + 1); show('Activity log cleared') }
+  async function clear() { await clearActivity(); await load(); show('Activity log cleared') }
 
   return (
     <div className="wrap">
@@ -41,8 +50,9 @@ export default function AdminActivity() {
       <p className="page-sub">Who signed in, when, and what they’re doing in the app — sign-ins, page views and key actions.</p>
 
       <div className="info-note">
-        ⓘ This log currently records activity from <b>this browser only</b> (no backend yet). To see every VIP across
-        all their own devices in real time, connect a backend — the same events are ready to send to an API.
+        {dbEnabled
+          ? <>● <b>Live</b> — synced across all devices in real time via the backend.</>
+          : <>ⓘ Backend not connected — showing activity from <b>this browser only</b>. Add your Supabase keys (see README) to sync every VIP across all devices live.</>}
       </div>
 
       {/* controls */}
