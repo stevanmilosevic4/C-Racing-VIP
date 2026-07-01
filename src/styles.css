@@ -298,16 +298,17 @@ ul { margin: 0; }
 .uni-banner { display: flex; align-items: center; gap: 20px; padding: 22px 26px; border-radius: 18px; color: #fff;
   background: linear-gradient(120deg, var(--red-dark), var(--red)); position: relative; overflow: hidden; }
 .uni-banner .yrs { font-size: 46px; font-weight: 900; line-height: 1; flex: none; }
-.uni-banner .cu-seal { flex: none; width: 84px; height: 84px; border-radius: 50%; border: 2px solid rgba(255,255,255,.75);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; line-height: 1; gap: 3px; position: relative; z-index: 1; }
-.uni-banner .cu-seal .cu { font-size: 14px; font-weight: 900; letter-spacing: .14em; }
-.uni-banner .cu-seal .n { font-size: 30px; font-weight: 900; }
-.uni-banner .cu-seal .y { font-size: 9px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; opacity: .85; }
+.uni-banner .cu-logo { flex: none; height: 60px; width: auto; position: relative; z-index: 1; }
+@media (max-width: 620px) { .uni-banner .cu-logo { height: 46px; } }
 .uni-banner .uni-copy { position: relative; z-index: 1; }
 .uni-banner .uni-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; }
 .uni-banner h3 { font-size: 18px; font-weight: 900; }
 .uni-banner p { color: rgba(255,255,255,.85); font-size: 13px; line-height: 1.55; margin-top: 6px; max-width: 640px; }
 .uni-banner p b { color: #fff; font-weight: 800; }
+.uni-banner .uni-rank { margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.22);
+  font-size: 12px; letter-spacing: .02em; color: rgba(255,255,255,.8); max-width: 640px; }
+.uni-banner .uni-rank b { color: #fff; font-weight: 700; }
+.uni-banner .uni-rank span { margin: 0 8px; opacity: .5; }
 .uni-banner .seal { position: absolute; right: -20px; bottom: -30px; font-size: 150px; font-weight: 900; opacity: .12; line-height: 1; }
 @media (max-width: 620px) { .uni-banner { flex-direction: column; align-items: flex-start; gap: 12px; } }
 

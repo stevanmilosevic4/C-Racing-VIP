@@ -43,15 +43,12 @@ export default function Home() {
 
       {/* 25 YEARS BANNER */}
       <div className="uni-banner" style={{ marginTop: 22 }}>
-        <div className="cu-seal">
-          <span className="cu">CU</span>
-          <span className="n">25</span>
-          <span className="y">Years</span>
-        </div>
+        <img className="cu-logo" src="/cu-25-white.png" alt="Constructor University · 25 Years" />
         <div className="uni-copy">
           <div className="uni-eyebrow">Constructor University · Bremen · Est. 2001</div>
           <h3>Celebrating 25 years of Constructor University.</h3>
-          <p>For twenty-five years, Constructor University in Bremen has been an international, English-language campus bringing <b>physics, computer science, engineering and business</b> together — teaching across disciplines and turning research into real-world impact. A quarter-century on, the mission holds: educate boldly, research fearlessly, and keep <b>constructing the future</b>. It’s also proudly the home of our A2RL autonomous racing team.</p>
+          <p>For twenty-five years, Constructor University in Bremen has brought <b>physics, computer science, engineering and business</b> together on one international, English-language campus — teaching across disciplines and turning research into real-world impact. A quarter-century on, the mission holds: educate boldly, research fearlessly, and keep <b>constructing the future</b>. From the lab bench to the paddock, that same spirit now powers our A2RL autonomous racing team.</p>
+          <div className="uni-rank">Ranked <b>#1 private university in Germany</b> and among the world’s <b>top 25%</b> <span>·</span> Times Higher Education</div>
         </div>
         <div className="seal">25</div>
       </div>
