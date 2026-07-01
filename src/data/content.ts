@@ -69,9 +69,9 @@ export const CREW: Crew[] = [
 export const IMOLA = {
   // Gallery — set `img` to a file in /public (e.g. '/imola-autodromo.jpg') to show a photo.
   gallery: [
-    { caption: 'The Autodromo', img: '/Autodromo Imola.jpg' },
-    { caption: 'Old town & Rocca', img: '/Old town Imola.webp' },
-    { caption: 'Emilia-Romagna', img: '/Emilia Romagna.webp' },
+    { caption: 'Autodromo Enzo e Dino Ferrari — the main straight on race day', img: '/Autodromo Imola.jpg' },
+    { caption: 'Rocca Sforzesca — the medieval fortress in Imola’s old town', img: '/Old town Imola.webp' },
+    { caption: 'Bologna — the regional capital, 35 km away', img: '/Emilia Romagna.webp' },
   ],
   intro:
     'Imola sits in the Emilia-Romagna region of northern Italy, on the river Santerno between Bologna and the Adriatic coast. A compact, walkable town of about 70,000, it is known worldwide for one thing above all — its racing circuit — but there is a medieval heart, a Sforza castle, and some of Italy\'s best food waiting just beyond the paddock.',

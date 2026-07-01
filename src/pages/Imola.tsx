@@ -29,6 +29,11 @@ export default function Imola() {
             <div className="media" style={g.img ? { backgroundImage: `url("${encodeURI(g.img)}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
               {!g.img && <span className="ph">{g.caption}</span>}
             </div>
+            {g.img && (
+              <div style={{ padding: '12px 16px', fontSize: 13, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.45 }}>
+                {g.caption}
+              </div>
+            )}
           </div>
         ))}
       </div>
