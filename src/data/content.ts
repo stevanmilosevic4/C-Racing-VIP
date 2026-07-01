@@ -46,6 +46,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: 'Constructor University on the grid',
     body: 'The home team\'s run from the garage to the grid — the build, the long nights, and the autonomy stack that puts navy & red on track.',
     meta: 'Behind the scenes',
+    img: '/Engineering Garage Formula Poster.png',
   },
 ]
 
