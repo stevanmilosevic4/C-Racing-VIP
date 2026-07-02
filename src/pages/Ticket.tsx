@@ -58,7 +58,7 @@ export default function Ticket() {
             <div className="tk-cell"><div className="l">Date</div><div className="v">Sat 5 Sep</div></div>
             <div className="tk-cell"><div className="l">Gate</div><div className="v">15:00</div></div>
             <div className="tk-cell"><div className="l">Venue</div><div className="v" style={{ fontSize: 14 }}>Autodromo Enzo e Dino Ferrari</div></div>
-            <div className="tk-cell"><div className="l">Access</div><div className="v" style={{ fontSize: 14 }}>Paddock · Grandstand · Lodge</div></div>
+            <div className="tk-cell"><div className="l">Access</div><div className="v" style={{ fontSize: 14 }}>Paddock · Grandstand</div></div>
             <div className="tk-cell"><div className="l">Seat</div><div className="v">Main straight</div></div>
           </div>
           <div className="tk-perf">

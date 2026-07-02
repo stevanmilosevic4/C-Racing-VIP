@@ -113,7 +113,6 @@ export const F1_HISTORY: F1Event[] = [
 export const TICKET_PERKS = [
   'Race-day grandstand VIP seat — main straight',
   'Paddock & pit-lane access pass',
-  'Constructor lodge / lounge all weekend',
   'Guided VIP garage tour with the engineers',
   'Constructor VIP dinner (eve of race)',
   'Hospitality — brunch, drinks & catering',
