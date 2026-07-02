@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Countdown, { MiniTimer } from '../components/Countdown'
+import Gallery from '../components/Gallery'
 import { EVENT, COUNTDOWN_TARGETS } from '../data/event'
 import { SPOTLIGHTS } from '../data/content'
 import { PHASES } from '../data/agenda'
@@ -76,6 +77,16 @@ export default function Home() {
           </article>
         ))}
       </div>
+
+      {/* PHOTO GALLERY */}
+      <div className="section-head">
+        <div>
+          <div className="eyebrow">Gallery</div>
+          <h2 style={{ marginTop: 8 }}>From the paddock</h2>
+        </div>
+        <span className="label">scroll →</span>
+      </div>
+      <Gallery />
 
       {/* AGENDA PREVIEW */}
       <div className="section-head">
