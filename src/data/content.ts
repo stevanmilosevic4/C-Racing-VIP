@@ -106,8 +106,9 @@ export const F1_HISTORY: F1Event[] = [
   { yr: '1981', title: 'San Marino GP begins', note: 'From 1981 the circuit hosted the San Marino Grand Prix — Italy\'s "second" F1 race, named for the nearby microstate.' },
   { yr: '1994', title: 'A weekend that changed F1', note: 'The darkest weekend in the sport: the loss of Roland Ratzenberger and Ayrton Senna led to sweeping, lasting safety reforms.' },
   { yr: '2006', title: 'End of the San Marino GP', note: 'The last San Marino Grand Prix was held in 2006 before Imola dropped off the calendar.' },
-  { yr: '2020', title: 'F1 returns', note: 'Imola came back as the Emilia-Romagna Grand Prix, a fan and driver favourite for its old-school character.' },
-  { yr: 'Now', title: 'A modern classic', note: 'One of the last true drivers\' circuits — narrow, fast, unforgiving, and steeped in history. The perfect stage for autonomous racing\'s next chapter.' },
+  { yr: '2020', title: 'F1 returns', note: 'Imola came back as the Emilia-Romagna Grand Prix — a fan and driver favourite for its old-school character — and ran every season through 2025.' },
+  { yr: '2025', title: 'The last Grand Prix (for now)', note: 'The May 2025 Emilia-Romagna GP proved to be the final F1 race at Imola: the circuit dropped off the 2026 calendar, its slot taken by the new Madrid street race.' },
+  { yr: '2026', title: 'The big comeback — autonomous racing', note: 'Top-level racing returns to the Santerno valley: the A2RL autonomous racing series brings its testing days and finals to Imola. A historic circuit opens a brand-new chapter — no one behind the wheel.' },
 ]
 
 export const TICKET_PERKS = [

@@ -21,6 +21,22 @@ export default function Imola() {
         ))}
       </div>
 
+      {/* PHOTOS */}
+      <div className="grid cols-3" style={{ marginTop: 40 }}>
+        {IMOLA.gallery.map((g) => (
+          <div key={g.caption} className="card spot">
+            <div className="media" style={g.img ? { backgroundImage: `url("${encodeURI(g.img)}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+              {!g.img && <span className="ph">{g.caption}</span>}
+            </div>
+            {g.img && (
+              <div style={{ padding: '12px 16px', fontSize: 13, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.45 }}>
+                {g.caption}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
       {/* WHAT TO DO */}
       <div className="section-head"><div><div className="eyebrow">What to do</div><h2 style={{ marginTop: 8 }}>Beyond the paddock</h2></div></div>
       <div className="grid cols-2">
