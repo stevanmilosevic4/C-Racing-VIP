@@ -294,6 +294,14 @@ ul { margin: 0; }
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
 
+.activity { display: flex; align-items: flex-start; gap: 12px; text-align: left; width: 100%; cursor: pointer;
+  background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font: inherit; color: var(--ink); transition: border-color .12s ease, background .12s ease; }
+.activity:hover { border-color: var(--blue); }
+.activity.on { border-color: var(--green); background: var(--green-soft); }
+.activity .check { flex: none; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--muted-2); display: grid; place-items: center; font-weight: 900; font-size: 13px; color: #fff; margin-top: 1px; }
+.activity.on .check { background: var(--green); border-color: var(--green); }
+.activity .act-label { font-size: 14px; line-height: 1.4; font-weight: 600; }
+
 /* banners */
 .uni-banner { display: flex; align-items: center; gap: 20px; padding: 22px 26px; border-radius: 18px; color: #fff;
   background: linear-gradient(120deg, var(--red-dark), var(--red)); position: relative; overflow: hidden; }

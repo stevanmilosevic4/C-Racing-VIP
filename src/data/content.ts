@@ -59,12 +59,15 @@ export type Crew = {
 }
 
 export const CREW: Crew[] = [
-  { id: 'c1', name: 'Bojana', role: 'Series Lead', color: '#0a1733', fact: 'Runs the whole campaign — guest list, outreach, and the final call on everything. Reviews every message before it goes out.' },
-  { id: 'c2', name: 'Marco', role: 'Race Engineer', color: '#e23026', fact: 'Talks to the car more than to people. Can read a telemetry trace like a novel and will happily explain every line on a garage tour.' },
-  { id: 'c3', name: 'Aiko', role: 'Autonomy Lead', color: '#1e9bf0', fact: 'Owns the perception + planning stack. Believes the best lap is the one the car finds that no human would have dared.' },
-  { id: 'c4', name: 'Luca', role: 'Performance & Sim', color: '#16b981', fact: 'Lives in the simulator. Has driven more virtual Imola laps than anyone alive — and the car has driven even more.' },
-  { id: 'c5', name: 'Priya', role: 'Systems & Safety', color: '#6a52d1', fact: 'The reason the car stops when it should. Keeps the fail-safes honest and the garage calm under pressure.' },
-  { id: 'c6', name: 'Tomas', role: 'Garage & Logistics', color: '#f2a93b', fact: 'Gets the car, the crew, and the freight to the right place at the right time. The unsung MVP of every race weekend.' },
+  { id: 'c1', name: 'Ilya Shimchik', role: 'Team Principal', color: '#0a1733', fact: 'Leads Constructor Racing — strategy, the crew, and the calls that count trackside.' },
+  { id: 'c2', name: 'Alexander Buyval', role: 'Sr. Autonomous Driving Engineer', color: '#db4e3d', fact: 'Senior engineer on the autonomy stack — the perception, planning and control that put the car on the limit.' },
+  { id: 'c3', name: 'Maksim Filipenko', role: 'Sr. Autonomous Driving Engineer', color: '#008ce2', fact: 'Builds and tunes the driving software that reads the track and commits to the racing line.' },
+  { id: 'c4', name: 'Maksim Liubimov', role: 'Sr. Autonomous Driving Engineer', color: '#16b981', fact: 'Works across perception and planning — turning sensor data into fast, repeatable laps.' },
+  { id: 'c5', name: 'Ruslan Mustafin', role: 'Sr. Autonomous Driving Engineer', color: '#6a52d1', fact: 'On the senior engineering crew keeping the car quick and the fail-safes honest.' },
+  { id: 'c6', name: 'Vladislav Sarzheniuk', role: 'Sr. Autonomous Driving Engineer', color: '#f2a93b', fact: 'Senior autonomy engineer — long hours in the sim and at the pit wall dialling in pace.' },
+  { id: 'c7', name: 'Giorgi Ambokadze', role: 'Autonomous Driving Engineer · Intern', color: '#0b63c4', fact: 'Rising talent on the autonomy team, shipping real code onto a race car.' },
+  { id: 'c8', name: 'Gazanfar Babayev', role: 'Autonomous Driving Engineer · Intern', color: '#13a89e', fact: 'Learning fast between the garage and the simulator on the driving team.' },
+  { id: 'c9', name: 'Danila Buival', role: 'Autonomous Driving Engineer · Intern', color: '#b73a2b', fact: 'On the team building the future of autonomous racing, one lap at a time.' },
 ]
 
 export const IMOLA = {
