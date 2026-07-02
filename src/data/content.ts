@@ -111,6 +111,15 @@ export const F1_HISTORY: F1Event[] = [
   { yr: '2026', title: 'The big comeback — autonomous racing', note: 'Top-level racing returns to the Santerno valley: the A2RL autonomous racing series brings its testing days and finals to Imola. A historic circuit opens a brand-new chapter — no one behind the wheel.' },
 ]
 
+// Constructor's road in autonomous racing — shown below the crew.
+export type RacingMilestone = { yr: string; title: string; note: string }
+export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
+  { yr: '2024', title: 'A2RL is born', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, no drivers. A new discipline for university-grade autonomy teams, and the arena Constructor sets its sights on.' },
+  { yr: '2025', title: 'Constructor on the grid', note: 'Constructor Racing is selected for the A2RL championship and qualifies for the six-car Grand Final at Yas Marina, racing wheel-to-wheel at over 250 km/h. A mid-race halt ends the final early — racing at the limit, lessons banked.' },
+  { yr: '2025', title: 'The stack matures', note: 'Between seasons the team rebuilds around what the race taught: perception, planning and control tuned lap after lap in simulation and testing — engineering from Constructor University\'s physics and computer-science talent.' },
+  { yr: '2026', title: 'Imola — and a home crowd', note: 'A2RL goes international for the first time, and Constructor Racing arrives at the Autodromo with a point to prove — in the university\'s 25th-anniversary year. Testing days in July and August, finals on 5 September.' },
+]
+
 export const TICKET_PERKS = [
   'Race-day grandstand VIP seat — main straight',
   'Paddock & pit-lane access pass',

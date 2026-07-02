@@ -1,4 +1,4 @@
-import { CREW } from '../data/content'
+import { CREW, CONSTRUCTOR_RACING_HISTORY } from '../data/content'
 
 export default function Crew() {
   return (
@@ -15,6 +15,20 @@ export default function Crew() {
             <div className="role">{c.role}</div>
             <p className="fact">{c.fact}</p>
           </article>
+        ))}
+      </div>
+
+      {/* CONSTRUCTOR IN AUTONOMOUS RACING */}
+      <div className="section-head"><div><div className="eyebrow">Heritage</div><h2 style={{ marginTop: 8 }}>Constructor in autonomous racing</h2></div></div>
+      <div className="card" style={{ padding: '8px 24px' }}>
+        {CONSTRUCTOR_RACING_HISTORY.map((e, i) => (
+          <div key={i} className="f1-row">
+            <div className="yr">{e.yr}</div>
+            <div className="ev">
+              <b>{e.title}</b>
+              <p>{e.note}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>
