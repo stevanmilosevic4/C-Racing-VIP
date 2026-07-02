@@ -35,8 +35,8 @@ export const SPOTLIGHTS: Spotlight[] = [
     badge: 'Wheel-to-wheel',
     badgeClass: 'tag-green',
     title: 'First autonomous overtake under racing conditions',
-    body: 'The moment the field stopped doing laps and started racing each other. Software making a real, committed pass at speed.',
-    meta: 'Highlight reel',
+    body: 'The moment racing changed — and it was ours. Constructor\'s car committed to the pass at speed and made history: the first true autonomous overtake, en route to P2 in the Grand Final.',
+    meta: 'Constructor Racing · Yas Marina',
     img: '/Formula CT.jpg',
   },
   {
@@ -44,7 +44,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     badge: 'Constructor',
     badgeClass: 'tag-amber',
     title: 'Constructor University on the grid',
-    body: 'The home team\'s run from the garage to the grid — the build, the long nights, and the autonomy stack that puts navy & red on track.',
+    body: 'From the garage to the podium — the build, the long nights, and the autonomy stack that took navy & red to P2. Next stop: the top step at Imola.',
     meta: 'Behind the scenes',
     img: '/Engineering Garage Formula Poster.png',
   },
@@ -114,10 +114,10 @@ export const F1_HISTORY: F1Event[] = [
 // Constructor's road in autonomous racing — shown below the crew.
 export type RacingMilestone = { yr: string; title: string; note: string }
 export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
-  { yr: '2024', title: 'A2RL is born', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, no drivers. A new discipline for university-grade autonomy teams, and the arena Constructor sets its sights on.' },
-  { yr: '2025', title: 'Constructor on the grid', note: 'Constructor Racing is selected for the A2RL championship and qualifies for the six-car Grand Final at Yas Marina, racing wheel-to-wheel at over 250 km/h. A mid-race halt ends the final early — racing at the limit, lessons banked.' },
-  { yr: '2025', title: 'The stack matures', note: 'Between seasons the team rebuilds around what the race taught: perception, planning and control tuned lap after lap in simulation and testing — engineering from Constructor University\'s physics and computer-science talent.' },
-  { yr: '2026', title: 'Imola — and a home crowd', note: 'A2RL goes international for the first time, and Constructor Racing arrives at the Autodromo with a point to prove — in the university\'s 25th-anniversary year. Testing days in July and August, finals on 5 September.' },
+  { yr: '2024', title: 'A2RL is born', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, 250+ km/h, and not a single driver. A brand-new discipline is born, and Constructor is in from the start.' },
+  { yr: '2025', title: 'History: the first-ever autonomous overtake', note: 'Yas Marina Grand Final. Wheel-to-wheel, flat out — and it\'s Constructor\'s car that commits to the pass. The first genuine autonomous overtake under racing conditions. Software out-braked software, and ours got there first. The clip went around the world.' },
+  { yr: '2025', title: 'P2 — on the podium', note: 'Constructor Racing finishes the Grand Final second overall. A podium in only the league\'s second season — proof the stack born at Constructor University races with the very best, and the gap to the top is measured in tenths.' },
+  { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and the team that made overtaking history arrives at the Autodromo hunting one step higher — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there when they go for P1.' },
 ]
 
 export const TICKET_PERKS = [

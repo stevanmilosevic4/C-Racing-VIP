@@ -26,9 +26,9 @@ export const TEAMS: Team[] = [
     university: 'Constructor University, Bremen',
     color: '#e23026',
     est: '2001',
-    lastYear: '5th',
+    lastYear: '2nd 🥈',
     drivers: 'First-ever autonomous overtake',
-    blurb: 'The home team. Constructor University (formerly Jacobs University Bremen) marks 25 years in 2026 and brings its own autonomy stack to the grid — research-led, full-stack, and unmistakably navy & red.',
+    blurb: 'The home team — and the history-makers. P2 in last season\'s Grand Final and authors of the first-ever autonomous overtake under racing conditions. Constructor University marks 25 years in 2026, and its stack arrives at Imola hunting the top step.',
   },
   {
     id: 'tum',
