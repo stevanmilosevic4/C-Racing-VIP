@@ -16,6 +16,7 @@ const VIP_LINKS = [
 
 const ADMIN_LINKS = [
   { to: '/admin', label: 'Event Control', end: true },
+  { to: '/admin/calendar', label: 'Calendar' },
   { to: '/admin/guests', label: 'Guests' },
   { to: '/admin/plan', label: 'Milestones' },
   { to: '/admin/activity', label: 'Activity' },

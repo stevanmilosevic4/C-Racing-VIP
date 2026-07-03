@@ -18,12 +18,13 @@ import AdminBoard from './pages/admin/AdminBoard'
 import AdminGuests from './pages/admin/AdminGuests'
 import AdminPlan from './pages/admin/AdminPlan'
 import AdminActivity from './pages/admin/AdminActivity'
+import AdminCalendar from './pages/admin/AdminCalendar'
 
 // Friendly names for each route, used in the activity log.
 const PAGE_NAMES: Record<string, string> = {
   '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola',
   '/predict': 'Podium Bet', '/ticket': 'Ticket', '/crew': 'Crew', '/book': 'Book a Visit',
-  '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity',
+  '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity', '/admin/calendar': 'Calendar',
 }
 
 // Records a page view for the signed-in user on every route change.
@@ -113,6 +114,7 @@ export default function App() {
           <Route path="/admin/guests" element={<Protected role="admin"><AdminGuests /></Protected>} />
           <Route path="/admin/plan" element={<Protected role="admin"><AdminPlan /></Protected>} />
           <Route path="/admin/activity" element={<Protected role="admin"><AdminActivity /></Protected>} />
+          <Route path="/admin/calendar" element={<Protected role="admin"><AdminCalendar /></Protected>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
