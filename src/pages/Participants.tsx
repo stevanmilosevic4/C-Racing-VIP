@@ -7,6 +7,11 @@ export default function Participants() {
       <h1 className="page-title" style={{ marginTop: 10 }}>Race Teams</h1>
       <p className="page-sub">The real 2026 A2RL field headed for Imola — up to five autonomous SF23s on 5 September. TUM, PoliMOVE and Unimore qualified on last season’s results; Kinetiz and Constructor Racing fight through qualification for the remaining grid spots.</p>
 
+      <div className="photo-band">
+        <img src="/gallery/AR2.jpeg" alt="A2RL cars on track" loading="lazy" />
+        <div className="pb-cap">Identical cars, different minds — the software is the only difference between them.</div>
+      </div>
+
       <div className="grid cols-3" style={{ marginTop: 30 }}>
         {TEAMS.map((tm) => (
           <article key={tm.id} className="card team">

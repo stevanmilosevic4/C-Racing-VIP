@@ -117,6 +117,10 @@ ul { margin: 0; }
   color: var(--muted); white-space: nowrap; letter-spacing: .04em; text-transform: uppercase;
 }
 .nav-link:hover { color: var(--ink); background: var(--line-2); }
+/* 9 links + user chip need breathing room on laptop widths */
+@media (max-width: 1560px) and (min-width: 861px) {
+  .nav-link { padding: 8px 8px; font-size: 12px; letter-spacing: .02em; }
+}
 .nav-link.active { color: var(--blue); }
 .nav-link.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: var(--blue); border-radius: 2px; }
 .nav-user { display: flex; align-items: center; gap: 10px; }
@@ -467,3 +471,48 @@ ul { margin: 0; }
   .cal-del { opacity: .5; width: 22px; height: 22px; font-size: 12px; }
   .cal-entry { padding-right: 26px; }
 }
+
+/* ---------- the formula, everywhere ---------- */
+/* subtle watermark of the car on every page, tucked behind the content */
+body::after {
+  content: '';
+  position: fixed; right: -6vw; bottom: -6vh; z-index: -1;
+  width: min(760px, 95vw); aspect-ratio: 16 / 9;
+  background: url('/Formula on track.webp') center / cover no-repeat;
+  opacity: .07; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 72%);
+  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 72%);
+}
+
+/* wide photo band used on Teams / Race Guide */
+.photo-band { position: relative; border-radius: 18px; overflow: hidden; margin-top: 26px; box-shadow: var(--shadow); }
+.photo-band img { width: 100%; height: 300px; object-fit: cover; display: block; }
+.photo-band .pb-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 42px 22px 14px; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .01em; background: linear-gradient(transparent, rgba(6, 13, 30, .82)); }
+@media (max-width: 620px) { .photo-band img { height: 190px; } }
+
+/* the car behind the ticket, the bet slip and the login panel */
+.ticket { background-image: linear-gradient(rgba(9, 20, 45, .88), rgba(9, 20, 45, .95)), url('/Formula on track.webp'); background-size: cover; background-position: center 35%; }
+.betslip { background-image: linear-gradient(135deg, rgba(9, 20, 45, .92), rgba(16, 33, 68, .93)), url('/Formula CT.jpg'); background-size: cover; background-position: center 30%; }
+.login-aside::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 48%;
+  background: url('/Formula CT.jpg') center / cover no-repeat;
+  opacity: .4; pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 55%);
+  mask-image: linear-gradient(transparent, #000 55%);
+}
+.login-aside > * { position: relative; z-index: 1; }
+
+/* ---------- race guide ---------- */
+.card.pad { padding: 22px; }
+.card.pad h3 { font-size: 16px; }
+.card.pad .blurb { margin-top: 8px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.video-frame { position: relative; border-radius: 16px; overflow: hidden; background: #0a1733; aspect-ratio: 16 / 9; box-shadow: var(--shadow); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* ---------- labs gallery (crew page) ---------- */
+.labs-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.lab-item { margin: 0; }
+.lab-item img, .lab-item video { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 14px; background: #0a1733; box-shadow: var(--shadow); }
+.lab-item figcaption { margin-top: 7px; font-size: 12px; font-weight: 700; color: var(--muted); line-height: 1.45; }
+@media (max-width: 900px) { .labs-gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) { .labs-gallery { grid-template-columns: 1fr; } }

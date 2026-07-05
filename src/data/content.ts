@@ -34,9 +34,9 @@ export const SPOTLIGHTS: Spotlight[] = [
     id: 's3',
     badge: 'Wheel-to-wheel',
     badgeClass: 'tag-green',
-    title: 'First autonomous overtake under racing conditions',
-    body: 'The moment racing changed — and it was ours. Constructor\'s car committed to the pass at speed and made history: the first true autonomous overtake, en route to P2 in the Grand Final.',
-    meta: 'Constructor Racing · Yas Marina',
+    title: 'The world-first six-car Grand Final',
+    body: 'Six driverless SF23s racing wheel-to-wheel at once — the largest autonomous race ever run, and Constructor Racing was on the grid. Overtakes, contact, real racing. Nobody driving.',
+    meta: 'Constructor Racing · Yas Marina · 2025',
     img: '/Formula CT.jpg',
   },
   {
@@ -44,7 +44,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     badge: 'Constructor',
     badgeClass: 'tag-amber',
     title: 'Constructor University on the grid',
-    body: 'From the garage to the podium — the build, the long nights, and the autonomy stack that took navy & red to P2. Next stop: the top step at Imola.',
+    body: 'The build, the long nights, and the autonomy stack that put navy & red on the Grand Final grid. Next stop: fighting through qualification for Imola.',
     meta: 'Behind the scenes',
     img: '/Engineering Garage Formula Poster.png',
   },
@@ -115,9 +115,9 @@ export const F1_HISTORY: F1Event[] = [
 export type RacingMilestone = { yr: string; title: string; note: string }
 export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
   { yr: '2024', title: 'A2RL is born', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, 250+ km/h, and not a single driver. A brand-new discipline is born, and Constructor is in from the start.' },
-  { yr: '2025', title: 'History: the first-ever autonomous overtake', note: 'Yas Marina Grand Final. Wheel-to-wheel, flat out — and it\'s Constructor\'s car that commits to the pass. The first genuine autonomous overtake under racing conditions. Software out-braked software, and ours got there first. The clip went around the world.' },
-  { yr: '2025', title: 'P2 — on the podium', note: 'Constructor Racing finishes the Grand Final second overall. A podium in only the league\'s second season — proof the stack born at Constructor University races with the very best, and the gap to the top is measured in tenths.' },
-  { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and the team that made overtaking history arrives at the Autodromo hunting one step higher — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there when they go for P1.' },
+  { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina, in front of a full house. Only a handful of teams on the planet have ever done this. Ours is one of them.' },
+  { yr: '2025', title: 'Taken out, not beaten', note: 'Racing hard in the Grand Final, the car is hit from behind mid-corner by a rival attempting an overtake — both cars out on the spot, through no fault of the Constructor stack. The pace was real; the finish never came. That one still stings in the garage.' },
+  { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and Constructor arrives at the Autodromo fighting through qualification for a place on the grid — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there for the rematch.' },
 ]
 
 export const TICKET_PERKS = [

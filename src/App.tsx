@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Agenda from './pages/Agenda'
 import Participants from './pages/Participants'
 import Imola from './pages/Imola'
+import Guide from './pages/Guide'
 import Predict from './pages/Predict'
 import Ticket from './pages/Ticket'
 import Crew from './pages/Crew'
@@ -22,7 +23,7 @@ import AdminCalendar from './pages/admin/AdminCalendar'
 
 // Friendly names for each route, used in the activity log.
 const PAGE_NAMES: Record<string, string> = {
-  '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola',
+  '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola', '/guide': 'Race Guide',
   '/predict': 'Podium Bet', '/ticket': 'Ticket', '/crew': 'Crew', '/book': 'Book a Visit',
   '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity', '/admin/calendar': 'Calendar',
 }
@@ -104,6 +105,7 @@ export default function App() {
           <Route path="/agenda" element={<Protected role="vip"><Agenda /></Protected>} />
           <Route path="/participants" element={<Protected role="vip"><Participants /></Protected>} />
           <Route path="/imola" element={<Protected role="vip"><Imola /></Protected>} />
+          <Route path="/guide" element={<Protected role="vip"><Guide /></Protected>} />
           <Route path="/predict" element={<Protected role="vip"><Predict /></Protected>} />
           <Route path="/ticket" element={<Protected role="vip"><Ticket /></Protected>} />
           <Route path="/crew" element={<Protected role="vip"><Crew /></Protected>} />

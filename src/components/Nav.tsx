@@ -7,6 +7,7 @@ const VIP_LINKS = [
   { to: '/', label: 'Home', end: true },
   { to: '/agenda', label: 'Agenda' },
   { to: '/participants', label: 'Teams' },
+  { to: '/guide', label: 'Race Guide' },
   { to: '/imola', label: 'Imola' },
   { to: '/predict', label: 'Podium Bet' },
   { to: '/ticket', label: 'Ticket' },
