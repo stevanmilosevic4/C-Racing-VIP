@@ -44,7 +44,7 @@ export default function AdminCalendar() {
     <div className="wrap">
       <div className="eyebrow">Organizer</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Calendar</h1>
-      <p className="page-sub">{meta.sub}. Click <b>+</b> on any day to add an entry; hover an entry to remove it. Changes sync live for every organiser.</p>
+      <p className="page-sub">{meta.sub}. Tap <b>+</b> on any day to add an entry; <b>✕</b> removes one. Changes sync live for every organiser.</p>
 
       {/* month tabs + legend */}
       <div className="board-toolbar" style={{ marginTop: 20 }}>
@@ -71,7 +71,7 @@ export default function AdminCalendar() {
               {day !== null && (
                 <>
                   <div className="cal-daynum">
-                    <span>{day}</span>
+                    <span>{day}<em className="cal-dow-inline">{DOW[i % 7]}</em></span>
                     <button className="cal-add" title="Add entry" onClick={() => { setAdding(day); setText('') }}>+</button>
                   </div>
                   <div className="cal-entries">
