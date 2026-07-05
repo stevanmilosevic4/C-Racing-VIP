@@ -1,6 +1,8 @@
-// A2RL participating teams — seeded from the inaugural 2024 grid at Yas Marina.
-// Constructor University is the host brand's own entry (formerly Jacobs University Bremen).
-// Edit / extend this list as the 2026 Imola grid is confirmed.
+// A2RL 2026 — the real Imola field (announced 29 June 2026).
+// Up to five SF23-based autonomous cars race at the Autodromo on 5 September:
+// TUM, PoliMOVE and Unimore qualified via their 2025 season; Kinetiz and
+// Constructor Racing battle through the qualification events for the
+// remaining grid spots. The season concludes at Yas Marina, Abu Dhabi.
 
 export type Team = {
   id: string
@@ -19,16 +21,16 @@ export type Team = {
 export const TEAMS: Team[] = [
   {
     id: 'constructor',
-    name: 'Constructor University',
-    short: 'CU',
+    name: 'Constructor Racing',
+    short: 'CR',
     country: 'Germany',
     flag: '🇩🇪',
     university: 'Constructor University, Bremen',
     color: '#e23026',
     est: '2001',
-    lastYear: '2nd 🥈',
-    drivers: 'First-ever autonomous overtake',
-    blurb: 'The home team — and the history-makers. P2 in last season\'s Grand Final and authors of the first-ever autonomous overtake under racing conditions. Constructor University marks 25 years in 2026, and its stack arrives at Imola hunting the top step.',
+    lastYear: 'Grand Final · DNF',
+    drivers: 'Fighting for an Imola grid spot',
+    blurb: 'The home team. Part of the world-first six-car Grand Final last season until contact from behind ended the race early — through no fault of the stack. Now, in the university\'s 25th-anniversary year, Constructor arrives at Imola with unfinished business, racing through qualification for a place on the grid.',
   },
   {
     id: 'tum',
@@ -40,8 +42,8 @@ export const TEAMS: Team[] = [
     color: '#0b63c4',
     est: '2018',
     lastYear: '1st 🏆',
-    drivers: 'Defending champions',
-    blurb: 'Reigning A2RL champions and Indy Autonomous Challenge veterans. The benchmark for the field — clinical, fast, and very hard to beat on a flying lap.',
+    drivers: 'Two-time champions · qualified',
+    blurb: 'Back-to-back A2RL champions — winners of the inaugural 2024 race and the 2025 six-car Grand Final — and Indy Autonomous Challenge veterans. The benchmark for the field: clinical, fast, and very hard to beat on a flying lap.',
   },
   {
     id: 'polimove',
@@ -52,9 +54,9 @@ export const TEAMS: Team[] = [
     university: 'Politecnico di Milano + Michigan State',
     color: '#13a89e',
     est: '2021',
-    lastYear: '2nd',
-    drivers: 'Top-speed record holders',
-    blurb: 'Holders of the autonomous land-speed record (>309 km/h). On home Italian soil at Imola, expect PoliMOVE to push the absolute pace.',
+    lastYear: '3rd 🥉',
+    drivers: 'Speed-record holders · qualified',
+    blurb: 'Holders of the autonomous land-speed record (>309 km/h) and podium finishers in last season\'s Grand Final. On home Italian soil at Imola, expect PoliMOVE to push the absolute pace.',
   },
   {
     id: 'unimore',
@@ -65,60 +67,21 @@ export const TEAMS: Team[] = [
     university: 'University of Modena & Reggio Emilia',
     color: '#f2a93b',
     est: '2022',
-    lastYear: '4th',
-    drivers: 'AImotion lab',
-    blurb: 'Emilia-Romagna locals from Modena — a stone\'s throw from the circuit. Strong on perception and the spiritual home crowd favourite in the valley.',
+    lastYear: 'Grand Final · DNF',
+    drivers: 'Qualified · home-soil favourites',
+    blurb: 'Emilia-Romagna locals from Modena — a stone\'s throw from the circuit, and qualified for Imola on their 2025 season. Bold on the brakes (ask Constructor about lap 12 of the Grand Final) and the home crowd favourite in the valley.',
   },
   {
-    id: 'kaist',
-    name: 'KAIST',
-    short: 'KA',
-    country: 'South Korea',
-    flag: '🇰🇷',
-    university: 'Korea Advanced Institute of Science & Tech',
-    color: '#6a52d1',
-    est: '2020',
-    lastYear: '3rd',
-    drivers: 'Save Lab',
-    blurb: 'Methodical and consistent, KAIST converts clean laps into points. A podium threat whenever the conditions get tricky.',
-  },
-  {
-    id: 'flyeagle',
-    name: 'Fly Eagle',
-    short: 'FE',
-    country: 'China',
-    flag: '🇨🇳',
-    university: 'Beijing Institute of Technology',
-    color: '#16b981',
-    est: '2023',
-    lastYear: '6th',
-    drivers: 'BIT autonomy group',
-    blurb: 'Aggressive newcomers with rapid year-on-year gains. The team most likely to spring a surprise on race day.',
-  },
-  {
-    id: 'code19',
-    name: 'Code19 Racing',
-    short: 'C19',
-    country: 'USA',
-    flag: '🇺🇸',
-    university: 'Independent (North America)',
-    color: '#1e9bf0',
-    est: '2021',
-    lastYear: '7th',
-    drivers: 'Indie autonomy collective',
-    blurb: 'An independent collective punching above its weight. Lean, scrappy, and a fan favourite for the underdog story.',
-  },
-  {
-    id: 'tii',
-    name: 'TII EuroRacing',
-    short: 'TII',
-    country: 'UAE / Italy',
+    id: 'kinetiz',
+    name: 'Kinetiz',
+    short: 'KZ',
+    country: 'UAE',
     flag: '🇦🇪',
-    university: 'Technology Innovation Institute',
-    color: '#0b1e3d',
-    est: '2022',
-    lastYear: '8th',
-    drivers: 'A2RL host programme',
-    blurb: 'Backed by the A2RL host institute, blending UAE ambition with European racing know-how. The bridge between Imola and the Abu Dhabi finale.',
+    university: 'Independent (UAE)',
+    color: '#6a52d1',
+    est: '2025',
+    lastYear: '4th',
+    drivers: 'Fighting for an Imola grid spot',
+    blurb: 'The UAE\'s own entry and the fastest-rising newcomer — fourth in last season\'s Grand Final after recovering from a spin on cold tyres. Battling Constructor through qualification for the final places on the Imola grid.',
   },
 ]

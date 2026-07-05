@@ -14,14 +14,17 @@ export default function Predict() {
   const [order, setOrder] = useSynced<string[]>(`cxa2rl.predict:${uk}`, TEAMS.map((t) => t.id))
   const [locked, setLocked] = useSynced<boolean>(`cxa2rl.predictLocked:${uk}`, false)
 
-  const teams = order.map((id) => TEAMS.find((t) => t.id === id)!).filter(Boolean)
+  // tolerate saved orders from an older grid: drop unknown ids, append new teams
+  const known = order.filter((id) => TEAMS.some((t) => t.id === id))
+  const ids = [...known, ...TEAMS.map((t) => t.id).filter((id) => !known.includes(id))]
+  const teams = ids.map((id) => TEAMS.find((t) => t.id === id)!)
   const podium = teams.slice(0, 3)
 
   function move(i: number, dir: -1 | 1) {
     if (locked) return
     const j = i + dir
     if (j < 0 || j >= teams.length) return
-    const next = [...order]
+    const next = [...ids]
     ;[next[i], next[j]] = [next[j], next[i]]
     setOrder(next)
   }
