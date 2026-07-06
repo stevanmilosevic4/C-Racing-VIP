@@ -37,7 +37,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: 'First autonomous overtake on an F1 circuit',
     body: 'Inaugural race, Yas Marina 2024: Constructor\'s car commits to the pass at speed and makes history — the first autonomous overtake on an F1 circuit, en route to P2 in the league\'s first-ever race.',
     meta: 'Constructor Racing · Yas Marina · 2024',
-    img: '/Formula CT.jpg',
+    img: '/gallery/AR3.jpeg',
   },
   {
     id: 's4',
