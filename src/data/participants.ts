@@ -27,10 +27,10 @@ export const TEAMS: Team[] = [
     flag: '🇩🇪',
     university: 'Constructor University, Bremen',
     color: '#e23026',
-    est: '2001',
+    est: '2020',
     lastYear: 'Grand Final · DNF',
-    drivers: 'Fighting for an Imola grid spot',
-    blurb: 'The home team. Part of the world-first six-car Grand Final last season until contact from behind ended the race early — through no fault of the stack. Now, in the university\'s 25th-anniversary year, Constructor arrives at Imola with unfinished business, racing through qualification for a place on the grid.',
+    drivers: 'P2 in Season 1 · A2RL\'s first overtaker',
+    blurb: 'The home team — with the longest autonomous-racing pedigree on the grid: born in the Roborace era (2020–21, leading the series when it folded), P2 in A2RL\'s inaugural 2024 race with an overtake along the way, then taken out of last season\'s six-car Grand Final by contact from behind. Imola, in the university\'s 25th-anniversary year, is the rematch.',
   },
   {
     id: 'tum',

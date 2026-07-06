@@ -495,7 +495,7 @@ body::after {
 .betslip { background-image: linear-gradient(135deg, rgba(9, 20, 45, .92), rgba(16, 33, 68, .93)), url('/Formula CT.jpg'); background-size: cover; background-position: center 30%; }
 .login-aside::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 48%;
-  background: url('/Formula CT.jpg') center / cover no-repeat;
+  background: url('/feature-car.jpg') center / cover no-repeat;
   opacity: .4; pointer-events: none;
   -webkit-mask-image: linear-gradient(transparent, #000 55%);
   mask-image: linear-gradient(transparent, #000 55%);
@@ -516,3 +516,21 @@ body::after {
 .lab-item figcaption { margin-top: 7px; font-size: 12px; font-weight: 700; color: var(--muted); line-height: 1.45; }
 @media (max-width: 900px) { .labs-gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .labs-gallery { grid-template-columns: 1fr; } }
+
+/* home hero — the car ghosted into the navy panel */
+.hero::before {
+  content: ''; position: absolute; right: -4%; bottom: -14%; width: 70%; height: 95%;
+  background: url('/feature-car.jpg') center right / cover no-repeat;
+  opacity: .18; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at 62% 55%, #000 30%, transparent 74%);
+  mask-image: radial-gradient(ellipse at 62% 55%, #000 30%, transparent 74%);
+}
+
+/* agenda — timeline left, the car riding along on the right */
+.agenda-layout { display: grid; grid-template-columns: minmax(0, 760px) minmax(240px, 1fr); gap: 36px; margin-top: 34px; align-items: start; }
+.agenda-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+@media (max-width: 980px) {
+  .agenda-layout { grid-template-columns: 1fr; }
+  .agenda-side { position: static; grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) { .agenda-side { grid-template-columns: 1fr; } }

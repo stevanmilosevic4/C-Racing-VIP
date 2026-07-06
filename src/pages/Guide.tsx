@@ -83,9 +83,9 @@ export default function Guide() {
           <h3 style={{ marginTop: 8 }}>The one that started it all</h3>
           <p className="blurb">
             Eight university teams, a sold-out grandstand, and the first-ever wheel-to-wheel autonomous
-            race in full-size cars. <b>TUM won it</b>, and most cars just finishing was a triumph — 18
-            months earlier the same cars couldn't reliably complete a lap. Ex-F1 driver Daniil Kvyat
-            raced an AI car in a showcase and won comfortably, about 10 seconds a lap faster.
+            race in full-size cars. <b>TUM won it — from Constructor Racing in P2</b>, whose car also
+            pulled off the first autonomous overtake on an F1 circuit during the race. Ex-F1 driver
+            Daniil Kvyat raced an AI car in a showcase and won comfortably, about 10 seconds a lap faster.
           </p>
         </div>
         <div className="card pad">

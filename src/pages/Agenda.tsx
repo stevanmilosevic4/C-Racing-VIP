@@ -7,7 +7,13 @@ export default function Agenda() {
       <h1 className="page-title" style={{ marginTop: 10 }}>Agenda</h1>
       <p className="page-sub">From relaxed testing days to the Imola finals — and on to Abu Dhabi. All times local; long legs are approximate.</p>
 
-      <div style={{ marginTop: 34, maxWidth: 760 }}>
+      <div className="photo-band">
+        <img src="/gallery/971.jpg" alt="The pit lane at dusk" loading="lazy" />
+        <div className="pb-cap">Pit lane, lights on — where every agenda item below actually happens.</div>
+      </div>
+
+      <div className="agenda-layout">
+        <div>
         {PHASES.map((p) => (
           <div key={p.id} className={`agenda-phase ${p.accent}`}>
             <div className="agenda-date">{p.dates}</div>
@@ -27,6 +33,23 @@ export default function Agenda() {
             </div>
           </div>
         ))}
+        </div>
+
+        {/* the car keeps you company down the whole agenda */}
+        <aside className="agenda-side">
+          <figure className="lab-item">
+            <img src="/gallery/631.jpg" alt="" loading="lazy" />
+            <figcaption>Car #8 — the sensor pod where a driver's head would be</figcaption>
+          </figure>
+          <figure className="lab-item">
+            <img src="/gallery/1301.jpg" alt="" loading="lazy" />
+            <figcaption>On the grid — moments before the cars are on their own</figcaption>
+          </figure>
+          <figure className="lab-item">
+            <img src="/gallery/AR1.jpeg" alt="" loading="lazy" />
+            <figcaption>Rolling out — pit lane, race night</figcaption>
+          </figure>
+        </aside>
       </div>
     </div>
   )

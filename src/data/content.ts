@@ -34,9 +34,9 @@ export const SPOTLIGHTS: Spotlight[] = [
     id: 's3',
     badge: 'Wheel-to-wheel',
     badgeClass: 'tag-green',
-    title: 'The world-first six-car Grand Final',
-    body: 'Six driverless SF23s racing wheel-to-wheel at once — the largest autonomous race ever run, and Constructor Racing was on the grid. Overtakes, contact, real racing. Nobody driving.',
-    meta: 'Constructor Racing · Yas Marina · 2025',
+    title: 'First autonomous overtake on an F1 circuit',
+    body: 'Inaugural race, Yas Marina 2024: Constructor\'s car commits to the pass at speed and makes history — the first autonomous overtake on an F1 circuit, en route to P2 in the league\'s first-ever race.',
+    meta: 'Constructor Racing · Yas Marina · 2024',
     img: '/Formula CT.jpg',
   },
   {
@@ -44,7 +44,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     badge: 'Constructor',
     badgeClass: 'tag-amber',
     title: 'Constructor University on the grid',
-    body: 'The build, the long nights, and the autonomy stack that put navy & red on the Grand Final grid. Next stop: fighting through qualification for Imola.',
+    body: 'The build, the long nights, and the autonomy stack that took navy & red to P2 in the league\'s first season and the six-car Grand Final in its second. Next stop: Imola.',
     meta: 'Behind the scenes',
     img: '/Engineering Garage Formula Poster.png',
   },
@@ -114,7 +114,8 @@ export const F1_HISTORY: F1Event[] = [
 // Constructor's road in autonomous racing — shown below the crew.
 export type RacingMilestone = { yr: string; title: string; note: string }
 export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
-  { yr: '2024', title: 'A2RL is born', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, 250+ km/h, and not a single driver. A brand-new discipline is born, and Constructor is in from the start.' },
+  { yr: '2020', title: 'Roborace roots', note: 'Before A2RL existed, the team (racing then as Acronis Rolos) fought at the front of Roborace\'s Season Beta — and was leading the series when it folded. The autonomous-racing pedigree starts here, not last week.' },
+  { yr: '2024', title: 'A2RL is born — P2, and the first overtake', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, 250+ km/h, nobody driving. Constructor finishes second, 27 seconds behind the winner, and pulls off the first-ever autonomous overtake on an F1 circuit along the way.' },
   { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina, in front of a full house. Only a handful of teams on the planet have ever done this. Ours is one of them.' },
   { yr: '2025', title: 'Taken out, not beaten', note: 'Racing hard in the Grand Final, the car is hit from behind mid-corner by a rival attempting an overtake — both cars out on the spot, through no fault of the Constructor stack. The pace was real; the finish never came. That one still stings in the garage.' },
   { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and Constructor arrives at the Autodromo fighting through qualification for a place on the grid — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there for the rematch.' },
