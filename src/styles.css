@@ -267,8 +267,9 @@ ul { margin: 0; }
 
 /* ---------- imola ---------- */
 .imola-hero { border-radius: 22px; overflow: hidden; color: #fff; padding: 40px 34px; background:
-  radial-gradient(900px 400px at 90% -20%, rgba(226,48,38,.4), transparent 55%),
-  linear-gradient(135deg, var(--navy-900), var(--navy-600)); }
+  radial-gradient(900px 400px at 90% -20%, rgba(226,48,38,.25), transparent 55%),
+  linear-gradient(100deg, rgba(9, 20, 45, .93) 30%, rgba(9, 20, 45, .55)),
+  url('/Autodromo Imola.jpg') center 40% / cover no-repeat; }
 .fact-card { padding: 18px 20px; }
 .fact-card .n { font-size: 30px; font-weight: 900; color: var(--red); }
 .fact-card .t { font-weight: 800; margin-top: 6px; }

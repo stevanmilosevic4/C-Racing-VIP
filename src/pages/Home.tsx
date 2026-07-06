@@ -60,7 +60,7 @@ export default function Home() {
           <div className="eyebrow">Spotlights</div>
           <h2 style={{ marginTop: 8 }}>From the races before</h2>
         </div>
-        <span className="label">Photos coming · placeholders for now</span>
+        <span className="label">Real shots from Yas Marina</span>
       </div>
       <div className="grid cols-4">
         {SPOTLIGHTS.map((s) => (
@@ -76,6 +76,32 @@ export default function Home() {
             </div>
           </article>
         ))}
+      </div>
+
+      {/* WATCH — the story of P2 at the inaugural race */}
+      <div className="section-head">
+        <div>
+          <div className="eyebrow">Watch</div>
+          <h2 style={{ marginTop: 8 }}>P2 at the first-ever A2RL race</h2>
+        </div>
+      </div>
+      <div className="grid cols-2" style={{ alignItems: 'center' }}>
+        <div className="video-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/hzUvM25_dCU"
+            title="Constructor got 2nd place at the A2RL"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+        <div className="card pad">
+          <h3>How it happened</h3>
+          <p className="blurb">
+            Yas Marina, April 2024 — the first autonomous formula race in history, and Constructor's
+            car crossed the line second, pulling off the first-ever autonomous overtake on an F1
+            circuit on the way. This is that story, told by the team. Imola is the next chapter.
+          </p>
+        </div>
       </div>
 
       {/* PHOTO GALLERY */}
