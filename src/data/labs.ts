@@ -10,6 +10,6 @@ export type LabMedia = { src: string; type: 'img' | 'video' | 'youtube'; caption
 export const LAB_MEDIA: LabMedia[] = [
   { src: 'https://www.youtube-nocookie.com/embed/hzUvM25_dCU', type: 'youtube', caption: 'Watch — Constructor\'s racing programme on video' },
   { src: '/gallery/341.jpg', type: 'img', caption: 'Robotics on show around the A2RL paddock — the discipline the labs live and breathe' },
-  { src: '/Engineering Garage Formula Poster.png', type: 'img', caption: 'From lab bench to garage — the crew working on the SF23' },
+  { src: '/gallery/1201.jpg', type: 'img', caption: 'From lab bench to garage — the crew rolling the SF23 out' },
   { src: '/gallery/741.jpg', type: 'img', caption: 'Hands on the car — engineering under race-week pressure' },
 ]
