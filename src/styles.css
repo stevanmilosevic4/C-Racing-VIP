@@ -492,7 +492,7 @@ body::after {
 
 /* the car behind the ticket, the bet slip and the login panel */
 .ticket { background-image: linear-gradient(rgba(9, 20, 45, .88), rgba(9, 20, 45, .95)), url('/Formula on track.webp'); background-size: cover; background-position: center 35%; }
-.betslip { background-image: linear-gradient(135deg, rgba(9, 20, 45, .92), rgba(16, 33, 68, .93)), url('/Formula CT.jpg'); background-size: cover; background-position: center 30%; }
+.betslip { background-image: linear-gradient(135deg, rgba(9, 20, 45, .9), rgba(16, 33, 68, .91)), url('/feature-car.jpg'); background-size: cover; background-position: center 55%; }
 .login-aside::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 48%;
   background: url('/feature-car.jpg') center / cover no-repeat;
