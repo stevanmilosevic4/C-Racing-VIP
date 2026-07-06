@@ -46,7 +46,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: 'Constructor University on the grid',
     body: 'The build, the long nights, and the autonomy stack that took navy & red to P2 in the league\'s first season and the six-car Grand Final in its second. Next stop: Imola.',
     meta: 'Behind the scenes',
-    img: '/Engineering Garage Formula Poster.png',
+    img: '/gallery/741.jpg',
   },
 ]
 
