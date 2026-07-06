@@ -43,9 +43,11 @@ export default function Crew() {
       <div className="labs-gallery">
         {LAB_MEDIA.map((m) => (
           <figure className="lab-item" key={m.src}>
-            {m.type === 'video'
-              ? <video src={m.src} controls playsInline preload="metadata" />
-              : <img src={m.src} alt="" loading="lazy" />}
+            {m.type === 'youtube'
+              ? <div className="video-frame"><iframe src={m.src} title={m.caption} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></div>
+              : m.type === 'video'
+                ? <video src={m.src} controls playsInline preload="metadata" />
+                : <img src={m.src} alt="" loading="lazy" />}
             <figcaption>{m.caption}</figcaption>
           </figure>
         ))}
