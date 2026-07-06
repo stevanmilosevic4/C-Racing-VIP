@@ -511,6 +511,8 @@ body::after {
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* ---------- labs gallery (crew page) ---------- */
+.labs-scroll { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; margin-top: 20px; padding: 4px 2px 12px; scrollbar-width: thin; }
+.labs-scroll .lab-item { flex: 0 0 auto; width: min(400px, 80vw); scroll-snap-align: start; }
 .labs-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
 .lab-item { margin: 0; }
 .lab-item img, .lab-item video { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 14px; background: #0a1733; box-shadow: var(--shadow); }

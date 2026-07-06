@@ -15,8 +15,4 @@ export const LAB_MEDIA: LabMedia[] = [
   { src: '/labs/img_1912.jpg', type: 'img', caption: 'Manipulation practice — millimetre precision, the discipline behind 250 km/h confidence' },
   { src: '/labs/img_1880.jpg', type: 'img', caption: 'Code first, motion second — programming a lab robot, exactly how the race car is "driven"' },
   { src: '/labs/img_1875.jpg', type: 'img', caption: 'Vision markers in the perception lab — how machines learn to know exactly where they are' },
-  // — and where it ends up: the race side —
-  { src: '/gallery/1361.jpg', type: 'img', caption: 'Race engineering — eyes on the telemetry, hands off the wheel' },
-  { src: '/gallery/741.jpg', type: 'img', caption: 'Hands on the car — engineering under race-week pressure' },
-  { src: '/gallery/1201.jpg', type: 'img', caption: 'From lab bench to garage — the crew rolling the SF23 out' },
 ]

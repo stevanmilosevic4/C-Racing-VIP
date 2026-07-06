@@ -30,19 +30,19 @@ export default function Crew() {
       </p>
       <div className="grid cols-3" style={{ marginTop: 22 }}>
         <div className="card pad">
-          <h3>🤖 Robotics &amp; autonomous systems</h3>
-          <p className="blurb">Where the autonomy story starts: robot arms, humanoids and even a robot dog — machines that sense and navigate the real world on their own. The cameras and sensors students calibrate on the Bremen lab benches are the same class of hardware bolted to the SF23.</p>
+          <h3>🤖 Robotics at Constructor University</h3>
+          <p className="blurb">The Bremen campus robotics labs are home to robot arms, humanoids and a robot dog. Students teach these machines to sense the world and move through it on their own — the exact discipline that lets the SF23 read a race track and place itself on it at 250 km/h.</p>
         </div>
         <div className="card pad">
-          <h3>⚙️ Embedded systems &amp; control</h3>
-          <p className="blurb">Keeping a race car stable at speed is a control problem solved thousands of times per second. The control theory and real-time software taught in the labs is precisely what runs on the car's onboard computers.</p>
+          <h3>⚙️ Control &amp; embedded systems on campus</h3>
+          <p className="blurb">Keeping a robot arm steady and keeping a formula car stable at speed are the same mathematics, solved thousands of times per second. The control theory taught in Constructor University's lecture halls and practised on its lab benches runs — scaled up — on the race car's onboard computers.</p>
         </div>
         <div className="card pad">
-          <h3>🧠 AI &amp; software engineering</h3>
-          <p className="blurb">The "driver" is a software stack — planning, prediction, decision-making under uncertainty. For the students in the racing programme, the car is a rolling thesis: lab research that gets tested at 250 km/h in front of a grandstand.</p>
+          <h3>🧠 AI &amp; software — from thesis to pit lane</h3>
+          <p className="blurb">Constructor University students write software that plans, predicts and decides under uncertainty. The racing programme turns that coursework into a "driver": university lab research, tested at 250 km/h in front of a grandstand.</p>
         </div>
       </div>
-      <div className="labs-gallery">
+      <div className="labs-scroll">
         {LAB_MEDIA.map((m) => (
           <figure className="lab-item" key={m.src}>
             {m.type === 'youtube'
