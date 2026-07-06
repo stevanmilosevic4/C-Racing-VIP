@@ -107,6 +107,23 @@ export default function Guide() {
         </div>
       </div>
 
+      {/* constructor's best result — the banner stat */}
+      <div className="cr-best">
+        <div className="eyebrow" style={{ color: '#8fc1ff' }}>Constructor corner · our best result</div>
+        <h3 style={{ fontSize: 22, marginTop: 8 }}>Silver in the first autonomous race in history</h3>
+        <p style={{ color: 'rgba(255,255,255,.8)', fontSize: 14, lineHeight: 1.6, marginTop: 8, maxWidth: 720 }}>
+          Yas Marina, 27 April 2024. When autonomous cars raced wheel-to-wheel for the first time ever,
+          Constructor's car crossed the line second — and overtook a rival on the way, the first
+          autonomous pass ever completed on an F1 circuit. Nobody can ever take either of those away.
+        </p>
+        <div className="cr-best-stats">
+          <div><b>P2</b><span>finishing position</span></div>
+          <div><b>+27.2s</b><span>to the winning car, TUM</span></div>
+          <div><b>1st ever</b><span>autonomous overtake on an F1 circuit</span></div>
+          <div><b>8 teams</b><span>in the inaugural field</span></div>
+        </div>
+      </div>
+
       {/* videos */}
       <div className="section-head" style={{ marginTop: 40 }}>
         <div><div className="eyebrow">Watch</div><h2 style={{ marginTop: 8 }}>Highlights from the first two seasons</h2></div>

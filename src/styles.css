@@ -518,6 +518,15 @@ body::after {
 @media (max-width: 900px) { .labs-gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .labs-gallery { grid-template-columns: 1fr; } }
 
+/* race guide — constructor best-result banner */
+.cr-best { margin-top: 22px; border-radius: 18px; color: #fff; padding: 26px 28px;
+  background-image: linear-gradient(115deg, rgba(9, 20, 45, .95) 40%, rgba(124, 22, 15, .6)), url('/feature-car.jpg');
+  background-size: cover; background-position: center 60%; }
+.cr-best-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+.cr-best-stats b { display: block; font-size: 26px; font-weight: 900; letter-spacing: -.01em; }
+.cr-best-stats span { display: block; margin-top: 4px; font-size: 12px; font-weight: 700; color: rgba(255,255,255,.65); line-height: 1.4; }
+@media (max-width: 700px) { .cr-best-stats { grid-template-columns: repeat(2, 1fr); } }
+
 /* home hero — the car ghosted into the navy panel */
 .hero::before {
   content: ''; position: absolute; right: -4%; bottom: -14%; width: 70%; height: 95%;
