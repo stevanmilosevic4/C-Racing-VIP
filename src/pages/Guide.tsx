@@ -4,7 +4,7 @@
 
 const WATCH = [
   { icon: '🔀', title: 'Overtakes', text: 'Still the rarest, loudest moment in the sport — every autonomous pass under racing conditions is a little piece of history. When two cars go side by side, watch the paddock stop breathing.' },
-  { icon: '🛑', title: 'The braking zones', text: 'Where the software earns its lap time. At Imola, watch Tamburello and Tosa — how late a car brakes tells you how much its team trusts the stack.' },
+  { icon: '🛑', title: 'The braking zones', text: 'Where the software earns its lap time. At Imola, watch the braking in the Tamburello and Tosa corners — how late a car brakes tells you how much its team trusts the stack.' },
   { icon: '🌡️', title: 'Cold tyres', text: 'AI drivers hate them as much as humans do. Restarts and out-laps are when cars snap sideways — Kinetiz spun on cold tyres in last season\'s final and still recovered to P4.' },
   { icon: '⏱️', title: 'Sector times vs the human benchmark', text: 'Ex-F1 driver Daniil Kvyat\'s 57.5s lap of Yas Marina is the bar. The fastest AI lap is ~1.6s off — down from 10 seconds just 18 months earlier.' },
   { icon: '📡', title: 'The pit wall', text: 'Nobody is steering, but the garages are electric — engineers watch telemetry the way parents watch a toddler near stairs. They can change strategy parameters, never drive.' },
