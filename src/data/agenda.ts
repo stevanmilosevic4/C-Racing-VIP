@@ -1,5 +1,7 @@
-// Series agenda — four phases from the project plan.
-// Testing days → Finals week → Race day → Abu Dhabi.
+// Series agenda — deliberately flexible: testing runs are decided in the
+// moment (car readiness, weather), so items carry day-ranges and labels
+// instead of clock times. Race day gets exact times once A2RL publishes
+// the official schedule.
 
 export type AgendaItem = { time: string; what: string; where?: string }
 export type Phase = {
@@ -18,13 +20,12 @@ export const PHASES: Phase[] = [
     accent: 'blue',
     dates: '21–27 July 2026',
     title: 'Testing · Window 1',
-    summary: 'Relaxed garage days at Imola. See the car run, meet the engineers, and get an autonomous-racing primer. Open invite, low-key.',
+    summary: 'Flexible test days at Imola — no fixed timetable. What runs when is decided in the moment, based on how the car is behaving. Tell us which day you\'re coming and how many you are (use Book a Visit), so we can arrange a tour guide for your group.',
     tier: 'Internal / relaxed',
     items: [
-      { time: '10:00', what: 'Garage open · car reveal', where: 'Constructor garage, Imola paddock' },
-      { time: '11:30', what: 'Guided garage tour + autonomy walk-through', where: 'Pit lane' },
-      { time: '13:00', what: 'Light lunch with the engineering crew', where: 'Hospitality' },
-      { time: '14:30', what: 'Live test session — watch from the wall', where: 'Pit wall' },
+      { time: '21–23 Jul', what: 'Garage days — the car stays inside', where: 'Constructor garage · static work, see the SF23 and the crew up close' },
+      { time: 'From 24 Jul', what: 'Track testing begins — watch the car run', where: 'Pit wall · run times decided day by day' },
+      { time: 'Any day', what: 'Guided tour — the car, the garage, the facilities around the track', where: 'Imola paddock' },
     ],
   },
   {
@@ -32,25 +33,25 @@ export const PHASES: Phase[] = [
     accent: 'blue',
     dates: '2–11 August 2026',
     title: 'Testing · Window 2',
-    summary: 'Second testing window — more track time, deeper engineering Q&A, and content capture as the car is dialled in for the finals.',
+    summary: 'Second window — same spirit as July: flexible, decided in the moment. More track running as the car is dialled in for the finals; garage and facility tours available every day. Book your day and group size and we\'ll take care of the rest.',
     tier: 'Internal / relaxed',
     items: [
-      { time: '10:00', what: 'Garage open · setup briefing', where: 'Constructor garage' },
-      { time: '12:00', what: 'Engineer fireside — the autonomy stack', where: 'Hospitality' },
-      { time: '15:00', what: 'Extended test running', where: 'Full circuit' },
+      { time: 'Daily', what: 'Garage open — watch the crew at work', where: 'Constructor garage' },
+      { time: 'Track days', what: 'Test running — watch from the pit wall', where: 'Timing decided in the moment' },
+      { time: 'Any day', what: 'Guided tour — car, garage, facilities', where: 'Imola paddock' },
     ],
   },
   {
     id: 'finals',
     accent: 'amber',
     dates: '31 Aug – 4 Sep 2026',
-    title: 'Finals Week — VIP Experience',
-    summary: 'The curated, invite-only build-up. Lodge/lounge access, guided VIP garage tours, and the Constructor dinner the evening before the race.',
+    title: 'Finals Week',
+    summary: 'Simpler than the testing windows: our static base all week is the garage. A short drive-around (30–60 minutes) may happen before race day, schedule permitting. Final test runs are strictly limited — the car goes out once or twice at most, so catching one is a genuine privilege.',
     tier: 'Executive / VIP',
     items: [
-      { time: 'Thu', what: 'VIP arrivals · lodge & lounge check-in', where: 'Constructor Lodge, Imola' },
-      { time: 'Fri 16:00', what: 'VIP guided garage tour + qualifying watch', where: 'Paddock' },
-      { time: 'Fri 20:00', what: 'Constructor VIP dinner', where: 'Private venue, Imola hills' },
+      { time: 'All week', what: 'Garage base — visits, tours & meet the crew', where: 'Constructor garage, Imola paddock' },
+      { time: 'If possible', what: 'Drive-around, 30–60 min — before race day', where: 'Circuit · schedule permitting' },
+      { time: 'Once or twice', what: 'Final test runs — strict, limited access', where: 'Pit wall · confirmed on the day' },
     ],
   },
   {
@@ -58,13 +59,13 @@ export const PHASES: Phase[] = [
     accent: 'red',
     dates: 'Saturday 5 September 2026',
     title: 'Race Day — Imola Finals',
-    summary: 'The headline moment. Grandstand VIP seats, paddock access, and the autonomous racing finale at the Autodromo.',
+    summary: 'The main action of the whole summer. Grandstand seats, garage and paddock access, and the autonomous racing finale at the Autodromo. Exact times will follow once A2RL publishes the official race-day schedule.',
     tier: 'Executive / VIP',
     items: [
-      { time: '11:00', what: 'VIP brunch + paddock access', where: 'Constructor hospitality' },
-      { time: '13:30', what: 'Grid walk & final systems checks', where: 'Starting grid' },
-      { time: '15:00', what: 'Lights out — A2RL Imola Final', where: 'Autodromo Enzo e Dino Ferrari' },
-      { time: '17:30', what: 'Podium & celebration', where: 'Main straight' },
+      { time: 'Morning', what: 'VIP brunch · garage & paddock access', where: 'Constructor hospitality' },
+      { time: 'Midday', what: 'Grid walk & final systems checks', where: 'Starting grid' },
+      { time: 'Afternoon', what: 'Lights out — A2RL Imola Final', where: 'Autodromo Enzo e Dino Ferrari' },
+      { time: 'After', what: 'Podium & celebration', where: 'Main straight' },
     ],
   },
   {
