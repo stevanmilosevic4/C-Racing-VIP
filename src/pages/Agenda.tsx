@@ -23,7 +23,7 @@ export default function Agenda() {
             <div className="agenda-items">
               {p.items.map((it, i) => (
                 <div className="agenda-item" key={i}>
-                  <div className="time">{it.time}</div>
+                  {it.time && <div className="time">{it.time}</div>}
                   <div>
                     <div className="what">{it.what}</div>
                     {it.where && <div className="where">{it.where}</div>}

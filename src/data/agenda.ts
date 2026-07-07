@@ -49,9 +49,9 @@ export const PHASES: Phase[] = [
     summary: 'Simpler than the testing windows: our static base all week is the garage. A short drive-around (30–60 minutes) may happen before race day, schedule permitting. Final test runs are strictly limited — the car goes out once or twice at most, so catching one is a genuine privilege.',
     tier: 'Executive / VIP',
     items: [
-      { time: 'All week', what: 'Garage base — visits, tours & meet the crew', where: 'Constructor garage, Imola paddock' },
-      { time: 'If possible', what: 'Drive-around, 30–60 min — before race day', where: 'Circuit · schedule permitting' },
-      { time: 'Once or twice', what: 'Final test runs — strict, limited access', where: 'Pit wall · confirmed on the day' },
+      { time: '', what: 'Garage base — visits, tours & meet the crew', where: 'Constructor garage, Imola paddock' },
+      { time: '', what: 'Drive-around, 30–60 min — before race day', where: 'Circuit · schedule permitting' },
+      { time: '', what: 'Final test runs — strict, limited access', where: 'Pit wall · confirmed on the day' },
     ],
   },
   {
