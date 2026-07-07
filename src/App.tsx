@@ -17,6 +17,7 @@ import Crew from './pages/Crew'
 import Booking from './pages/Booking'
 import AdminBoard from './pages/admin/AdminBoard'
 import AdminGuests from './pages/admin/AdminGuests'
+import AdminVisits from './pages/admin/AdminVisits'
 import AdminPlan from './pages/admin/AdminPlan'
 import AdminActivity from './pages/admin/AdminActivity'
 import AdminCalendar from './pages/admin/AdminCalendar'
@@ -25,7 +26,7 @@ import AdminCalendar from './pages/admin/AdminCalendar'
 const PAGE_NAMES: Record<string, string> = {
   '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola', '/guide': 'Race Guide',
   '/predict': 'Podium Bet', '/profile': 'Profile', '/crew': 'Crew', '/book': 'Book a Visit',
-  '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity', '/admin/calendar': 'Calendar',
+  '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/visits': 'Visits', '/admin/plan': 'Milestones', '/admin/activity': 'Activity', '/admin/calendar': 'Calendar',
 }
 
 // Records a page view for the signed-in user on every route change.
@@ -115,6 +116,7 @@ export default function App() {
           {/* Admin */}
           <Route path="/admin" element={<Protected role="admin"><AdminBoard /></Protected>} />
           <Route path="/admin/guests" element={<Protected role="admin"><AdminGuests /></Protected>} />
+          <Route path="/admin/visits" element={<Protected role="admin"><AdminVisits /></Protected>} />
           <Route path="/admin/plan" element={<Protected role="admin"><AdminPlan /></Protected>} />
           <Route path="/admin/activity" element={<Protected role="admin"><AdminActivity /></Protected>} />
           <Route path="/admin/calendar" element={<Protected role="admin"><AdminCalendar /></Protected>} />

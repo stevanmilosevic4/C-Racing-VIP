@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useSynced, useToast } from '../hooks'
 import { logActivity } from '../activity'
+import { BOOKINGS_KEY, emailBookingNotification, type BookingRecord } from '../data/bookings'
 
 // Real testing days (from the series plan): 21–27 Jul and 2–11 Aug 2026.
 // Exact daily run-plan is set closer to the date — guests pick a preferred day.
@@ -35,6 +36,7 @@ export default function BookingPage() {
   const { user } = useAuth()
   const { msg, show } = useToast()
   const [booking, setBooking] = useSynced<Booking | null>(`cxa2rl.booking:${user?.name ?? 'guest'}`, null)
+  const [, setAllBookings] = useSynced<BookingRecord[]>(BOOKINGS_KEY, [])
   const [dayId, setDayId] = useState<string>(booking?.dayId ?? '')
   const [people, setPeople] = useState(booking?.people ?? 1)
   const [activities, setActivities] = useState<string[]>(booking?.activities ?? [])
@@ -51,9 +53,30 @@ export default function BookingPage() {
     if (!dayId) { show('Pick a preferred day first'); return }
     setBooking({ dayId, people, activities, note })
     show('Garage visit requested ✓')
-    if (user && day) logActivity(user.name, user.role, 'Booked a garage visit', `${day.label} · ${booking ? 'updated' : 'new'}`)
+    if (user && day) {
+      logActivity(user.name, user.role, 'Booked a garage visit', `${day.label} · ${booking ? 'updated' : 'new'}`)
+      // central copy for the organisers' Visits board + email notification
+      const rec: BookingRecord = {
+        guest: user.name, company: user.company ?? '', email: user.email ?? '',
+        dayId, day: day.label, window: day.window, people, activities, note,
+        ts: Date.now(), status: 'requested',
+      }
+      setAllBookings((list) => [...(list ?? []).filter((b) => b.guest !== user.name), rec])
+      emailBookingNotification(rec)
+    }
   }
-  function cancel() { setBooking(null); setDayId(''); setActivities([]); show('Booking cancelled') }
+  function cancel() {
+    setBooking(null); setDayId(''); setActivities([]); show('Booking cancelled')
+    if (user) {
+      setAllBookings((list) => (list ?? []).map((b) => {
+        if (b.guest !== user.name || b.status === 'cancelled') return b
+        const cancelled: BookingRecord = { ...b, status: 'cancelled', ts: Date.now() }
+        emailBookingNotification(cancelled)
+        return cancelled
+      }))
+      logActivity(user.name, user.role, 'Cancelled a garage visit')
+    }
+  }
 
   return (
     <div className="wrap">
