@@ -1,78 +1,118 @@
+import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { EVENT } from '../data/event'
 import { TICKET_PERKS } from '../data/content'
+import { useSynced, useToast } from '../hooks'
 
-// Deterministic faux-QR from a seed string — purely decorative.
-const N = 21
-function QR({ seed }: { seed: string }) {
-  let h = 2166136261 >>> 0
-  for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0 }
-  const isFinder = (x: number, y: number) => {
-    const inBox = (ox: number, oy: number) => x >= ox && x < ox + 7 && y >= oy && y < oy + 7
-    for (const [ox, oy] of [[0, 0], [N - 7, 0], [0, N - 7]] as const) {
-      if (inBox(ox, oy)) {
-        const dx = x - ox, dy = y - oy
-        const ring = dx === 0 || dx === 6 || dy === 0 || dy === 6
-        const core = dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4
-        return ring || core
-      }
-    }
-    return null
-  }
-  const cells: { x: number; y: number }[] = []
-  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-    const f = isFinder(x, y)
-    if (f !== null) { if (f) cells.push({ x, y }); continue }
-    h = (Math.imul(h, 1103515245) + 12345) & 0x7fffffff
-    if ((h >> 16) % 2 === 0) cells.push({ x, y })
-  }
-  return (
-    <svg viewBox={`0 0 ${N} ${N}`} shapeRendering="crispEdges">
-      {cells.map((c, i) => <rect key={i} x={c.x} y={c.y} width="1" height="1" fill="#0a1733" />)}
-    </svg>
-  )
+// A guest's uploaded ticket — stored per user and synced to the backend,
+// so it follows them across devices. Images are downscaled client-side;
+// PDFs are stored as-is (size-capped).
+type StoredTicket = { fileName: string; mime: string; dataUrl: string; uploadedAt: number }
+
+const MAX_PDF_BYTES = 3 * 1024 * 1024 // ~3 MB raw
+
+async function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader()
+    r.onload = () => resolve(r.result as string)
+    r.onerror = reject
+    r.readAsDataURL(file)
+  })
+}
+
+// Downscale an image to max 1600px on the long side, JPEG — keeps the
+// stored payload small enough to sync comfortably.
+async function imageToDataUrl(file: File): Promise<string> {
+  const raw = await fileToDataUrl(file)
+  const img = new Image()
+  await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = raw })
+  const scale = Math.min(1, 1600 / Math.max(img.width, img.height))
+  if (scale === 1 && file.size < 900_000) return raw
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.round(img.width * scale)
+  canvas.height = Math.round(img.height * scale)
+  canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height)
+  return canvas.toDataURL('image/jpeg', 0.85)
 }
 
 export default function Ticket() {
   const { user } = useAuth()
-  const name = user?.name ?? 'Guest'
-  const ref = 'CX-' + name.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4).padEnd(4, 'X') + '-26'
+  const { msg, show } = useToast()
+  const name = user?.name ?? 'guest'
+  const [ticket, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  const [busy, setBusy] = useState(false)
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  async function onFile(file: File | undefined | null) {
+    if (!file) return
+    setBusy(true)
+    try {
+      const isImage = file.type.startsWith('image/')
+      const isPdf = file.type === 'application/pdf'
+      if (!isImage && !isPdf) { show('Please upload a photo or a PDF'); return }
+      if (isPdf && file.size > MAX_PDF_BYTES) { show('PDF too large — max 3 MB. A photo/screenshot of the ticket works too.'); return }
+      const dataUrl = isImage ? await imageToDataUrl(file) : await fileToDataUrl(file)
+      setTicket({ fileName: file.name, mime: isPdf ? 'application/pdf' : 'image/jpeg', dataUrl, uploadedAt: Date.now() })
+      show('Ticket saved ✓ — it will be here whenever you need it')
+    } catch {
+      show('Could not read that file — try another one')
+    } finally {
+      setBusy(false)
+      if (fileRef.current) fileRef.current.value = ''
+    }
+  }
 
   return (
     <div className="wrap">
       <div className="eyebrow">Race Day Pass</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Ticket</h1>
-      <p className="page-sub">Your VIP credential for the A2RL Imola finals. Show this at the paddock gate on race day.</p>
+      <p className="page-sub">
+        Your entry for the A2RL Imola finals on 5 September. Once your official ticket arrives, store it
+        here — it stays with your account and is ready to show at the gate from any device.
+      </p>
 
       <div className="grid cols-2" style={{ marginTop: 30, alignItems: 'start' }}>
-        <div className="ticket">
-          <div className="tk-top">
-            <div>
-              <div style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: '#1e9bf0', fontWeight: 800 }}>Constructor × A2RL · VIP</div>
-              <div style={{ fontSize: 26, fontWeight: 900, marginTop: 6 }}>Imola Finals</div>
+        <div>
+          {ticket ? (
+            <div className="card" style={{ padding: 18 }}>
+              {ticket.mime === 'application/pdf'
+                ? (
+                  <object data={ticket.dataUrl} type="application/pdf" style={{ width: '100%', height: 460, borderRadius: 12 }}>
+                    <div style={{ padding: 24, textAlign: 'center', fontSize: 14 }}>
+                      PDF stored ✓ — <a href={ticket.dataUrl} download={ticket.fileName} style={{ fontWeight: 800 }}>open / download it here</a>
+                    </div>
+                  </object>
+                )
+                : <img src={ticket.dataUrl} alt="Your ticket" style={{ width: '100%', borderRadius: 12, display: 'block' }} />}
+              <div style={{ display: 'flex', gap: 10, marginTop: 14, flexWrap: 'wrap', alignItems: 'center' }}>
+                <button className="btn btn-dark btn-sm" onClick={() => fileRef.current?.click()} disabled={busy}>Replace</button>
+                <button className="btn btn-ghost btn-sm" onClick={() => { setTicket(null); show('Ticket removed') }}>Remove</button>
+                <span className="muted" style={{ fontSize: 12, marginLeft: 'auto' }}>{ticket.fileName}</span>
+              </div>
             </div>
-            <span className="tag tag-red">VIP</span>
-          </div>
-          <div className="tk-mid">
-            <div className="tk-cell"><div className="l">Guest</div><div className="v">{name}</div></div>
-            <div className="tk-cell"><div className="l">Date</div><div className="v">Sat 5 Sep</div></div>
-            <div className="tk-cell"><div className="l">Gate</div><div className="v">15:00</div></div>
-            <div className="tk-cell"><div className="l">Venue</div><div className="v" style={{ fontSize: 14 }}>Autodromo Enzo e Dino Ferrari</div></div>
-            <div className="tk-cell"><div className="l">Access</div><div className="v" style={{ fontSize: 14 }}>Paddock · Grandstand</div></div>
-            <div className="tk-cell"><div className="l">Seat</div><div className="v">Main straight</div></div>
-          </div>
-          <div className="tk-perf">
-            <div>
-              <div style={{ fontSize: 11, letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.55)', fontWeight: 800 }}>Reference</div>
-              <div style={{ fontWeight: 900, fontSize: 22, letterSpacing: '.06em', marginTop: 5 }}>{ref}</div>
-              <div style={{ color: 'rgba(255,255,255,.5)', fontSize: 12, marginTop: 6 }}>{EVENT.vipCapacity} VIP passes · invite-only</div>
+          ) : (
+            <div className="ticket-upload">
+              <div style={{ fontSize: 40 }}>🎟️</div>
+              <h3 style={{ fontSize: 20, marginTop: 10 }}>Tickets — coming soon</h3>
+              <p className="muted" style={{ fontSize: 14, lineHeight: 1.6, marginTop: 8, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
+                Official race tickets haven't been distributed yet. As soon as yours arrives, upload it
+                here (photo, screenshot or PDF) and it will always be ready on this page.
+              </p>
+              <button className="btn btn-red" style={{ marginTop: 18 }} onClick={() => fileRef.current?.click()} disabled={busy}>
+                {busy ? 'Saving…' : 'Upload my ticket'}
+              </button>
             </div>
-            <div className="qr"><QR seed={ref} /></div>
-          </div>
+          )}
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*,application/pdf"
+            style={{ display: 'none' }}
+            onChange={(e) => onFile(e.target.files?.[0])}
+          />
         </div>
 
         <div className="card" style={{ padding: 22 }}>
-          <h3 style={{ fontSize: 18 }}>What your pass includes</h3>
+          <h3 style={{ fontSize: 18 }}>What your VIP access includes</h3>
           <div style={{ marginTop: 12 }}>
             {TICKET_PERKS.map((p) => (
               <div className="perk" key={p}>
@@ -82,10 +122,12 @@ export default function Ticket() {
             ))}
           </div>
           <div style={{ marginTop: 16, padding: '12px 14px', background: 'var(--blue-soft)', borderRadius: 10, fontSize: 13, color: 'var(--blue-dark)', fontWeight: 600 }}>
-            Keep this screen handy on race day — your reference and QR are your entry.
+            Your uploaded ticket is saved to your account — it will be right here on race day, on any device you sign in from.
           </div>
         </div>
       </div>
+
+      {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
   )
 }

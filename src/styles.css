@@ -523,6 +523,9 @@ body::after {
 @media (max-width: 900px) { .labs-gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .labs-gallery { grid-template-columns: 1fr; } }
 
+/* ticket upload */
+.ticket-upload { border: 2px dashed var(--line); border-radius: 18px; padding: 44px 26px; text-align: center; background: var(--card); }
+
 /* race guide — rules of the race */
 .rules-list { display: grid; gap: 10px; max-width: 880px; }
 .rule-row { display: flex; gap: 15px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px; box-shadow: var(--shadow); }

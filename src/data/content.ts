@@ -124,7 +124,7 @@ export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
 ]
 
 export const TICKET_PERKS = [
-  'Race-day grandstand VIP seat — main straight',
+  'Race day in the special Constructor VIP lounge',
   'Paddock & pit-lane access pass',
   'Guided VIP garage tour with the engineers',
   'Constructor VIP dinner (eve of race)',
