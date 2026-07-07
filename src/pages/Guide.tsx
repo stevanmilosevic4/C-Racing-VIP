@@ -11,6 +11,18 @@ const WATCH = [
   { icon: '🤝', title: 'Traffic decisions', text: 'The cars negotiate space with each other in real time, no radio, no team orders. Watch how a following car probes for a gap lap after lap — that\'s the software "thinking".' },
 ]
 
+// Distilled from the official A2RL Sporting Regulations v2.0 (2025) and the
+// Race Control Flag Scenarios v1.9 — the important + fun parts only.
+const RULES = [
+  { icon: '🏁', title: 'How a race weekend works', text: 'Qualifying is a solo time-trial — each car gets the track entirely to itself, and only its single fastest lap counts. Then come sprint races in groups of three, and the quickest cars advance to the Grand Final: up to six cars, 24 laps, rolling start. Too slow to keep up (over 115% of the fastest pace) and you don\'t make the final at all.' },
+  { icon: '⚡', title: 'Push to Pass — but never for the leader', text: 'Every car can unlock extra engine power to attack… except the car in first place. The moment you take the lead, your boost switches off. The rule exists purely to create overtakes — whoever leads is always catchable.' },
+  { icon: '📏', title: 'The 15-metre gentleman\'s rule', text: 'Once an attacker closes to within 15 metres, the defender must hold its line and leave three metres of space at the next corner. Blocking is banned outright, and overtaking at the apex of a corner is off-limits. The cars are required — by the rulebook — to race politely.' },
+  { icon: '💥', title: 'No touching. Ever.', text: 'Any contact between cars gets penalised, intentional or not. There is no "racing incident" excuse here — which is exactly why every clean wheel-to-wheel pass is such a big deal.' },
+  { icon: '🚩', title: 'Flags are beamed straight into the cars', text: 'Nobody waves cloth at a robot. Race Control sends flags digitally and each car must react on its own: local yellow means slow to 100 km/h in that sector, Code 60 means 60 km/h everywhere, and a red flag makes every car calmly pull over and stop itself.' },
+  { icon: '🎟️', title: 'One appeal token per team', text: 'Disagree with the stewards? Each team may appeal exactly once per event. Win the appeal and you keep the token for next time; lose and it\'s gone. Choose your battles.' },
+  { icon: '💰', title: 'Real stakes', text: 'US $2.25 million in prize money was on the line at the 2025 finals, split by performance across the season. This is not a science fair.' },
+]
+
 const S2_RESULTS = [
   { pos: 'P1 🏆', team: 'TUM Autonomous Motorsport', note: 'Back-to-back champions' },
   { pos: 'P2', team: 'TII Racing', note: 'Host-institute entry' },
@@ -54,10 +66,17 @@ export default function Guide() {
         </div>
       </div>
 
-      <div className="info-note" style={{ marginTop: 22 }}>
-        <b>The rules in 60 seconds:</b> identical cars · the AI software is the only "driver" · qualifying
-        pace sets the grid · cars must avoid contact on their own — no human may intervene while the car
-        is on track · fastest across the line wins. That's it. The complexity is all in the code.
+      {/* rules of the race — distilled from the official regulations */}
+      <div className="section-head" style={{ marginTop: 40 }}>
+        <div><div className="eyebrow">From the official rulebook · minus the boring parts</div><h2 style={{ marginTop: 8 }}>Rules of the race</h2></div>
+      </div>
+      <div className="rules-list">
+        {RULES.map((r) => (
+          <div className="rule-row" key={r.title}>
+            <div className="rule-ico">{r.icon}</div>
+            <div><b>{r.title}</b><p>{r.text}</p></div>
+          </div>
+        ))}
       </div>
 
       {/* what to watch */}
