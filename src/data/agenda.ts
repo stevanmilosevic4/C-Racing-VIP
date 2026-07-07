@@ -64,7 +64,7 @@ export const PHASES: Phase[] = [
     items: [
       { time: 'Morning', what: 'VIP brunch · garage & paddock access', where: 'Constructor hospitality' },
       { time: 'Midday', what: 'Grid walk & final systems checks', where: 'Starting grid' },
-      { time: 'Afternoon', what: 'Lights out — A2RL Imola Final', where: 'Autodromo Enzo e Dino Ferrari' },
+      { time: 'Afternoon', what: 'Lights out — A2RL Imola Final · watched from our special VIP lounge', where: 'Autodromo Enzo e Dino Ferrari · Constructor VIP lounge' },
       { time: 'After', what: 'Podium & celebration', where: 'Main straight' },
     ],
   },
