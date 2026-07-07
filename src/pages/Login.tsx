@@ -132,6 +132,7 @@ export default function Login() {
 
       <section className="login-main">
         <div className="login-box">
+          <div className="login-mbrand"><Logo size={24} /></div>
           <div className="private">● Members only</div>
 
           {mode === 'guest' && (

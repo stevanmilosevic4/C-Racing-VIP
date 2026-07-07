@@ -332,7 +332,6 @@ ul { margin: 0; }
 
 /* ---------- login ---------- */
 .login-screen { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }
-@media (max-width: 880px) { .login-screen { grid-template-columns: 1fr; } .login-aside { display: none; } }
 .login-aside { position: relative; overflow: hidden; color: #fff; padding: 56px 50px; display: flex; flex-direction: column; justify-content: space-between; background:
   radial-gradient(900px 500px at 80% 0%, rgba(30,155,240,.4), transparent 55%),
   radial-gradient(700px 500px at 10% 100%, rgba(226,48,38,.4), transparent 55%),
@@ -342,6 +341,13 @@ ul { margin: 0; }
 .login-aside .pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px; }
 .login-aside .pill { padding: 7px 13px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; font-size: 12px; font-weight: 700; }
 .login-main { display: grid; place-items: center; padding: 40px 24px; }
+.login-mbrand { display: none; margin-bottom: 20px; }
+/* phones: hide the tall aside (must come after the base .login-aside rule) */
+@media (max-width: 880px) {
+  .login-screen { grid-template-columns: 1fr; }
+  .login-aside { display: none; }
+  .login-mbrand { display: block; }
+}
 .login-box { width: 100%; max-width: 380px; }
 .login-box .private { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); font-weight: 800; }
 .login-box h2 { font-size: 28px; font-weight: 900; margin: 10px 0 6px; }
