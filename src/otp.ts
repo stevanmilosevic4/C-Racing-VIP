@@ -1,44 +1,44 @@
-// Email verification codes for guest sign-in, sent via EmailJS
-// (https://www.emailjs.com — free tier, no server needed).
+// Email sign-in codes, sent by our Vercel serverless function
+// (/api/send-code) via Resend, from a2rl@weareconstructor.com.
+// The code never reaches the browser: the server returns a signed
+// token, and /api/verify-code checks code+token together.
 //
-// Configure in Vercel → Project → Settings → Environment Variables
-// (and locally in .env.local):
-//   VITE_EMAILJS_SERVICE_ID   — from EmailJS → Email Services
-//   VITE_EMAILJS_TEMPLATE_ID  — from EmailJS → Email Templates
-//   VITE_EMAILJS_PUBLIC_KEY   — from EmailJS → Account → General
-//
-// The template should use {{to_email}} as the recipient and include
-// {{to_name}} and {{code}} in the body.
-//
-// While these are unset, guest sign-in skips verification (straight in),
-// so the site keeps working before the email service is connected.
+// If the backend isn't available (local dev, or RESEND_API_KEY not set
+// on Vercel), sign-in falls back to direct entry so nobody gets locked out.
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined
+export type SendResult =
+  | { status: 'sent'; token: string; expires: number }
+  | { status: 'unconfigured' }
+  | { status: 'error' }
 
-export const otpConfigured = Boolean(SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY)
-
-export function makeCode(): string {
-  const buf = new Uint32Array(1)
-  crypto.getRandomValues(buf)
-  return String(buf[0] % 1_000_000).padStart(6, '0')
-}
-
-export async function sendCode(toEmail: string, toName: string, code: string): Promise<boolean> {
+export async function requestCode(email: string, name: string): Promise<SendResult> {
   try {
-    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    const res = await fetch('/api/send-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        service_id: SERVICE_ID,
-        template_id: TEMPLATE_ID,
-        user_id: PUBLIC_KEY,
-        template_params: { to_email: toEmail, to_name: toName, code },
-      }),
+      body: JSON.stringify({ email, name }),
     })
-    return res.ok
+    if (res.status === 404 || res.status === 501) return { status: 'unconfigured' }
+    if (!res.ok) return { status: 'error' }
+    const { token, expires } = await res.json()
+    return { status: 'sent', token, expires }
   } catch {
-    return false
+    return { status: 'unconfigured' } // no backend reachable (e.g. local dev)
+  }
+}
+
+export async function verifyCode(email: string, code: string, token: string, expires: number): Promise<'ok' | 'wrong' | 'expired' | 'error'> {
+  try {
+    const res = await fetch('/api/verify-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, code, token, expires }),
+    })
+    if (res.ok) return 'ok'
+    if (res.status === 401) return 'wrong'
+    if (res.status === 410) return 'expired'
+    return 'error'
+  } catch {
+    return 'error'
   }
 }

@@ -2,9 +2,8 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Logo from '../components/Logo'
-import { otpConfigured, makeCode, sendCode } from '../otp'
+import { requestCode, verifyCode } from '../otp'
 
-const CODE_TTL_MS = 10 * 60 * 1000 // codes are valid for 10 minutes
 const MAX_ATTEMPTS = 5
 const RESEND_COOLDOWN_S = 30
 
@@ -20,7 +19,7 @@ export default function Login() {
   const [err, setErr] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const [cooldown, setCooldown] = useState(0)
-  const pending = useRef<{ code: string; expires: number; attempts: number } | null>(null)
+  const pending = useRef<{ token: string; expires: number; attempts: number } | null>(null)
 
   function startCooldown() {
     setCooldown(RESEND_COOLDOWN_S)
@@ -34,30 +33,33 @@ export default function Login() {
     if (!c) { setErr('Please enter your company.'); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { setErr('Please enter a valid email address.'); return }
 
-    // Email service not connected yet → sign straight in (pre-launch mode).
-    if (!otpConfigured) {
+    setBusy(true)
+    const sent = await requestCode(m, n)
+    setBusy(false)
+    if (sent.status === 'unconfigured') {
+      // Email backend not live yet → sign straight in (pre-launch mode).
       const res = loginGuest({ name: n, company: c, email: m })
       if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
       nav('/')
       return
     }
-
-    setBusy(true)
-    const fresh = makeCode()
-    const sent = await sendCode(m, n, fresh)
-    setBusy(false)
-    if (!sent) { setErr('We couldn\'t send the email — check the address and try again.'); return }
-    pending.current = { code: fresh, expires: Date.now() + CODE_TTL_MS, attempts: 0 }
+    if (sent.status === 'error') { setErr('We couldn\'t send the email — check the address and try again.'); return }
+    pending.current = { token: sent.token, expires: sent.expires, attempts: 0 }
     setOtp(''); setErr(null); setMode('verify'); startCooldown()
   }
 
-  function submitOtp(e: React.FormEvent) {
+  async function submitOtp(e: React.FormEvent) {
     e.preventDefault()
     const p = pending.current
     if (!p || Date.now() > p.expires) { setErr('That code has expired — send a new one.'); return }
     if (p.attempts >= MAX_ATTEMPTS) { setErr('Too many tries — send a new code.'); return }
     p.attempts++
-    if (otp.trim() !== p.code) { setErr('That code doesn\'t match — check the email and try again.'); return }
+    setBusy(true)
+    const result = await verifyCode(email.trim(), otp.trim(), p.token, p.expires)
+    setBusy(false)
+    if (result === 'wrong') { setErr('That code doesn\'t match — check the email and try again.'); return }
+    if (result === 'expired') { setErr('That code has expired — send a new one.'); return }
+    if (result === 'error') { setErr('Something hiccuped — try again.'); return }
     pending.current = null
     const res = loginGuest({ name, company, email })
     if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
@@ -67,11 +69,10 @@ export default function Login() {
   async function resend() {
     if (cooldown > 0 || busy) return
     setBusy(true)
-    const fresh = makeCode()
-    const sent = await sendCode(email.trim(), name.trim(), fresh)
+    const sent = await requestCode(email.trim(), name.trim())
     setBusy(false)
-    if (!sent) { setErr('Couldn\'t resend — try again in a moment.'); return }
-    pending.current = { code: fresh, expires: Date.now() + CODE_TTL_MS, attempts: 0 }
+    if (sent.status !== 'sent') { setErr('Couldn\'t resend — try again in a moment.'); return }
+    pending.current = { token: sent.token, expires: sent.expires, attempts: 0 }
     setErr(null); startCooldown()
   }
 
