@@ -525,6 +525,10 @@ body::after {
 @media (max-width: 900px) { .labs-gallery { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .labs-gallery { grid-template-columns: 1fr; } }
 
+/* login — access-code toggle */
+.login-alt { display: block; margin-top: 18px; background: none; border: 0; padding: 0; color: var(--muted); font-size: 13px; font-weight: 700; cursor: pointer; }
+.login-alt:hover { color: var(--ink); text-decoration: underline; }
+
 /* ticket upload */
 .ticket-upload { border: 2px dashed var(--line); border-radius: 18px; padding: 44px 26px; text-align: center; background: var(--card); }
 

@@ -4,15 +4,27 @@ import { useAuth } from '../context/AuthContext'
 import Logo from '../components/Logo'
 
 export default function Login() {
-  const { login } = useAuth()
+  const { loginGuest, loginAdmin } = useAuth()
   const nav = useNavigate()
+  const [mode, setMode] = useState<'guest' | 'code'>('guest')
   const [name, setName] = useState('')
+  const [company, setCompany] = useState('')
+  const [email, setEmail] = useState('')
+  const [code, setCode] = useState('')
   const [err, setErr] = useState<string | null>(null)
 
-  function enter(role: 'vip' | 'admin') {
-    const res = login(name, role)
-    if (!res.ok) { setErr(res.error ?? 'Login failed'); return }
-    nav(role === 'admin' ? '/admin' : '/')
+  function submitGuest(e: React.FormEvent) {
+    e.preventDefault()
+    const res = loginGuest({ name, company, email })
+    if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
+    nav('/')
+  }
+
+  function submitCode(e: React.FormEvent) {
+    e.preventDefault()
+    const res = loginAdmin(name, code)
+    if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
+    nav('/admin')
   }
 
   return (
@@ -38,25 +50,61 @@ export default function Login() {
       <section className="login-main">
         <div className="login-box">
           <div className="private">● Members only</div>
-          <h2>Welcome to the crew.</h2>
-          <p className="hint">Enter your name, then choose how you’re joining.</p>
 
-          <form onSubmit={(e) => { e.preventDefault(); enter('vip') }}>
-            {err && <div className="login-err">{err}</div>}
-            <label className="field">
-              <span>Your name</span>
-              <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Alex" autoFocus />
-            </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
-              <button type="submit" className="btn btn-red">Enter as Guest</button>
-              <button type="button" className="btn btn-dark" onClick={() => enter('admin')}>Enter as Organiser</button>
-            </div>
-          </form>
+          {mode === 'guest' ? (
+            <>
+              <h2>Welcome to the crew.</h2>
+              <p className="hint">Tell us who you are and you're in.</p>
 
-          <div className="demo-creds">
-            <b>Guest</b> — the VIP experience (home, agenda, ticket, book a visit).<br />
-            <b>Organiser</b> — the event-control board and guest records.
-          </div>
+              <form onSubmit={submitGuest}>
+                {err && <div className="login-err">{err}</div>}
+                <label className="field">
+                  <span>Full name</span>
+                  <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Alex Rossi" autoFocus />
+                </label>
+                <label className="field">
+                  <span>Company</span>
+                  <input value={company} onChange={(e) => { setCompany(e.target.value); setErr(null) }} placeholder="e.g. Constructor Group" />
+                </label>
+                <label className="field">
+                  <span>Email</span>
+                  <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setErr(null) }} placeholder="you@company.com" />
+                </label>
+                <button type="submit" className="btn btn-red" style={{ width: '100%', marginTop: 4 }}>Enter</button>
+              </form>
+
+              <div className="demo-creds">
+                Your details stay with the organising team only — they're used for gate lists, tour-guide
+                planning and race-week updates.
+              </div>
+
+              <button className="login-alt" onClick={() => { setMode('code'); setErr(null) }}>
+                I have an access code →
+              </button>
+            </>
+          ) : (
+            <>
+              <h2>Access code</h2>
+              <p className="hint">For the organising team — enter your name and the code.</p>
+
+              <form onSubmit={submitCode}>
+                {err && <div className="login-err">{err}</div>}
+                <label className="field">
+                  <span>Your name</span>
+                  <input value={name} onChange={(e) => { setName(e.target.value); setErr(null) }} placeholder="e.g. Stevan" autoFocus />
+                </label>
+                <label className="field">
+                  <span>Access code</span>
+                  <input type="password" value={code} onChange={(e) => { setCode(e.target.value); setErr(null) }} placeholder="••••••••••••" />
+                </label>
+                <button type="submit" className="btn btn-dark" style={{ width: '100%', marginTop: 4 }}>Enter as Organiser</button>
+              </form>
+
+              <button className="login-alt" onClick={() => { setMode('guest'); setErr(null) }}>
+                ← Back to guest sign-in
+              </button>
+            </>
+          )}
         </div>
       </section>
     </div>

@@ -69,7 +69,8 @@ export default function Profile() {
         <div className="avatar" style={{ width: 56, height: 56, fontSize: 22 }}>{name.trim().slice(0, 1).toUpperCase()}</div>
         <div>
           <div style={{ fontWeight: 900, fontSize: 20 }}>{name}</div>
-          <div className="muted" style={{ fontSize: 13, fontWeight: 700 }}>{user?.role === 'admin' ? 'Organizer' : 'VIP Crew'} · A2RL Imola Series</div>
+          <div className="muted" style={{ fontSize: 13, fontWeight: 700 }}>{user?.role === 'admin' ? 'Organizer' : 'VIP Crew'}{user?.company ? ` · ${user.company}` : ''} · A2RL Imola Series</div>
+          {user?.email && <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>{user.email}</div>}
         </div>
       </div>
 
