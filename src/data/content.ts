@@ -28,7 +28,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     title: '300+ km/h, no one behind the wheel',
     body: 'The autonomous land-speed record fell during the series — proof that the cars are getting genuinely, alarmingly fast on the straights.',
     meta: 'Record run · 2024',
-    img: '/Formula on track.webp',
+    img: '/gallery/1011.jpg',
   },
   {
     id: 's3',
