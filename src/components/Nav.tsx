@@ -9,7 +9,6 @@ const VIP_LINKS = [
   { to: '/participants', label: 'Teams' },
   { to: '/guide', label: 'Race Guide' },
   { to: '/predict', label: 'Podium Bet' },
-  { to: '/ticket', label: 'Ticket' },
   { to: '/crew', label: 'Crew' },
   { to: '/book', label: 'Book a Visit' },
   { to: '/imola', label: 'Imola' },
@@ -60,11 +59,23 @@ export default function Nav() {
               </button>
             )
           )}
-          <div className="avatar">{initials}</div>
-          <div className="hide-sm">
-            <div className="nav-name">{user.name}</div>
-            <div className="nav-role">{isAdmin ? (previewGuest ? 'Guest preview' : 'Organizer') : 'VIP Crew'}</div>
-          </div>
+          {viewRole === 'vip' ? (
+            <NavLink to="/profile" className="nav-profile" title="Profile & ticket">
+              <div className="avatar">{initials}</div>
+              <div className="hide-sm">
+                <div className="nav-name">{user.name}</div>
+                <div className="nav-role">{isAdmin ? 'Guest preview' : 'VIP Crew'}</div>
+              </div>
+            </NavLink>
+          ) : (
+            <>
+              <div className="avatar">{initials}</div>
+              <div className="hide-sm">
+                <div className="nav-name">{user.name}</div>
+                <div className="nav-role">Organizer</div>
+              </div>
+            </>
+          )}
           <button className="icon-btn" title="Sign out" onClick={() => { logout(); nav('/login') }}>⎋</button>
           <button className="icon-btn mobile-toggle" onClick={() => setOpen((o) => !o)} title="Menu">{open ? '✕' : '≡'}</button>
         </div>

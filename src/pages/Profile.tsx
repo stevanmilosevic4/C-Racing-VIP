@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { TICKET_PERKS } from '../data/content'
 import { useSynced, useToast } from '../hooks'
 
 // A guest's uploaded ticket — stored per user and synced to the backend,
@@ -34,7 +33,7 @@ async function imageToDataUrl(file: File): Promise<string> {
   return canvas.toDataURL('image/jpeg', 0.85)
 }
 
-export default function Ticket() {
+export default function Profile() {
   const { user } = useAuth()
   const { msg, show } = useToast()
   const name = user?.name ?? 'guest'
@@ -63,14 +62,26 @@ export default function Ticket() {
 
   return (
     <div className="wrap">
-      <div className="eyebrow">Race Day Pass</div>
-      <h1 className="page-title" style={{ marginTop: 10 }}>Ticket</h1>
-      <p className="page-sub">
+      <div className="eyebrow">Your Space</div>
+      <h1 className="page-title" style={{ marginTop: 10 }}>Profile</h1>
+
+      <div className="card" style={{ padding: 22, marginTop: 26, display: 'flex', alignItems: 'center', gap: 16, maxWidth: 640 }}>
+        <div className="avatar" style={{ width: 56, height: 56, fontSize: 22 }}>{name.trim().slice(0, 1).toUpperCase()}</div>
+        <div>
+          <div style={{ fontWeight: 900, fontSize: 20 }}>{name}</div>
+          <div className="muted" style={{ fontSize: 13, fontWeight: 700 }}>{user?.role === 'admin' ? 'Organizer' : 'VIP Crew'} · A2RL Imola Series</div>
+        </div>
+      </div>
+
+      <div className="section-head" style={{ marginTop: 34 }}>
+        <div><div className="eyebrow">Race Day Pass</div><h2 style={{ marginTop: 8 }}>My ticket</h2></div>
+      </div>
+      <p className="page-sub" style={{ maxWidth: 640 }}>
         Your entry for the A2RL Imola finals on 5 September. Once your official ticket arrives, store it
         here — it stays with your account and is ready to show at the gate from any device.
       </p>
 
-      <div className="grid cols-2" style={{ marginTop: 30, alignItems: 'start' }}>
+      <div style={{ marginTop: 22, maxWidth: 640 }}>
         <div>
           {ticket ? (
             <div className="card" style={{ padding: 18 }}>
@@ -109,21 +120,6 @@ export default function Ticket() {
             style={{ display: 'none' }}
             onChange={(e) => onFile(e.target.files?.[0])}
           />
-        </div>
-
-        <div className="card" style={{ padding: 22 }}>
-          <h3 style={{ fontSize: 18 }}>What your VIP access includes</h3>
-          <div style={{ marginTop: 12 }}>
-            {TICKET_PERKS.map((p) => (
-              <div className="perk" key={p}>
-                <span className="dot">✓</span>
-                <span style={{ fontSize: 14, fontWeight: 600 }}>{p}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{ marginTop: 16, padding: '12px 14px', background: 'var(--blue-soft)', borderRadius: 10, fontSize: 13, color: 'var(--blue-dark)', fontWeight: 600 }}>
-            Your uploaded ticket is saved to your account — it will be right here on race day, on any device you sign in from.
-          </div>
         </div>
       </div>
 

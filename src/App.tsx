@@ -12,7 +12,7 @@ import Participants from './pages/Participants'
 import Imola from './pages/Imola'
 import Guide from './pages/Guide'
 import Predict from './pages/Predict'
-import Ticket from './pages/Ticket'
+import Profile from './pages/Profile'
 import Crew from './pages/Crew'
 import Booking from './pages/Booking'
 import AdminBoard from './pages/admin/AdminBoard'
@@ -24,7 +24,7 @@ import AdminCalendar from './pages/admin/AdminCalendar'
 // Friendly names for each route, used in the activity log.
 const PAGE_NAMES: Record<string, string> = {
   '/': 'Home', '/agenda': 'Agenda', '/participants': 'Teams', '/imola': 'Imola', '/guide': 'Race Guide',
-  '/predict': 'Podium Bet', '/ticket': 'Ticket', '/crew': 'Crew', '/book': 'Book a Visit',
+  '/predict': 'Podium Bet', '/profile': 'Profile', '/crew': 'Crew', '/book': 'Book a Visit',
   '/admin': 'Event Control', '/admin/guests': 'Guests', '/admin/plan': 'Milestones', '/admin/activity': 'Activity', '/admin/calendar': 'Calendar',
 }
 
@@ -107,7 +107,8 @@ export default function App() {
           <Route path="/imola" element={<Protected role="vip"><Imola /></Protected>} />
           <Route path="/guide" element={<Protected role="vip"><Guide /></Protected>} />
           <Route path="/predict" element={<Protected role="vip"><Predict /></Protected>} />
-          <Route path="/ticket" element={<Protected role="vip"><Ticket /></Protected>} />
+          <Route path="/profile" element={<Protected role="vip"><Profile /></Protected>} />
+          <Route path="/ticket" element={<Navigate to="/profile" replace />} />
           <Route path="/crew" element={<Protected role="vip"><Crew /></Protected>} />
           <Route path="/book" element={<Protected role="vip"><Booking /></Protected>} />
 
