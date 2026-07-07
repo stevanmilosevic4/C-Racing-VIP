@@ -8,10 +8,26 @@ export default function Crew() {
       <h1 className="page-title" style={{ marginTop: 10 }}>Crew</h1>
       <p className="page-sub">The Constructor team behind the car — the people you’ll meet in the garage. A few small facts about each.</p>
 
+      <div className="crew-stats">
+        <span className="pillstat">🏆 Roborace champions '22</span>
+        <span className="pillstat">🥈 P2 — A2RL's first race</span>
+        <span className="pillstat">🔀 A2RL's first overtake</span>
+        <span className="pillstat">📜 27 patented IPs</span>
+        <span className="pillstat">⏱️ 1,000+ hours on track</span>
+        <span className="pillstat">📅 Racing autonomously since 2018</span>
+      </div>
+
+      <div className="photo-band">
+        <img src="/crew/team-photo.jpg" alt="The Constructor Racing team with the car" loading="lazy" />
+        <div className="pb-cap">The crew and the car — Yas Marina, race week.</div>
+      </div>
+
       <div className="grid cols-3" style={{ marginTop: 30 }}>
         {CREW.map((c) => (
           <article key={c.id} className="card crew-card">
-            <div className="crew-ava" style={{ background: `linear-gradient(135deg, ${c.color}, ${c.color}cc)` }}>{c.name.slice(0, 1)}</div>
+            {c.photo
+              ? <img className="crew-ava-img" src={c.photo} alt={c.name} loading="lazy" />
+              : <div className="crew-ava" style={{ background: `linear-gradient(135deg, ${c.color}, ${c.color}cc)` }}>{c.name.slice(0, 1)}</div>}
             <h3>{c.name}</h3>
             <div className="role">{c.role}</div>
             <p className="fact">{c.fact}</p>
@@ -52,6 +68,31 @@ export default function Crew() {
                 : <img src={m.src} alt={m.caption} loading="lazy" />}
           </figure>
         ))}
+      </div>
+
+      {/* BEYOND THE TRACK — what the racing tech becomes */}
+      <div className="section-head"><div><div className="eyebrow">Racing → Real World</div><h2 style={{ marginTop: 8 }}>Beyond the track — products born from racing</h2></div></div>
+      <p className="page-sub" style={{ maxWidth: 760 }}>
+        The technology doesn't stay on the circuit. Everything proven at race pace — perception, planning,
+        control — spins out into products the team builds today.
+      </p>
+      <div className="grid cols-2" style={{ marginTop: 22 }}>
+        <div className="card pad">
+          <h3>🎯 AI Racing Coach</h3>
+          <p className="blurb">A real-time AI driving coach built on the race stack: a lap-by-lap plan, racing-line corrections, and throttle/brake feedback against the AI-optimal lap. For racing schools, driver programmes, sim racing and track days.</p>
+        </div>
+        <div className="card pad">
+          <h3>🛡️ ADAS &amp; obstacle avoidance</h3>
+          <p className="blurb">High-speed collision-avoidance for road vehicles, spun out of race-pace perception and planning — already running as a live demo on a Tesla Model Y.</p>
+        </div>
+        <div className="card pad">
+          <h3>🏭 Private-area autonomy</h3>
+          <p className="blurb">Self-driving for controlled environments — ports, campuses, farms, logistics yards — where the racing autonomy stack transfers directly.</p>
+        </div>
+        <div className="card pad">
+          <h3>🧰 Autonomy kits</h3>
+          <p className="blurb">Modular perception, planning and control building blocks, so industries can assemble exactly the autonomy they need.</p>
+        </div>
       </div>
 
       {/* CONSTRUCTOR IN AUTONOMOUS RACING */}

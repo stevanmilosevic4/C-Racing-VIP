@@ -56,15 +56,17 @@ export type Crew = {
   role: string
   color: string
   fact: string
+  photo?: string // headshot under /public/crew
 }
 
 export const CREW: Crew[] = [
-  { id: 'c1', name: 'Ilya Shimchik', role: 'Team Principal', color: '#0a1733', fact: 'Leads Constructor Racing — strategy, the crew, and the calls that count trackside.' },
-  { id: 'c2', name: 'Alexander Buyval', role: 'Sr. Autonomous Driving Engineer', color: '#db4e3d', fact: 'Senior engineer on the autonomy stack — the perception, planning and control that put the car on the limit.' },
-  { id: 'c3', name: 'Maksim Filipenko', role: 'Sr. Autonomous Driving Engineer', color: '#008ce2', fact: 'Builds and tunes the driving software that reads the track and commits to the racing line.' },
-  { id: 'c4', name: 'Maksim Liubimov', role: 'Sr. Autonomous Driving Engineer', color: '#16b981', fact: 'Works across perception and planning — turning sensor data into fast, repeatable laps.' },
+  { id: 'c1', name: 'Ilya Shimchik', role: 'Team Principal', color: '#0a1733', photo: '/crew/ilya.jpg', fact: 'Leads Constructor Racing — strategy, the crew, and the calls that count trackside.' },
+  { id: 'c10', name: 'Andreas Birk', role: 'Research Lead · Professor, Constructor University', color: '#0b63c4', photo: '/crew/birk.jpg', fact: 'Professor at Constructor University in Bremen — the bridge between the campus robotics labs and the pit lane, leading the research behind the racing stack.' },
+  { id: 'c2', name: 'Alexander Buyval', role: 'Sr. Autonomous Driving Engineer', color: '#db4e3d', photo: '/crew/buyval.jpg', fact: 'Senior engineer on the autonomy stack — the perception, planning and control that put the car on the limit.' },
+  { id: 'c3', name: 'Maksim Filipenko', role: 'Sr. Autonomous Driving Engineer', color: '#008ce2', photo: '/crew/filipenko.jpg', fact: 'Builds and tunes the driving software that reads the track and commits to the racing line.' },
+  { id: 'c4', name: 'Maksim Liubimov', role: 'Sr. Autonomous Driving Engineer', color: '#16b981', photo: '/crew/liubimov.jpg', fact: 'Works across perception and planning — turning sensor data into fast, repeatable laps.' },
   { id: 'c5', name: 'Ruslan Mustafin', role: 'Sr. Autonomous Driving Engineer', color: '#6a52d1', fact: 'On the senior engineering crew keeping the car quick and the fail-safes honest.' },
-  { id: 'c6', name: 'Vladislav Sarzheniuk', role: 'Sr. Autonomous Driving Engineer', color: '#f2a93b', fact: 'Senior autonomy engineer — long hours in the sim and at the pit wall dialling in pace.' },
+  { id: 'c6', name: 'Vladislav Sarzheniuk', role: 'Sr. Autonomous Driving Engineer', color: '#f2a93b', photo: '/crew/sarzheniuk.jpg', fact: 'Senior autonomy engineer — long hours in the sim and at the pit wall dialling in pace.' },
   { id: 'c7', name: 'Giorgi Ambokadze', role: 'Autonomous Driving Engineer · Intern', color: '#0b63c4', fact: 'Rising talent on the autonomy team, shipping real code onto a race car.' },
   { id: 'c8', name: 'Gazanfar Babayev', role: 'Autonomous Driving Engineer · Intern', color: '#13a89e', fact: 'Learning fast between the garage and the simulator on the driving team.' },
   { id: 'c9', name: 'Danila Buival', role: 'Autonomous Driving Engineer · Intern', color: '#b73a2b', fact: 'On the team building the future of autonomous racing, one lap at a time.' },
@@ -114,10 +116,10 @@ export const F1_HISTORY: F1Event[] = [
 // Constructor's road in autonomous racing — shown below the crew.
 export type RacingMilestone = { yr: string; title: string; note: string }
 export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
-  { yr: '2020', title: 'Roborace roots', note: 'Before A2RL existed, the team (racing then as Acronis Rolos) fought at the front of Roborace\'s Season Beta — and was leading the series when it folded. The autonomous-racing pedigree starts here, not last week.' },
-  { yr: '2024', title: 'A2RL is born — P2, and the first overtake', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, 250+ km/h, nobody driving. Constructor finishes second, 27 seconds behind the winner, and pulls off the first-ever autonomous overtake on an F1 circuit along the way.' },
-  { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina, in front of a full house. Only a handful of teams on the planet have ever done this. Ours is one of them.' },
-  { yr: '2025', title: 'Taken out, not beaten', note: 'Racing hard in the Grand Final, the car is hit from behind mid-corner by a rival attempting an overtake — both cars out on the spot, through no fault of the Constructor stack. The pace was real; the finish never came. That one still stings in the garage.' },
+  { yr: '2018', title: 'The beginning — Atlas Racing', note: 'The team starts developing and testing autonomous driving algorithms in Roborace under the name Atlas Racing, joining Constructor a year later. The pedigree starts here — this crew has been racing without drivers longer than almost anyone on the planet.' },
+  { yr: '2022', title: 'Champions of Roborace', note: 'After winning multiple races and leading most of the 2021 season, the team takes the Roborace Season Beta title. Before A2RL even existed, Constructor Racing were already autonomous racing champions.' },
+  { yr: '2024', title: 'A2RL arrives — P2, and the first overtake', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, nobody driving. Constructor finishes second, 27 seconds behind the winner, and pulls off the first-ever autonomous overtake on an F1 circuit along the way.' },
+  { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina. Racing hard until hit from behind mid-corner by a rival\'s failed overtake, the car is classified sixth. The pace was real; the finish never came.' },
   { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and Constructor arrives at the Autodromo fighting through qualification for a place on the grid — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there for the rematch.' },
 ]
 

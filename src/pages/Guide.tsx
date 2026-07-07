@@ -44,7 +44,7 @@ export default function Guide() {
 
       <div className="photo-band">
         <img src="/gallery/AR3.jpeg" alt="A2RL cars racing" loading="lazy" />
-        <div className="pb-cap">Full-size Super Formula cars, 250+ km/h — and not a single driver on board.</div>
+        <div className="pb-cap">Full-size Super Formula cars, up to 280 km/h — and not a single driver on board.</div>
       </div>
 
       {/* how it works */}
@@ -54,7 +54,7 @@ export default function Guide() {
       <div className="grid cols-3">
         <div className="card pad">
           <h3>🏎️ The car</h3>
-          <p className="blurb">Every team races the identical car — a Dallara Super Formula SF23 converted for autonomy, stuffed with cameras, lidar, radar and GPS. Nobody can buy speed; the hardware is a level playing field.</p>
+          <p className="blurb">Every team races the identical car — a Dallara Super Formula SF23 converted for autonomy, carrying 3 lidars, 4 radars and 7 cameras, capable of up to 280 km/h. Nobody can buy speed; the hardware is a level playing field.</p>
         </div>
         <div className="card pad">
           <h3>🧠 The driver</h3>

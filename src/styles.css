@@ -261,6 +261,9 @@ ul { margin: 0; }
 /* ---------- crew ---------- */
 .crew-card { padding: 20px; text-align: center; }
 .crew-ava { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 12px; display: grid; place-items: center; font-weight: 900; font-size: 26px; color: #fff; }
+.crew-ava-img { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 12px; display: block; object-fit: cover; box-shadow: var(--shadow); }
+.crew-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.pillstat { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; color: var(--ink); box-shadow: var(--shadow); }
 .crew-card h3 { font-size: 17px; }
 .crew-card .role { color: var(--blue-dark); font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-top: 4px; }
 .crew-card .fact { color: var(--muted); font-size: 13px; line-height: 1.55; margin-top: 12px; }
