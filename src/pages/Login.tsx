@@ -7,6 +7,24 @@ import { requestCode, verifyCode } from '../otp'
 const MAX_ATTEMPTS = 5
 const RESEND_COOLDOWN_S = 30
 
+// Devices remember which emails they've verified — once a code has been
+// entered successfully on this device, future sign-ins with that email
+// skip the code step. (A new device/browser asks for a code again.)
+const VERIFIED_KEY = 'cxa2rl.verifiedEmails'
+function isEmailVerifiedHere(email: string): boolean {
+  try {
+    const map = JSON.parse(localStorage.getItem(VERIFIED_KEY) ?? '{}')
+    return Boolean(map[email.trim().toLowerCase()])
+  } catch { return false }
+}
+function markEmailVerifiedHere(email: string) {
+  try {
+    const map = JSON.parse(localStorage.getItem(VERIFIED_KEY) ?? '{}')
+    map[email.trim().toLowerCase()] = Date.now()
+    localStorage.setItem(VERIFIED_KEY, JSON.stringify(map))
+  } catch { /* ignore */ }
+}
+
 export default function Login() {
   const { loginGuest, loginAdmin } = useAuth()
   const nav = useNavigate()
@@ -32,6 +50,14 @@ export default function Login() {
     if (!n) { setErr('Please enter your full name.'); return }
     if (!c) { setErr('Please enter your company.'); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { setErr('Please enter a valid email address.'); return }
+
+    // Already verified on this device? Straight in — no code needed.
+    if (isEmailVerifiedHere(m)) {
+      const res = loginGuest({ name: n, company: c, email: m })
+      if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
+      nav('/')
+      return
+    }
 
     setBusy(true)
     const sent = await requestCode(m, n)
@@ -61,6 +87,7 @@ export default function Login() {
     if (result === 'expired') { setErr('That code has expired — send a new one.'); return }
     if (result === 'error') { setErr('Something hiccuped — try again.'); return }
     pending.current = null
+    markEmailVerifiedHere(email)
     const res = loginGuest({ name, company, email })
     if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
     nav('/')
@@ -145,7 +172,7 @@ export default function Login() {
           {mode === 'verify' && (
             <>
               <h2>Check your email.</h2>
-              <p className="hint">We sent a 6-digit code to <b>{email.trim()}</b>. It's valid for 10 minutes.</p>
+              <p className="hint">We sent a 6-digit code to <b>{email.trim()}</b> — <b>check your spam folder too</b>. It's valid for 10 minutes. You only do this once on this device.</p>
 
               <form onSubmit={submitOtp}>
                 {err && <div className="login-err">{err}</div>}
