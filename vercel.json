@@ -5,5 +5,8 @@
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/((?!api/|assets/|favicon).*)", "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/keepalive", "schedule": "0 6 * * *" }
   ]
 }
