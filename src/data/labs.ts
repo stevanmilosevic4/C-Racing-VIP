@@ -4,7 +4,7 @@
 // bridge lab bench → pit lane. To add more: drop files into /public/labs/
 // and list them here. type: 'img' | 'video' (local mp4) | 'youtube' (embed URL).
 
-export type LabMedia = { src: string; type: 'img' | 'video' | 'youtube'; caption: string }
+export type LabMedia = { src: string; type: 'img' | 'video' | 'youtube'; caption: string; pos?: string /* CSS object-position override for the crop */ }
 
 export const LAB_MEDIA: LabMedia[] = [
   // — on campus: the actual Constructor University labs, Bremen —
@@ -14,5 +14,5 @@ export const LAB_MEDIA: LabMedia[] = [
   { src: '/labs/img_1911.jpg', type: 'img', caption: 'Students driving twin robot arms — control loops you can shake hands with' },
   { src: '/labs/img_1912.jpg', type: 'img', caption: 'Manipulation practice — millimetre precision, the discipline behind 250 km/h confidence' },
   { src: '/labs/img_1880.jpg', type: 'img', caption: 'Code first, motion second — programming a lab robot, exactly how the race car is "driven"' },
-  { src: '/labs/img_1875.jpg', type: 'img', caption: 'Vision markers in the perception lab — how machines learn to know exactly where they are' },
+  { src: '/labs/img_1875.jpg', type: 'img', caption: 'Vision markers in the perception lab — how machines learn to know exactly where they are', pos: 'center 88%' },
 ]
