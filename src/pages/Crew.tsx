@@ -18,7 +18,7 @@ export default function Crew() {
       </div>
 
       <div className="photo-band">
-        <img src="/crew/team-photo.jpg" alt="The Constructor Racing team with the car" loading="lazy" />
+        <img src="/gallery/391.jpg" alt="The Constructor Racing team with the car" loading="lazy" />
         <div className="pb-cap">The crew and the car — Yas Marina, race week.</div>
       </div>
 
