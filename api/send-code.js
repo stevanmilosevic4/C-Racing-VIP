@@ -40,6 +40,8 @@ export default async function handler(req, res) {
       to: [email.trim()],
       reply_to: REPLY_TO,
       subject: `${code} is your A2RL Imola sign-in code`,
+      // A plain-text alternative markedly improves spam scoring vs HTML-only.
+      text: `Hi ${safeName},\n\nYour sign-in code for the A2RL Imola guest app is: ${code}\n\nIt is valid for 10 minutes. If you didn't request it, you can ignore this email.\n\nConstructor Racing - the A2RL Imola Series\nhttps://a2rl.weareconstructor.com`,
       html: `
         <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:480px;margin:0 auto;padding:8px">
           <div style="background:#0a1733;border-radius:14px;padding:28px;color:#fff;text-align:center">
