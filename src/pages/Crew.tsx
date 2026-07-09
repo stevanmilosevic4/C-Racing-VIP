@@ -18,7 +18,8 @@ export default function Crew() {
       </div>
 
       <div className="photo-band">
-        <img src="/crew-banner.jpg" alt="The Constructor Racing team with the car" loading="lazy" />
+        {/* taller band + top-weighted crop so nobody's head gets cut */}
+        <img src="/crew-banner.jpg" alt="The Constructor Racing team with the car" loading="lazy" style={{ height: 380, objectPosition: 'center 22%' }} />
         <div className="pb-cap">The crew and the car — Yas Marina, race week.</div>
       </div>
 
