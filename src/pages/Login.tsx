@@ -3,26 +3,45 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Logo from '../components/Logo'
 import { requestCode, verifyCode } from '../otp'
+import { dbEnabled, getState, setState } from '../db'
 
 const MAX_ATTEMPTS = 5
 const RESEND_COOLDOWN_S = 30
 
-// Devices remember which emails they've verified — once a code has been
-// entered successfully on this device, future sign-ins with that email
-// skip the code step. (A new device/browser asks for a code again.)
+// Once an email has been verified with a code — on any device — future
+// sign-ins with that email go straight in. The verified list lives in the
+// shared backend (with a local copy as fast path / offline fallback).
 const VERIFIED_KEY = 'cxa2rl.verifiedEmails'
+const GLOBAL_VERIFIED_KEY = 'cxa2rl.verifiedEmails.global'
+
 function isEmailVerifiedHere(email: string): boolean {
   try {
     const map = JSON.parse(localStorage.getItem(VERIFIED_KEY) ?? '{}')
     return Boolean(map[email.trim().toLowerCase()])
   } catch { return false }
 }
-function markEmailVerifiedHere(email: string) {
+async function isEmailVerified(email: string): Promise<boolean> {
+  if (isEmailVerifiedHere(email)) return true
+  if (!dbEnabled) return false
+  try {
+    const map = await getState<Record<string, number>>(GLOBAL_VERIFIED_KEY)
+    return Boolean(map && map[email.trim().toLowerCase()])
+  } catch { return false }
+}
+async function markEmailVerified(email: string) {
+  const key = email.trim().toLowerCase()
   try {
     const map = JSON.parse(localStorage.getItem(VERIFIED_KEY) ?? '{}')
-    map[email.trim().toLowerCase()] = Date.now()
+    map[key] = Date.now()
     localStorage.setItem(VERIFIED_KEY, JSON.stringify(map))
   } catch { /* ignore */ }
+  if (dbEnabled) {
+    try {
+      const map = (await getState<Record<string, number>>(GLOBAL_VERIFIED_KEY)) ?? {}
+      map[key] = Date.now()
+      await setState(GLOBAL_VERIFIED_KEY, map)
+    } catch { /* backend hiccup — local copy still set */ }
+  }
 }
 
 export default function Login() {
@@ -51,15 +70,15 @@ export default function Login() {
     if (!c) { setErr('Please enter your company.'); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { setErr('Please enter a valid email address.'); return }
 
-    // Already verified on this device? Straight in — no code needed.
-    if (isEmailVerifiedHere(m)) {
+    // Email verified before (on any device)? Straight in — no code needed.
+    setBusy(true)
+    if (await isEmailVerified(m)) {
+      setBusy(false)
       const res = loginGuest({ name: n, company: c, email: m })
       if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
       nav('/')
       return
     }
-
-    setBusy(true)
     const sent = await requestCode(m, n)
     setBusy(false)
     if (sent.status === 'unconfigured') {
@@ -87,7 +106,7 @@ export default function Login() {
     if (result === 'expired') { setErr('That code has expired — send a new one.'); return }
     if (result === 'error') { setErr('Something hiccuped — try again.'); return }
     pending.current = null
-    markEmailVerifiedHere(email)
+    void markEmailVerified(email)
     const res = loginGuest({ name, company, email })
     if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
     nav('/')
