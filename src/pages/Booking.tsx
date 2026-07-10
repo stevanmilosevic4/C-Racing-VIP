@@ -15,9 +15,8 @@ function testingDays(): { id: string; label: string; window: string }[] {
     const date = new Date(Date.UTC(y, m - 1, d))
     days.push({ id: `${y}-${m}-${d}`, label: fmt.format(date), window })
   }
-  for (let d = 21; d <= 27; d++) push(2026, 7, d, 'Testing · Window 1')
-  for (let d = 2; d <= 11; d++) push(2026, 8, d, 'Testing · Window 2')
-  push(2026, 9, 5, 'Race Day') // tours around the finals happen on race day only
+  // Bookable: race day only — garage tours & VIP visits happen on 5 September.
+  push(2026, 9, 5, 'Race Day')
   return days
 }
 const DAYS = testingDays()
@@ -40,7 +39,7 @@ export default function BookingPage() {
   const { msg, show } = useToast()
   const [booking, setBooking] = useSynced<Booking | null>(`cxa2rl.booking:${user?.name ?? 'guest'}`, null)
   const [, setAllBookings] = useSynced<BookingRecord[]>(BOOKINGS_KEY, [])
-  const [dayId, setDayId] = useState<string>(booking?.dayId ?? '')
+  const [dayId, setDayId] = useState<string>(booking?.dayId ?? DAYS[0].id)
   const [people, setPeople] = useState(booking?.people ?? 1)
   const [activities, setActivities] = useState<string[]>(booking?.activities ?? [])
   const [note, setNote] = useState(booking?.note ?? '')
@@ -85,7 +84,7 @@ export default function BookingPage() {
     <div className="wrap">
       <div className="eyebrow">Testing Days</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Book a Visit</h1>
-      <p className="page-sub">Come to a relaxed testing day at Imola — watch the car run, meet the engineers, and see the autonomy work up close. Around the finals, garage tours happen on <b>race day itself, Saturday 5 September</b>, before the 18:30 final. Tell us what you’d like to do and your preferred day; we’ll confirm the schedule with you.</p>
+      <p className="page-sub">Garage tours and VIP visits happen on <b>race day — Saturday 5 September</b> — before the 18:30 final: see the car and the garage up close, meet the engineers, and settle into the lounge for the race. Pick what you’d like to do and how many you are; we’ll confirm your schedule.</p>
 
       {booking && day && (
         <div className="card" style={{ padding: 18, marginTop: 22, borderLeft: '4px solid var(--green)', display: 'flex', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
@@ -117,18 +116,9 @@ export default function BookingPage() {
         <form className="card" style={{ padding: 22, position: 'sticky', top: 84 }} onSubmit={confirm}>
           <h2 style={{ fontSize: 18, marginBottom: 16 }}>Your visit</h2>
           <label className="field"><span>Guest</span><input value={user?.name ?? ''} readOnly /></label>
-          <label className="field"><span>Preferred day</span>
-            <select value={dayId} onChange={(e) => setDayId(e.target.value)}>
-              <option value="">Choose a testing day…</option>
-              <optgroup label="Testing · Window 1 (21–27 Jul)">
-                {DAYS.filter((d) => d.window.endsWith('1')).map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
-              </optgroup>
-              <optgroup label="Testing · Window 2 (2–11 Aug)">
-                {DAYS.filter((d) => d.window.endsWith('2')).map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
-              </optgroup>
-              <optgroup label="Race Day · Saturday 5 September">
-                {DAYS.filter((d) => d.window === 'Race Day').map((d) => <option key={d.id} value={d.id}>{d.label} — tours before the 18:30 final</option>)}
-              </optgroup>
+          <label className="field"><span>Day</span>
+            <select value={dayId || DAYS[0].id} onChange={(e) => setDayId(e.target.value)}>
+              {DAYS.map((d) => <option key={d.id} value={d.id}>{d.label} — tours before the 18:30 final</option>)}
             </select>
           </label>
           <label className="field"><span>How many people</span>

@@ -20,7 +20,7 @@ export const PHASES: Phase[] = [
     accent: 'blue',
     dates: '21–27 July 2026',
     title: 'Testing · Window 1',
-    summary: 'Flexible test days at Imola — no fixed timetable. What runs when is decided in the moment, based on how the car is behaving. Tell us which day you\'re coming and how many you are (use Book a Visit), so we can arrange a tour guide for your group.',
+    summary: 'Flexible test days at Imola — no fixed timetable. What runs when is decided in the moment, based on how the car is behaving. Coming by? Let your Constructor contact know which day and how many you are, so a tour guide can be arranged.',
     tier: 'Internal / relaxed',
     items: [
       { time: '21–23 Jul', what: 'Garage days — the car stays inside', where: 'Constructor garage · static work, see the SF23 and the crew up close' },
@@ -33,7 +33,7 @@ export const PHASES: Phase[] = [
     accent: 'blue',
     dates: '2–11 August 2026',
     title: 'Testing · Window 2',
-    summary: 'Second window — same spirit as July: flexible, decided in the moment. More track running as the car is dialled in for the finals; garage and facility tours available every day. Book your day and group size and we\'ll take care of the rest.',
+    summary: 'Second window — same spirit as July: flexible, decided in the moment. More track running as the car is dialled in for the finals; garage and facility tours available every day. Let your Constructor contact know your day and group size and we\'ll take care of the rest.',
     tier: 'Internal / relaxed',
     items: [
       { time: 'Daily', what: 'Garage open — watch the crew at work', where: 'Constructor garage' },
