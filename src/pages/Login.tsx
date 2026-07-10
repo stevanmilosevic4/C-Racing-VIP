@@ -5,6 +5,11 @@ import Logo from '../components/Logo'
 import { requestCode, verifyCode } from '../otp'
 import { dbEnabled, getState, setState } from '../db'
 
+// EMERGENCY SWITCH: email-code verification is temporarily off while code
+// delivery is being diagnosed — guests sign straight in. Flip back to true
+// once Resend delivery is confirmed working.
+const OTP_ENABLED = false
+
 const MAX_ATTEMPTS = 5
 const RESEND_COOLDOWN_S = 30
 
@@ -69,6 +74,13 @@ export default function Login() {
     if (!n) { setErr('Please enter your full name.'); return }
     if (!c) { setErr('Please enter your company.'); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { setErr('Please enter a valid email address.'); return }
+
+    if (!OTP_ENABLED) {
+      const res = loginGuest({ name: n, company: c, email: m })
+      if (!res.ok) { setErr(res.error ?? 'Sign-in failed'); return }
+      nav('/')
+      return
+    }
 
     // Email verified before (on any device)? Straight in — no code needed.
     setBusy(true)
