@@ -17,8 +17,7 @@ function testingDays(): { id: string; label: string; window: string }[] {
   }
   for (let d = 21; d <= 27; d++) push(2026, 7, d, 'Testing · Window 1')
   for (let d = 2; d <= 11; d++) push(2026, 8, d, 'Testing · Window 2')
-  push(2026, 8, 31, 'Finals Week')
-  for (let d = 1; d <= 4; d++) push(2026, 9, d, 'Finals Week')
+  push(2026, 9, 5, 'Race Day') // tours around the finals happen on race day only
   return days
 }
 const DAYS = testingDays()
@@ -86,7 +85,7 @@ export default function BookingPage() {
     <div className="wrap">
       <div className="eyebrow">Testing Days</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Book a Visit</h1>
-      <p className="page-sub">Come to a relaxed testing day at Imola — watch the car run, meet the engineers, and see the autonomy work up close. Finals-week days (31 Aug – 4 Sep) can be booked too: our garage is the base all week, though the car itself runs only once or twice before race day. Tell us what you’d like to do and your preferred day; we’ll confirm the schedule with you.</p>
+      <p className="page-sub">Come to a relaxed testing day at Imola — watch the car run, meet the engineers, and see the autonomy work up close. Around the finals, garage tours happen on <b>race day itself, Saturday 5 September</b>, before the 18:30 final. Tell us what you’d like to do and your preferred day; we’ll confirm the schedule with you.</p>
 
       {booking && day && (
         <div className="card" style={{ padding: 18, marginTop: 22, borderLeft: '4px solid var(--green)', display: 'flex', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
@@ -127,8 +126,8 @@ export default function BookingPage() {
               <optgroup label="Testing · Window 2 (2–11 Aug)">
                 {DAYS.filter((d) => d.window.endsWith('2')).map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
               </optgroup>
-              <optgroup label="Finals Week (31 Aug – 4 Sep) · garage base, before race day">
-                {DAYS.filter((d) => d.window === 'Finals Week').map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
+              <optgroup label="Race Day · Saturday 5 September">
+                {DAYS.filter((d) => d.window === 'Race Day').map((d) => <option key={d.id} value={d.id}>{d.label} — tours before the 18:30 final</option>)}
               </optgroup>
             </select>
           </label>

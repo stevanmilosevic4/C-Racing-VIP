@@ -62,7 +62,7 @@ export default function Guide() {
         </div>
         <div className="card pad">
           <h3>🏁 The weekend</h3>
-          <p className="blurb">Solo qualifying laps set the grid, then the cars race wheel-to-wheel. At Imola on 5 September up to five cars line up — three qualified on last season, and two spots go to the qualification battle Constructor is fighting in.</p>
+          <p className="blurb">Solo qualifying laps set the grid, then the cars race wheel-to-wheel. At Imola on 5 September up to five cars line up — three qualified on last season, and two spots go to the qualification battle Constructor is fighting in. Lights out at 18:30, after a full day of ACI Racing Weekend action on track.</p>
         </div>
       </div>
 

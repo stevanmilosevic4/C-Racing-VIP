@@ -6,8 +6,8 @@ export const EVENT = {
   partner: 'Constructor × A2RL',
   circuit: 'Autodromo Enzo e Dino Ferrari',
   city: 'Imola, Emilia-Romagna, Italy',
-  // Headline race day — Saturday 5 September 2026, 15:00 local
-  raceDay: '2026-09-05T15:00:00+02:00',
+  // Headline race day — Saturday 5 September 2026, race start 18:30 local (confirmed)
+  raceDay: '2026-09-05T18:30:00+02:00',
   // Testing windows (relaxed garage days)
   testing1Start: '2026-07-21T09:00:00+02:00',
   testing2Start: '2026-08-02T09:00:00+02:00',
