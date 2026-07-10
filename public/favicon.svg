@@ -1,9 +1,3 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0a1733"/>
-  <!-- C -->
-  <path d="M42 15.5a17.5 17.5 0 1 0 0 33" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
-  <!-- chevron in the C's mouth -->
-  <path d="M31 24.5l8 7.5-8 7.5" fill="none" stroke="#DB4E3D" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- speed dot -->
-  <circle cx="52" cy="32" r="5" fill="#008CE2"/>
+  <path d="M43 16a19 19 0 1 0 0 32" fill="none" stroke="#DB4E3D" stroke-width="9" stroke-linecap="round"/>
 </svg>
