@@ -21,10 +21,32 @@ export default function AdminVisits() {
 
   const fmtTs = (ts: number) => new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(ts))
 
+  // Download everything as a CSV that opens cleanly in Excel/Numbers.
+  function exportCsv() {
+    const q = (s: unknown) => `"${String(s ?? '').replace(/"/g, '""')}"`
+    const head = ['Guest', 'Company', 'Email', 'Day', 'Window', 'People', 'Activities', 'Note', 'Requested at', 'Status']
+    const lines = sorted.map((b) => [
+      b.guest, b.company, b.email, b.day, b.window, b.people,
+      b.activities.join(' | '), b.note, new Date(b.ts).toISOString().replace('T', ' ').slice(0, 16), b.status,
+    ].map(q).join(','))
+    const csv = '﻿' + [head.map(q).join(','), ...lines].join('\r\n')
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }))
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `a2rl-visit-requests-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="wrap">
       <div className="eyebrow">Organizer</div>
-      <h1 className="page-title" style={{ marginTop: 10 }}>Visits</h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+        <h1 className="page-title" style={{ marginTop: 10 }}>Visits</h1>
+        {sorted.length > 0 && (
+          <button className="btn btn-dark btn-sm" style={{ marginLeft: 'auto' }} onClick={exportCsv}>⬇ Export CSV</button>
+        )}
+      </div>
       <p className="page-sub">
         Every garage-visit request from guests, live. Each request is also emailed to
         <b> autonomousracing@constructor.org</b>. Use the per-day headcounts to arrange tour guides.
