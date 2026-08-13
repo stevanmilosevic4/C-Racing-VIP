@@ -29,15 +29,28 @@ export async function setState<T>(key: string, value: T): Promise<void> {
   await supabase.from('app_state').upsert({ key, value, updated_at: new Date().toISOString() })
 }
 
+// Channel names must be unique per subscription: supabase-js returns the
+// SAME channel object for a repeated topic name, and adding callbacks to an
+// already-subscribed channel throws ("cannot add postgres_changes callbacks
+// after subscribe()") — which crashes React when two components watch the
+// same key. A sequence number keeps every subscription on its own channel.
+let chanSeq = 0
 export function subscribeState<T>(key: string, cb: (value: T) => void): () => void {
   const sb = supabase
   if (!sb) return () => {}
-  const ch = sb
-    .channel(`state:${key}`)
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'app_state', filter: `key=eq.${key}` },
-      (payload: any) => { if (payload.new?.value !== undefined) cb(payload.new.value as T) })
-    .subscribe()
-  return () => { sb.removeChannel(ch) }
+  try {
+    const ch = sb
+      .channel(`state:${key}:${++chanSeq}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'app_state', filter: `key=eq.${key}` },
+        (payload: any) => { if (payload.new?.value !== undefined) cb(payload.new.value as T) })
+      .subscribe()
+    return () => { try { sb.removeChannel(ch) } catch { /* ignore */ } }
+  } catch (e) {
+    // Live sync is an enhancement — if subscribing fails the page must still
+    // render (data loads once via getState and on refresh).
+    console.error('subscribeState failed', key, e)
+    return () => {}
+  }
 }
 
 export { lsGet, lsSet }
@@ -73,10 +86,15 @@ export async function fetchActivity(): Promise<ActivityRow[]> {
 export function subscribeActivity(cb: () => void): () => void {
   const sb = supabase
   if (!sb) return () => {}
-  const ch = sb.channel('activity-feed')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity' }, cb)
-    .subscribe()
-  return () => { sb.removeChannel(ch) }
+  try {
+    const ch = sb.channel(`activity-feed:${++chanSeq}`)
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'activity' }, cb)
+      .subscribe()
+    return () => { try { sb.removeChannel(ch) } catch { /* ignore */ } }
+  } catch (e) {
+    console.error('subscribeActivity failed', e)
+    return () => {}
+  }
 }
 
 export async function clearActivity(): Promise<void> {
