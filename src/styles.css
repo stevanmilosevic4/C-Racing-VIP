@@ -440,6 +440,20 @@ ul { margin: 0; }
 .cal-del:hover { color: var(--red); }
 .cal-form { background: #fff; border-radius: 16px; padding: 24px; width: min(420px, 92vw); cursor: default; box-shadow: var(--shadow-lg); }
 
+/* ---------- hotel check popup + WhatsApp block ---------- */
+.hotel-modal { position: relative; background: #fff; border-radius: 18px; padding: 28px; width: min(460px, 92vw); cursor: default; box-shadow: var(--shadow-lg); }
+.hotel-modal h3 { font-size: 20px; line-height: 1.25; padding-right: 26px; }
+.hm-emoji { font-size: 40px; margin-bottom: 10px; }
+.hm-x { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: 14px; display: grid; place-items: center; cursor: pointer; }
+.hm-x:hover { color: var(--red); border-color: var(--red); }
+.wa-block { display: flex; gap: 18px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+.wa-qr { width: 180px; height: 180px; border: 1px solid var(--line); border-radius: 12px; flex: none; }
+.wa-copy { flex: 1; min-width: 200px; }
+.wa-copy b { font-size: 15px; }
+.wa-copy p { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 6px 0 12px; }
+.btn-green { background: #25d366; color: #fff; }
+.btn-green:hover { background: #1eb958; }
+
 .footer { border-top: 1px solid var(--line); padding: 26px 0; color: var(--muted-2); font-size: 13px; }
 .footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 

@@ -4,6 +4,7 @@ import { useAuth, type Role } from './context/AuthContext'
 import { logActivity } from './activity'
 import Nav from './components/Nav'
 import Logo from './components/Logo'
+import HotelCheck from './components/HotelCheck'
 
 import Login from './pages/Login'
 import Home from './pages/Home'
@@ -96,6 +97,7 @@ export default function App() {
       <Nav />
       <ActivityTracker />
       <PreviewBanner />
+      <HotelCheck />
       <main className="app-main">
         <BackBar />
         <Routes>

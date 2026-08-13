@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useSynced, useToast } from '../hooks'
+import { useHotels, WhatsAppBlock } from '../components/HotelCheck'
 
 // A guest's uploaded ticket — stored per user and synced to the backend,
 // so it follows them across devices. Images are downscaled client-side;
@@ -40,6 +41,18 @@ export default function Profile() {
   const [ticket, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
   const [busy, setBusy] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
+
+  // Hotel & travel
+  const [hotels, setHotels] = useHotels()
+  const mine = hotels[name]
+  const [editingHotel, setEditingHotel] = useState(false)
+  const [hotelDraft, setHotelDraft] = useState('')
+
+  function saveHotel(booked: boolean, hotel: string) {
+    setHotels((h) => ({ ...h, [name]: { booked, hotel, ts: Date.now() } }))
+    setEditingHotel(false)
+    show(booked ? 'Hotel saved ✓' : 'Noted — check the group for hotel tips')
+  }
 
   async function onFile(file: File | undefined | null) {
     if (!file) return
@@ -122,6 +135,43 @@ export default function Profile() {
             onChange={(e) => onFile(e.target.files?.[0])}
           />
         </div>
+      </div>
+
+      {/* HOTEL & TRAVEL */}
+      <div className="section-head" style={{ marginTop: 40 }}>
+        <div><div className="eyebrow">Travel</div><h2 style={{ marginTop: 8 }}>Hotel & travel</h2></div>
+      </div>
+      <div className="card" style={{ padding: 22, maxWidth: 640 }}>
+        {editingHotel || !mine || mine.booked === null ? (
+          <>
+            <b style={{ fontSize: 15 }}>Did you book a hotel for Imola?</b>
+            <label className="field" style={{ marginTop: 14 }}>
+              <span>Hotel name (and town if outside Imola)</span>
+              <input value={hotelDraft} onChange={(e) => setHotelDraft(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && hotelDraft.trim() && saveHotel(true, hotelDraft.trim())}
+                placeholder="e.g. Hotel Olimpia, Imola" />
+            </label>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <button className="btn btn-red btn-sm" disabled={!hotelDraft.trim()} onClick={() => saveHotel(true, hotelDraft.trim())}>Save hotel</button>
+              <button className="btn btn-dark btn-sm" onClick={() => saveHotel(false, '')}>Not booked yet</button>
+              {editingHotel && <button className="btn btn-ghost btn-sm" onClick={() => setEditingHotel(false)}>Cancel</button>}
+            </div>
+          </>
+        ) : (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+            <div style={{ fontSize: 28 }}>🏨</div>
+            <div style={{ flex: 1, minWidth: 220 }}>
+              {mine.booked
+                ? <><b>Staying at:</b> {mine.hotel}</>
+                : <><b>No hotel yet</b> — tips and group deals are in the WhatsApp group below.</>}
+            </div>
+            <button className="btn btn-ghost btn-sm" onClick={() => { setHotelDraft(mine.hotel || ''); setEditingHotel(true) }}>Change</button>
+          </div>
+        )}
+      </div>
+
+      <div className="card" style={{ padding: 22, maxWidth: 640, marginTop: 16 }}>
+        <WhatsAppBlock compact />
       </div>
 
       {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}

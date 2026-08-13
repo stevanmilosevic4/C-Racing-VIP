@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { GUESTS, type Guest } from '../../data/tasks'
 import { EVENT } from '../../data/event'
 import { useSynced, useToast } from '../../hooks'
+import { useHotels } from '../../components/HotelCheck'
+import { timeAgo } from '../../activity'
 
 const TIERS = ['Organiser', 'VIP', 'Public']
 const STATUSES = ['Confirmed', 'Invited', 'Pending']
@@ -13,6 +15,8 @@ function tierClass(tier: string) {
 export default function AdminGuests() {
   const { msg, show } = useToast()
   const [guests, setGuests] = useSynced<Guest[]>('cxa2rl.guests', GUESTS)
+  const [hotels] = useHotels()
+  const hotelRows = Object.entries(hotels).sort((a, b) => b[1].ts - a[1].ts)
   const [name, setName] = useState('')
   const [dept, setDept] = useState('')
   const [tier, setTier] = useState('VIP')
@@ -77,6 +81,34 @@ export default function AdminGuests() {
           </tbody>
         </table>
       </div>
+
+      {/* HOTELS — answers from the login popup / profile */}
+      <div className="section-head"><div><div className="eyebrow">Travel</div><h2 style={{ marginTop: 8 }}>Hotels</h2></div>
+        <span className="label">{hotelRows.filter(([, h]) => h.booked).length} booked · {hotelRows.filter(([, h]) => h.booked === false).length} not yet</span>
+      </div>
+      {hotelRows.length === 0
+        ? <div className="empty">No answers yet — guests are asked about their hotel when they sign in.</div>
+        : (
+          <div style={{ overflowX: 'auto' }}>
+            <table className="table">
+              <thead><tr><th>Guest</th><th>Hotel</th><th>Status</th><th>Answered</th></tr></thead>
+              <tbody>
+                {hotelRows.map(([gname, h]) => (
+                  <tr key={gname}>
+                    <td style={{ fontWeight: 700 }}>{gname}</td>
+                    <td>{h.booked ? h.hotel : <span className="muted">—</span>}</td>
+                    <td>
+                      {h.booked === true && <span className="st Confirmed">Booked</span>}
+                      {h.booked === false && <span className="st Pending">Not booked</span>}
+                      {h.booked === null && <span className="st Invited">Skipped</span>}
+                    </td>
+                    <td className="muted">{timeAgo(h.ts)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
       {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
