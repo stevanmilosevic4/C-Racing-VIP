@@ -39,7 +39,20 @@ export default function Profile() {
   const { user } = useAuth()
   const { msg, show } = useToast()
   const name = user?.name ?? 'guest'
-  const [ticket, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  const [ticketRaw, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  // Sanitise whatever is stored — a malformed record must never crash the
+  // page. Anything without a usable dataUrl counts as "no ticket".
+  const ticket: StoredTicket | null = (() => {
+    if (!ticketRaw || typeof ticketRaw !== 'object') return null
+    const r = ticketRaw as Record<string, unknown>
+    if (typeof r.dataUrl !== 'string' || !r.dataUrl.startsWith('data:')) return null
+    return {
+      fileName: typeof r.fileName === 'string' ? r.fileName : 'ticket',
+      mime: r.mime === 'application/pdf' ? 'application/pdf' : 'image/jpeg',
+      dataUrl: r.dataUrl,
+      uploadedAt: Number(r.uploadedAt) || 0,
+    }
+  })()
   const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
   const [hotelOpen, setHotelOpen] = useState(false)
   const hotel = hotels?.[name.trim().toLowerCase()]

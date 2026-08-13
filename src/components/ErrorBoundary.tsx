@@ -18,6 +18,7 @@ export default class ErrorBoundary extends Component<{ children: ReactNode }, { 
         <p className="muted" style={{ fontSize: 14, marginTop: 8, maxWidth: 420, marginLeft: 'auto', marginRight: 'auto' }}>
           The rest of the app is fine — try reloading, or head back home.
         </p>
+        <div className="muted" style={{ fontSize: 11, marginTop: 12, wordBreak: 'break-word' }}>{String(this.state.error)}</div>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 20 }}>
           <button className="btn btn-red" onClick={() => window.location.reload()}>Reload</button>
           <button className="btn btn-dark" onClick={() => { window.location.href = '/' }}>Go home</button>
