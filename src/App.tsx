@@ -5,6 +5,7 @@ import { logActivity } from './activity'
 import Nav from './components/Nav'
 import Logo from './components/Logo'
 import HotelPrompt from './components/HotelPrompt'
+import ErrorBoundary from './components/ErrorBoundary'
 import { useSynced } from './hooks'
 import { HOTELS_KEY, type HotelRecord } from './data/hotels'
 
@@ -133,6 +134,7 @@ export default function App() {
       <HotelGate />
       <main className="app-main">
         <BackBar />
+        <ErrorBoundary>
         <Routes>
           <Route path="/login" element={user ? <Navigate to={user.role === 'admin' ? '/admin' : '/'} replace /> : <Login />} />
 
@@ -158,6 +160,7 @@ export default function App() {
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </ErrorBoundary>
       </main>
       {user && <Footer />}
     </div>

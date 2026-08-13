@@ -15,7 +15,23 @@ export default function AdminGuests() {
   const { msg, show } = useToast()
   const [guests, setGuests] = useSynced<Guest[]>('cxa2rl.guests', GUESTS)
   const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
-  const hotelRows = Object.values(hotels ?? {}).sort((a, b) => b.ts - a.ts)
+  // Tolerate records written by the earlier hotel implementation (different
+  // field names, missing timestamps) — never let bad data crash the page.
+  const hotelRows = Object.values(hotels ?? {})
+    .filter((h): h is HotelRecord => Boolean(h) && typeof h === 'object')
+    .map((h) => {
+      const any = h as Record<string, unknown>
+      const hotelName = String(any.hotelName ?? any.hotel ?? '')
+      return {
+        guest: String(any.guest ?? any.name ?? '—'),
+        company: String(any.company ?? ''),
+        email: String(any.email ?? ''),
+        hasHotel: Boolean(any.hasHotel ?? hotelName),
+        hotelName,
+        ts: Number.isFinite(Number(any.ts)) ? Number(any.ts) : 0,
+      }
+    })
+    .sort((a, b) => b.ts - a.ts)
   const [name, setName] = useState('')
   const [dept, setDept] = useState('')
   const [tier, setTier] = useState('VIP')
@@ -94,7 +110,7 @@ export default function AdminGuests() {
                 <tr key={h.guest}>
                   <td><b>{h.guest}</b><div className="muted" style={{ fontSize: 12 }}>{[h.company, h.email].filter(Boolean).join(' · ') || '—'}</div></td>
                   <td>{h.hasHotel ? <b>{h.hotelName}</b> : <span className="tag tag-amber">No hotel yet</span>}</td>
-                  <td className="muted" style={{ fontSize: 13, whiteSpace: 'nowrap' }}>{new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(h.ts))}</td>
+                  <td className="muted" style={{ fontSize: 13, whiteSpace: 'nowrap' }}>{h.ts ? new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(h.ts)) : '—'}</td>
                 </tr>
               ))}
             </tbody>

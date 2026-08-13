@@ -86,7 +86,7 @@ export default function Profile() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: 200 }}>
             <div style={{ fontWeight: 800, fontSize: 15 }}>
-              {hotel ? (hotel.hasHotel ? `🏨 ${hotel.hotelName}` : '🏨 No hotel booked yet') : '🏨 Hotel — not answered yet'}
+              {hotel ? ((hotel.hasHotel ?? (hotel as { hotel?: string }).hotel) ? `🏨 ${hotel.hotelName || (hotel as { hotel?: string }).hotel || 'Hotel saved'}` : '🏨 No hotel booked yet') : '🏨 Hotel — not answered yet'}
             </div>
             <div className="muted" style={{ fontSize: 13, marginTop: 3 }}>
               Tell us where you're staying so we can plan transfers — and join the guest WhatsApp group for live updates.
