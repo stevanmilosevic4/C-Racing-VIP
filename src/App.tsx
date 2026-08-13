@@ -1,9 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth, type Role } from './context/AuthContext'
 import { logActivity } from './activity'
 import Nav from './components/Nav'
 import Logo from './components/Logo'
+import HotelPrompt from './components/HotelPrompt'
+import { useSynced } from './hooks'
+import { HOTELS_KEY, type HotelRecord } from './data/hotels'
 
 import Login from './pages/Login'
 import Home from './pages/Home'
@@ -65,6 +68,31 @@ function BackBar() {
   )
 }
 
+// Once per session, ask signed-in guests about their hotel (and offer the
+// WhatsApp group). Skipped once they've answered — the shared map gets a
+// moment to sync down before the popup fires.
+function HotelGate() {
+  const { user } = useAuth()
+  const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
+  const [open, setOpen] = useState(false)
+  const key = (user?.name ?? '').trim().toLowerCase()
+  const answered = Boolean(hotels?.[key])
+
+  useEffect(() => {
+    if (open) return // never interfere once showing (saving mid-flow flips `answered`)
+    if (!user || user.role !== 'vip' || answered) return
+    try { if (sessionStorage.getItem('cxa2rl.hotelPromptSeen')) return } catch { /* ignore */ }
+    const t = window.setTimeout(() => setOpen(true), 1500) // let the sync land first
+    return () => window.clearTimeout(t)
+  }, [user, answered, open])
+
+  function close() {
+    setOpen(false)
+    try { sessionStorage.setItem('cxa2rl.hotelPromptSeen', '1') } catch { /* ignore */ }
+  }
+  return open ? <HotelPrompt onClose={close} /> : null
+}
+
 // Slim banner shown while an organiser is previewing the guest experience.
 function PreviewBanner() {
   const { user, previewGuest, setPreviewGuest } = useAuth()
@@ -96,6 +124,7 @@ export default function App() {
       <Nav />
       <ActivityTracker />
       <PreviewBanner />
+      <HotelGate />
       <main className="app-main">
         <BackBar />
         <Routes>

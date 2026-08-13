@@ -538,6 +538,13 @@ body::after {
 /* ticket upload */
 .ticket-upload { border: 2px dashed var(--line); border-radius: 18px; padding: 44px 26px; text-align: center; background: var(--card); }
 
+/* hotel prompt modal */
+.hp-card { position: relative; }
+.hp-x { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 9px; border: 1px solid var(--line); background: var(--card); color: var(--muted); font-size: 13px; font-weight: 800; cursor: pointer; }
+.hp-x:hover { color: var(--ink); border-color: var(--muted-2); }
+.hp-qr { display: grid; place-items: center; margin: 16px 0 14px; }
+.hp-qr img { width: min(230px, 60vw); border-radius: 14px; border: 1px solid var(--line); display: block; }
+
 /* race guide — rules of the race */
 .rules-list { display: grid; gap: 10px; max-width: 880px; }
 .rule-row { display: flex; gap: 15px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px; box-shadow: var(--shadow); }

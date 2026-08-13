@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useSynced, useToast } from '../hooks'
+import HotelPrompt from '../components/HotelPrompt'
+import { HOTELS_KEY, WHATSAPP_URL, type HotelRecord } from '../data/hotels'
 
 // A guest's uploaded ticket — stored per user and synced to the backend,
 // so it follows them across devices. Images are downscaled client-side;
@@ -38,6 +40,9 @@ export default function Profile() {
   const { msg, show } = useToast()
   const name = user?.name ?? 'guest'
   const [ticket, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
+  const [hotelOpen, setHotelOpen] = useState(false)
+  const hotel = hotels?.[name.trim().toLowerCase()]
   const [busy, setBusy] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
 
@@ -71,6 +76,24 @@ export default function Profile() {
           <div style={{ fontWeight: 900, fontSize: 20 }}>{name}</div>
           <div className="muted" style={{ fontSize: 13, fontWeight: 700 }}>{user?.role === 'admin' ? 'Organizer' : 'VIP Crew'}{user?.company ? ` · ${user.company}` : ''} · A2RL Imola Series</div>
           {user?.email && <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>{user.email}</div>}
+        </div>
+      </div>
+
+      <div className="section-head" style={{ marginTop: 34 }}>
+        <div><div className="eyebrow">Stay & Chat</div><h2 style={{ marginTop: 8 }}>Hotel & WhatsApp</h2></div>
+      </div>
+      <div className="card" style={{ padding: 20, marginTop: 18, maxWidth: 640 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: 200 }}>
+            <div style={{ fontWeight: 800, fontSize: 15 }}>
+              {hotel ? (hotel.hasHotel ? `🏨 ${hotel.hotelName}` : '🏨 No hotel booked yet') : '🏨 Hotel — not answered yet'}
+            </div>
+            <div className="muted" style={{ fontSize: 13, marginTop: 3 }}>
+              Tell us where you're staying so we can plan transfers — and join the guest WhatsApp group for live updates.
+            </div>
+          </div>
+          <button className="btn btn-dark btn-sm" onClick={() => setHotelOpen(true)}>{hotel ? 'Update' : 'Answer now'}</button>
+          <a className="btn btn-ghost btn-sm" href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp group →</a>
         </div>
       </div>
 
@@ -124,6 +147,7 @@ export default function Profile() {
         </div>
       </div>
 
+      {hotelOpen && <HotelPrompt onClose={() => setHotelOpen(false)} />}
       {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
   )

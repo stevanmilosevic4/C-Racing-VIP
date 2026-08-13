@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { GUESTS, type Guest } from '../../data/tasks'
 import { EVENT } from '../../data/event'
 import { useSynced, useToast } from '../../hooks'
+import { HOTELS_KEY, type HotelRecord } from '../../data/hotels'
 
 const TIERS = ['Organiser', 'VIP', 'Public']
 const STATUSES = ['Confirmed', 'Invited', 'Pending']
@@ -13,6 +14,8 @@ function tierClass(tier: string) {
 export default function AdminGuests() {
   const { msg, show } = useToast()
   const [guests, setGuests] = useSynced<Guest[]>('cxa2rl.guests', GUESTS)
+  const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
+  const hotelRows = Object.values(hotels ?? {}).sort((a, b) => b.ts - a.ts)
   const [name, setName] = useState('')
   const [dept, setDept] = useState('')
   const [tier, setTier] = useState('VIP')
@@ -77,6 +80,27 @@ export default function AdminGuests() {
           </tbody>
         </table>
       </div>
+
+      {/* GUEST HOTELS — answers from the sign-in hotel popup */}
+      <div className="section-head"><div><div className="eyebrow">Stay</div><h2 style={{ marginTop: 8 }}>Guest hotels</h2></div></div>
+      {hotelRows.length === 0 ? (
+        <p className="muted" style={{ fontSize: 14 }}>No answers yet — guests are asked about their hotel when they sign in.</p>
+      ) : (
+        <div style={{ overflowX: 'auto' }}>
+          <table className="table">
+            <thead><tr><th>Guest</th><th>Hotel</th><th>Answered</th></tr></thead>
+            <tbody>
+              {hotelRows.map((h) => (
+                <tr key={h.guest}>
+                  <td><b>{h.guest}</b><div className="muted" style={{ fontSize: 12 }}>{[h.company, h.email].filter(Boolean).join(' · ') || '—'}</div></td>
+                  <td>{h.hasHotel ? <b>{h.hotelName}</b> : <span className="tag tag-amber">No hotel yet</span>}</td>
+                  <td className="muted" style={{ fontSize: 13, whiteSpace: 'nowrap' }}>{new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(h.ts))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
