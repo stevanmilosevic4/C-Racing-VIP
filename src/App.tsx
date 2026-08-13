@@ -68,29 +68,35 @@ function BackBar() {
   )
 }
 
-// Once per session, ask signed-in guests about their hotel (and offer the
-// WhatsApp group). Skipped once they've answered — the shared map gets a
-// moment to sync down before the popup fires.
+// Ask signed-in guests about their hotel (and offer the WhatsApp group)
+// exactly ONCE — the first time they use the app. Shown-state is stored in
+// the shared backend (keyed by email), so it never re-appears, on any
+// device. Guests can still answer or update later from their Profile.
+const PROMPTED_KEY = 'cxa2rl.hotelPrompted'
 function HotelGate() {
   const { user } = useAuth()
   const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
+  const [prompted, setPrompted] = useSynced<Record<string, number>>(PROMPTED_KEY, {})
   const [open, setOpen] = useState(false)
-  const key = (user?.name ?? '').trim().toLowerCase()
-  const answered = Boolean(hotels?.[key])
+  const key = (user?.email ?? user?.name ?? '').trim().toLowerCase()
+  const answered = Boolean(hotels?.[(user?.name ?? '').trim().toLowerCase()])
+  const seen = Boolean(prompted?.[key])
 
   useEffect(() => {
     if (open) return // never interfere once showing (saving mid-flow flips `answered`)
-    if (!user || user.role !== 'vip' || answered) return
+    if (!user || user.role !== 'vip' || answered || seen) return
     try { if (sessionStorage.getItem('cxa2rl.hotelPromptSeen')) return } catch { /* ignore */ }
-    const t = window.setTimeout(() => setOpen(true), 1500) // let the sync land first
+    const t = window.setTimeout(() => {
+      setOpen(true)
+      // mark as shown the moment it appears — first login only, ever
+      setPrompted((m) => ({ ...(m ?? {}), [key]: Date.now() }))
+      try { sessionStorage.setItem('cxa2rl.hotelPromptSeen', '1') } catch { /* ignore */ }
+    }, 1500) // let the sync land first
     return () => window.clearTimeout(t)
-  }, [user, answered, open])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, answered, seen, open])
 
-  function close() {
-    setOpen(false)
-    try { sessionStorage.setItem('cxa2rl.hotelPromptSeen', '1') } catch { /* ignore */ }
-  }
-  return open ? <HotelPrompt onClose={close} /> : null
+  return open ? <HotelPrompt onClose={() => setOpen(false)} /> : null
 }
 
 // Slim banner shown while an organiser is previewing the guest experience.
