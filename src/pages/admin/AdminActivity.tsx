@@ -43,6 +43,45 @@ export default function AdminActivity() {
 
   async function clear() { await clearActivity(); await load(); show('Activity log cleared') }
 
+  // One row per unique guest, assembled from sign-in events (detail carries
+  // "Company · email" since the single-form login shipped; older sign-ins
+  // may lack one or both — exported with blanks rather than dropped).
+  function exportGuests() {
+    const map = new Map<string, { name: string; company: string; email: string; first: number; last: number; count: number }>()
+    for (const a of all) {
+      if (a.role !== 'vip' || a.action !== 'Signed in') continue
+      let company = '', email = ''
+      for (const part of (a.detail ?? '').split(' · ')) {
+        const t = part.trim()
+        if (t.includes('@')) email = t
+        else if (t && !t.startsWith('as ')) company = t
+      }
+      const key = (email || a.name).toLowerCase()
+      const cur = map.get(key) ?? { name: a.name, company, email, first: a.ts, last: a.ts, count: 0 }
+      cur.count++
+      cur.first = Math.min(cur.first, a.ts)
+      cur.last = Math.max(cur.last, a.ts)
+      cur.name = a.name
+      if (company) cur.company = company
+      if (email) cur.email = email
+      map.set(key, cur)
+    }
+    const rows = [...map.values()].sort((x, y) => x.first - y.first)
+    if (rows.length === 0) { show('No guest sign-ins to export yet'); return }
+    const esc = (v: string | number) => '"' + String(v).replace(/"/g, '""') + '"'
+    const fmt = (ts: number) => new Intl.DateTimeFormat('en-GB', { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(ts))
+    const csv = '\uFEFF' + [
+      ['Name', 'Company', 'Email', 'First signed in', 'Last signed in', 'Sign-ins'].map(esc).join(','),
+      ...rows.map((r) => [r.name, r.company, r.email, fmt(r.first), fmt(r.last), r.count].map(esc).join(',')),
+    ].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `a2rl-registered-guests-${new Date().toISOString().slice(0, 10)}.csv`
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
+
   return (
     <div className="wrap">
       <div className="eyebrow">Organizer</div>
@@ -62,6 +101,7 @@ export default function AdminActivity() {
           <button className={scope === 'all' ? 'on' : ''} onClick={() => setScope('all')}>Everyone</button>
         </div>
         <span className="nav-role" style={{ marginLeft: 'auto' }}>{filtered.length} events · {people.length} people</span>
+        <button className="btn btn-dark btn-sm" onClick={exportGuests}>⬇ Export registered guests</button>
         <button className="btn btn-ghost btn-sm" onClick={clear}>Clear log</button>
       </div>
 
