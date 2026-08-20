@@ -19,6 +19,6 @@ export const EVENT = {
 export type CountdownTarget = { label: string; date: string; note: string }
 
 export const COUNTDOWN_TARGETS: CountdownTarget[] = [
-  { label: 'Testing · Window 1', date: EVENT.testing1Start, note: '21–27 Jul · Imola' },
-  { label: 'Testing · Window 2', date: EVENT.testing2Start, note: '2–11 Aug · Imola' },
+  { label: 'Practice & Qualifying', date: '2026-09-04T08:45:00+02:00', note: 'Fri 4 Sep · Imola' },
+  { label: 'A2RL Imola Final', date: EVENT.raceDay, note: 'Sat 5 Sep · 18:30' },
 ]

@@ -153,8 +153,8 @@ export default function Login() {
           <h1 style={{ marginTop: 14 }}>Autonomous racing,<br />Imola → Abu Dhabi.</h1>
           <p className="lead">Your VIP home for the A2RL series — countdown, agenda, garage visits, the teams, and race day at the Autodromo Enzo e Dino Ferrari.</p>
           <div className="pills">
-            <span className="pill">Testing · Jul & Aug</span>
-            <span className="pill">Finals · 5 Sep</span>
+            <span className="pill">Practice · Fri 4 Sep</span>
+            <span className="pill">Final · Sat 5 Sep 18:30</span>
             <span className="pill">Abu Dhabi · Oct</span>
           </div>
         </div>
