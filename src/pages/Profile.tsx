@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useSynced, useToast } from '../hooks'
-import { useHotels, WhatsAppBlock } from '../components/HotelCheck'
+import HotelPrompt from '../components/HotelPrompt'
+import { HOTELS_KEY, WHATSAPP_URL, type HotelRecord } from '../data/hotels'
 
 // A guest's uploaded ticket — stored per user and synced to the backend,
 // so it follows them across devices. Images are downscaled client-side;
@@ -38,21 +39,25 @@ export default function Profile() {
   const { user } = useAuth()
   const { msg, show } = useToast()
   const name = user?.name ?? 'guest'
-  const [ticket, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  const [ticketRaw, setTicket] = useSynced<StoredTicket | null>(`cxa2rl.myticket:${name}`, null)
+  // Sanitise whatever is stored — a malformed record must never crash the
+  // page. Anything without a usable dataUrl counts as "no ticket".
+  const ticket: StoredTicket | null = (() => {
+    if (!ticketRaw || typeof ticketRaw !== 'object') return null
+    const r = ticketRaw as Record<string, unknown>
+    if (typeof r.dataUrl !== 'string' || !r.dataUrl.startsWith('data:')) return null
+    return {
+      fileName: typeof r.fileName === 'string' ? r.fileName : 'ticket',
+      mime: r.mime === 'application/pdf' ? 'application/pdf' : 'image/jpeg',
+      dataUrl: r.dataUrl,
+      uploadedAt: Number(r.uploadedAt) || 0,
+    }
+  })()
+  const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
+  const [hotelOpen, setHotelOpen] = useState(false)
+  const hotel = hotels?.[name.trim().toLowerCase()]
   const [busy, setBusy] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
-
-  // Hotel & travel
-  const [hotels, setHotels] = useHotels()
-  const mine = hotels[name]
-  const [editingHotel, setEditingHotel] = useState(false)
-  const [hotelDraft, setHotelDraft] = useState('')
-
-  function saveHotel(booked: boolean, hotel: string) {
-    setHotels((h) => ({ ...h, [name]: { booked, hotel, ts: Date.now() } }))
-    setEditingHotel(false)
-    show(booked ? 'Hotel saved ✓' : 'Noted — check the group for hotel tips')
-  }
 
   async function onFile(file: File | undefined | null) {
     if (!file) return
@@ -84,6 +89,24 @@ export default function Profile() {
           <div style={{ fontWeight: 900, fontSize: 20 }}>{name}</div>
           <div className="muted" style={{ fontSize: 13, fontWeight: 700 }}>{user?.role === 'admin' ? 'Organizer' : 'VIP Crew'}{user?.company ? ` · ${user.company}` : ''} · A2RL Imola Series</div>
           {user?.email && <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>{user.email}</div>}
+        </div>
+      </div>
+
+      <div className="section-head" style={{ marginTop: 34 }}>
+        <div><div className="eyebrow">Stay & Chat</div><h2 style={{ marginTop: 8 }}>Hotel & WhatsApp</h2></div>
+      </div>
+      <div className="card" style={{ padding: 20, marginTop: 18, maxWidth: 640 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: 200 }}>
+            <div style={{ fontWeight: 800, fontSize: 15 }}>
+              {hotel ? ((hotel.hasHotel ?? (hotel as { hotel?: string }).hotel) ? `🏨 ${hotel.hotelName || (hotel as { hotel?: string }).hotel || 'Hotel saved'}` : '🏨 No hotel booked yet') : '🏨 Hotel — not answered yet'}
+            </div>
+            <div className="muted" style={{ fontSize: 13, marginTop: 3 }}>
+              Tell us where you're staying so we can plan transfers — and join the guest WhatsApp group for live updates.
+            </div>
+          </div>
+          <button className="btn btn-dark btn-sm" onClick={() => setHotelOpen(true)}>{hotel ? 'Update' : 'Answer now'}</button>
+          <a className="btn btn-ghost btn-sm" href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp group →</a>
         </div>
       </div>
 
@@ -137,43 +160,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* HOTEL & TRAVEL */}
-      <div className="section-head" style={{ marginTop: 40 }}>
-        <div><div className="eyebrow">Travel</div><h2 style={{ marginTop: 8 }}>Hotel & travel</h2></div>
-      </div>
-      <div className="card" style={{ padding: 22, maxWidth: 640 }}>
-        {editingHotel || !mine || mine.booked === null ? (
-          <>
-            <b style={{ fontSize: 15 }}>Did you book a hotel for Imola?</b>
-            <label className="field" style={{ marginTop: 14 }}>
-              <span>Hotel name (and town if outside Imola)</span>
-              <input value={hotelDraft} onChange={(e) => setHotelDraft(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && hotelDraft.trim() && saveHotel(true, hotelDraft.trim())}
-                placeholder="e.g. Hotel Olimpia, Imola" />
-            </label>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <button className="btn btn-red btn-sm" disabled={!hotelDraft.trim()} onClick={() => saveHotel(true, hotelDraft.trim())}>Save hotel</button>
-              <button className="btn btn-dark btn-sm" onClick={() => saveHotel(false, '')}>Not booked yet</button>
-              {editingHotel && <button className="btn btn-ghost btn-sm" onClick={() => setEditingHotel(false)}>Cancel</button>}
-            </div>
-          </>
-        ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-            <div style={{ fontSize: 28 }}>🏨</div>
-            <div style={{ flex: 1, minWidth: 220 }}>
-              {mine.booked
-                ? <><b>Staying at:</b> {mine.hotel}</>
-                : <><b>No hotel yet</b> — tips and group deals are in the WhatsApp group below.</>}
-            </div>
-            <button className="btn btn-ghost btn-sm" onClick={() => { setHotelDraft(mine.hotel || ''); setEditingHotel(true) }}>Change</button>
-          </div>
-        )}
-      </div>
-
-      <div className="card" style={{ padding: 22, maxWidth: 640, marginTop: 16 }}>
-        <WhatsAppBlock compact />
-      </div>
-
+      {hotelOpen && <HotelPrompt onClose={() => setHotelOpen(false)} />}
       {msg && <div className="toast"><span className="ok">●</span>{msg}</div>}
     </div>
   )
