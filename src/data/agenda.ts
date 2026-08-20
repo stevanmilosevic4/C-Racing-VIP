@@ -1,7 +1,6 @@
-// Series agenda — deliberately flexible: testing runs are decided in the
-// moment (car readiness, weather), so items carry day-ranges and labels
-// instead of clock times. Race day gets exact times once A2RL publishes
-// the official schedule.
+// Race-weekend agenda — the official ACI Racing Weekend timetable for
+// Friday 4 and Saturday 5 September, with the A2RL finals slot on Saturday
+// evening. All times local to Imola (CEST).
 
 export type AgendaItem = { time: string; what: string; where?: string }
 export type Phase = {
@@ -16,42 +15,28 @@ export type Phase = {
 
 export const PHASES: Phase[] = [
   {
-    id: 'testing1',
-    accent: 'blue',
-    dates: '21–27 July 2026',
-    title: 'Testing · Window 1',
-    summary: 'Flexible test days at Imola — no fixed timetable. What runs when is decided in the moment, based on how the car is behaving. Coming by? Let your Constructor contact know which day and how many you are, so a tour guide can be arranged.',
-    tier: 'Internal / relaxed',
-    items: [
-      { time: '21–23 Jul', what: 'Garage days — the car stays inside', where: 'Constructor garage · static work, see the SF23 and the crew up close' },
-      { time: 'From 24 Jul', what: 'Track testing begins — watch the car run', where: 'Pit wall · run times decided day by day' },
-      { time: 'Any day', what: 'Guided tour — the car, the garage, the facilities around the track', where: 'Imola paddock' },
-    ],
-  },
-  {
-    id: 'testing2',
-    accent: 'blue',
-    dates: '2–11 August 2026',
-    title: 'Testing · Window 2',
-    summary: 'Second window — same spirit as July: flexible, decided in the moment. More track running as the car is dialled in for the finals; garage and facility tours available every day. Let your Constructor contact know your day and group size and we\'ll take care of the rest.',
-    tier: 'Internal / relaxed',
-    items: [
-      { time: 'Daily', what: 'Garage open — watch the crew at work', where: 'Constructor garage' },
-      { time: 'Track days', what: 'Test running — watch from the pit wall', where: 'Timing decided in the moment' },
-      { time: 'Any day', what: 'Guided tour — car, garage, facilities', where: 'Imola paddock' },
-    ],
-  },
-  {
-    id: 'finals',
+    id: 'friday',
     accent: 'amber',
-    dates: '31 Aug – 4 Sep 2026',
-    title: 'Race Week — Behind the Scenes',
-    summary: 'The quiet build-up: the crew moves into the garage and dials the car in for Saturday. This week is heads-down preparation — garage tours and guest visits happen on race day itself, 5 September.',
-    tier: 'Team preparation',
+    dates: 'Friday 4 September 2026',
+    title: 'Practice & Qualifying',
+    summary: 'The racing weekend spins up: free practice and qualifying all day across the ACI series. Administrative checks and scrutineering run 09:00–12:00; the paddock is open to teams 08:00–20:00.',
+    tier: 'Race weekend · Day 1',
     items: [
-      { time: '', what: 'The crew preps the car — setup, systems, sim work', where: 'Constructor garage, Imola paddock' },
-      { time: '', what: 'Possible short drive-around before race day', where: 'Circuit · schedule permitting' },
-      { time: '', what: 'Final test runs — once or twice at most', where: 'Track · timing decided by the team' },
+      { time: '08:45–09:10', what: 'Italian F4 (Series 1) — Free Practice' },
+      { time: '09:20–09:45', what: 'Italian F4 (Series 2) — Free Practice' },
+      { time: '09:55–10:45', what: 'FIA Formula Regional European Championship — Free Practice' },
+      { time: '10:55–11:45', what: 'GT4 Italy Series — Free Practice' },
+      { time: '11:55–12:55', what: 'CI Gran Turismo Endurance — Free Practice' },
+      { time: '13:05–13:30', what: 'Italian F4 (Series 1) — Free Practice 2' },
+      { time: '13:40–14:05', what: 'Italian F4 (Series 2) — Free Practice 2' },
+      { time: '14:15–15:05', what: 'GT4 Italy Series — Free Practice 2' },
+      { time: '15:15–15:30', what: 'FREC (Group A) — Qualifying 1' },
+      { time: '15:35–15:50', what: 'FREC (Group B) — Qualifying 1' },
+      { time: '16:00–17:00', what: 'CI Gran Turismo Endurance — Free Practice 2' },
+      { time: '17:10–17:25', what: 'Italian F4 (Series 1) — Qualifying' },
+      { time: '17:35–17:50', what: 'Italian F4 (Series 2) — Qualifying' },
+      { time: '18:00–18:15', what: 'GT4 Italy Series — Qualifying 1' },
+      { time: '18:25–18:40', what: 'GT4 Italy Series — Qualifying 2' },
     ],
   },
   {
@@ -59,13 +44,20 @@ export const PHASES: Phase[] = [
     accent: 'red',
     dates: 'Saturday 5 September 2026',
     title: 'Race Day — Imola Finals',
-    summary: 'The main action of the whole summer — and the day for everything: garage tours, paddock access, hospitality, and the autonomous racing finale. The circuit runs the ACI Racing Weekend around us, so there\'s real racing on track all day before our 18:30 start.',
+    summary: 'The main day: garage tours, paddock access, hospitality — with real racing on track all day before our A2RL finals slot at 18:20. Watch it all from the Constructor VIP lounge.',
     tier: 'Executive / VIP',
     items: [
-      { time: 'All day', what: 'ACI Racing Weekend on track — human-driven Italian championship races, watch as you like', where: 'Circuit · info only, no booking needed' },
       { time: 'Daytime', what: 'VIP brunch · garage tours & paddock access', where: 'Constructor hospitality & garage' },
+      { time: '08:45–09:45', what: 'Italian GT Endurance — Free Practice' },
+      { time: '10:10', what: 'Formula Regional European Championship — Race 1 (30\' + 1 lap)' },
+      { time: '11:10', what: 'Italian F4 — Race 1 (Groups B–C, 25\' + 1 lap)' },
+      { time: '12:10', what: 'GT4 Italy Series — Race 1 (50\' + 1 lap)' },
+      { time: '13:15–13:45', what: 'Break — promotional activity on track' },
+      { time: '14:00–16:02', what: 'Italian GT Endurance — Qualifying (six 12-minute group sessions)' },
+      { time: '16:30', what: 'Formula Regional — Race 2 (30\' + 1 lap)' },
+      { time: '17:30', what: 'Italian F4 — Race 2 (Groups A–B, 25\' + 1 lap)' },
       { time: 'Pre-race', what: 'Grid walk & final systems checks', where: 'Starting grid' },
-      { time: '18:30', what: 'Lights out — A2RL Imola Final · watched from our special VIP lounge', where: 'Autodromo Enzo e Dino Ferrari · Constructor VIP lounge' },
+      { time: '18:20–19:20', what: 'A2RL — the autonomous racing finals · lights out 18:30', where: 'Autodromo Enzo e Dino Ferrari · Constructor VIP lounge' },
       { time: 'After', what: 'Podium & celebration', where: 'Main straight' },
     ],
   },

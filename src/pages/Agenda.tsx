@@ -5,7 +5,7 @@ export default function Agenda() {
     <div className="wrap">
       <div className="eyebrow">Series Agenda</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Agenda</h1>
-      <p className="page-sub">From relaxed testing days to the Imola finals — and on to Abu Dhabi. Deliberately flexible: test runs are decided in the moment, so there are no fixed timestamps. Pick your day, tell us how many you are via <b>Book a Visit</b>, and we'll arrange your tour guide.</p>
+      <p className="page-sub">Race weekend at Imola — Friday practice &amp; qualifying, Saturday race day with our A2RL finals at 18:20 — then on to Abu Dhabi. The circuit runs the full ACI Racing Weekend around us, so there's real racing on track all day. All times local (CEST).</p>
 
       <div className="photo-band">
         <img src="/gallery/971.jpg" alt="The pit lane at dusk" loading="lazy" />
