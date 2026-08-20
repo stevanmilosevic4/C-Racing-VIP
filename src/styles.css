@@ -513,8 +513,10 @@ body::after {
 /* wide photo band used on Teams / Race Guide */
 .photo-band { position: relative; border-radius: 18px; overflow: hidden; margin-top: 26px; box-shadow: var(--shadow); }
 .photo-band img { width: 100%; height: 300px; object-fit: cover; display: block; }
+/* .tall — for near-square photos (e.g. the crew photo) so nobody's head is cropped */
+.photo-band.tall img { aspect-ratio: 3 / 2; height: auto; object-position: 50% 84%; }
 .photo-band .pb-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 42px 22px 14px; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .01em; background: linear-gradient(transparent, rgba(6, 13, 30, .82)); }
-@media (max-width: 620px) { .photo-band img { height: 190px; } }
+@media (max-width: 620px) { .photo-band img { height: 190px; } .photo-band.tall img { height: auto; aspect-ratio: 4 / 3; } }
 
 /* the car behind the ticket, the bet slip and the login panel */
 .ticket { background-image: linear-gradient(rgba(9, 20, 45, .88), rgba(9, 20, 45, .95)), url('/Formula on track.webp'); background-size: cover; background-position: center 35%; }

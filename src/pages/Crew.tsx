@@ -17,7 +17,7 @@ export default function Crew() {
         <span className="pillstat">📅 Racing autonomously since 2018</span>
       </div>
 
-      <div className="photo-band">
+      <div className="photo-band tall">
         {/* taller band + top-weighted crop so nobody's head gets cut */}
         <img src="/crew-banner.jpg" alt="The Constructor Racing team with the car" loading="lazy" style={{ height: 380, objectPosition: 'center 22%' }} />
         <div className="pb-cap">The crew and the car — Yas Marina, race week.</div>
