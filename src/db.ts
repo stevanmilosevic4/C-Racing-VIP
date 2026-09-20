@@ -76,11 +76,33 @@ export function insertActivity(rec: ActivityRow) {
   }
 }
 
+function mapActivity(data: any[]): ActivityRow[] {
+  return data.map((r: any) => ({ name: r.name, role: r.role, action: r.action, detail: r.detail ?? undefined, ts: new Date(r.created_at).getTime() }))
+}
+
 export async function fetchActivity(): Promise<ActivityRow[]> {
   if (!supabase) return lsGet<ActivityRow[]>(ACT_KEY, [])
-  const { data, error } = await supabase.from('activity').select('*').order('created_at', { ascending: true }).limit(ACT_CAP)
+  // Most recent ACT_CAP events (fetch newest-first, then flip back to
+  // chronological order) — ascending+limit would return the OLDEST rows
+  // and silently hide everything recent once the table grows past the cap.
+  const { data, error } = await supabase.from('activity').select('*').order('created_at', { ascending: false }).limit(ACT_CAP)
   if (error || !data) return lsGet<ActivityRow[]>(ACT_KEY, [])
-  return data.map((r: any) => ({ name: r.name, role: r.role, action: r.action, detail: r.detail ?? undefined, ts: new Date(r.created_at).getTime() }))
+  return mapActivity(data).reverse()
+}
+
+// The complete activity history, paged past the per-request cap. Used by
+// the admin CSV export so analytics cover the whole event, not a window.
+export async function fetchAllActivity(): Promise<ActivityRow[]> {
+  if (!supabase) return lsGet<ActivityRow[]>(ACT_KEY, [])
+  const out: ActivityRow[] = []
+  const PAGE = 1000
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await supabase.from('activity').select('*')
+      .order('created_at', { ascending: true }).range(from, from + PAGE - 1)
+    if (error) return out.length ? out : lsGet<ActivityRow[]>(ACT_KEY, [])
+    out.push(...mapActivity(data ?? []))
+    if (!data || data.length < PAGE) return out
+  }
 }
 
 export function subscribeActivity(cb: () => void): () => void {

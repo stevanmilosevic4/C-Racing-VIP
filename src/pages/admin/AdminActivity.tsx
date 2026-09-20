@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { timeAgo, fmtTime, type Activity } from '../../activity'
-import { fetchActivity, subscribeActivity, clearActivity, dbEnabled } from '../../db'
+import { fetchActivity, fetchAllActivity, subscribeActivity, clearActivity, dbEnabled } from '../../db'
 import { useToast } from '../../hooks'
 
 type Person = { name: string; role: 'vip' | 'admin'; events: number; logins: number; last: number; first: number }
@@ -82,6 +82,26 @@ export default function AdminActivity() {
     URL.revokeObjectURL(link.href)
   }
 
+  // Raw dump of the ENTIRE activity history (every sign-in, page view and
+  // action, all users, no cap) — the source data for usage analytics.
+  async function exportActivity() {
+    show('Fetching full history…')
+    const rows = await fetchAllActivity()
+    if (rows.length === 0) { show('No activity to export yet'); return }
+    const esc = (v: string | number) => '"' + String(v).replace(/"/g, '""') + '"'
+    const csv = '﻿' + [
+      ['Timestamp', 'Name', 'Role', 'Action', 'Detail'].map(esc).join(','),
+      ...rows.map((r) => [new Date(r.ts).toISOString(), r.name, r.role, r.action, r.detail ?? ''].map(esc).join(',')),
+    ].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `a2rl-activity-log-${new Date().toISOString().slice(0, 10)}.csv`
+    link.click()
+    URL.revokeObjectURL(link.href)
+    show(`Exported ${rows.length.toLocaleString()} events`)
+  }
+
   return (
     <div className="wrap">
       <div className="eyebrow">Organizer</div>
@@ -102,6 +122,7 @@ export default function AdminActivity() {
         </div>
         <span className="nav-role" style={{ marginLeft: 'auto' }}>{filtered.length} events · {people.length} people</span>
         <button className="btn btn-dark btn-sm" onClick={exportGuests}>⬇ Export registered guests</button>
+        <button className="btn btn-dark btn-sm" onClick={exportActivity}>⬇ Export activity CSV</button>
         <button className="btn btn-ghost btn-sm" onClick={clear}>Clear log</button>
       </div>
 
