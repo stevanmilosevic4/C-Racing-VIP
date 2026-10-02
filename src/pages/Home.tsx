@@ -22,9 +22,9 @@ export default function Home() {
         </svg>
         <div className="hero-grid">
           <div>
-            <div className="kick">Tuesday · On the road to Imola</div>
+            <div className="kick">Next stop · Yas Marina, Abu Dhabi</div>
             <h1>Hello,<br />{firstName}.</h1>
-            <p className="sub">Race day is coming. Here is everything for your trip to Imola and the A2RL autonomous racing finals.</p>
+            <p className="sub">The season moves to Abu Dhabi — and for the first time, Constructor fields <b>two cars</b>. Here is everything for the October testing window at Yas Marina, including how to visit the garage.</p>
             <div style={{ display: 'flex', gap: 12, marginTop: 24, flexWrap: 'wrap' }}>
               <Link to="/agenda" className="btn btn-red">View the agenda</Link>
               <Link to="/book" className="btn btn-ghost">Book a garage visit</Link>
@@ -32,7 +32,7 @@ export default function Home() {
           </div>
 
           <div>
-            <Countdown target={EVENT.raceDay} title="Kick-off in — Race Day, 5 Sep" />
+            <Countdown target={EVENT.twoCars} title="Two cars on track — Sun 11 Oct" />
             <div className="mini-timers">
               {COUNTDOWN_TARGETS.map((t) => (
                 <MiniTimer key={t.label} target={t.date} label={t.label} note={t.note} />
@@ -99,7 +99,8 @@ export default function Home() {
           <p className="blurb">
             Yas Marina, April 2024 — the first autonomous formula race in history, and Constructor's
             car crossed the line second, pulling off the first-ever autonomous overtake on an F1
-            circuit on the way. This is that story, told by the team. Imola is the next chapter.
+            circuit on the way. This is that story, told by the team. Now we return to that same
+            circuit — this time with two cars.
           </p>
         </div>
       </div>

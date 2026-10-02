@@ -30,7 +30,7 @@ export const TEAMS: Team[] = [
     est: '2018',
     lastYear: '6th · Grand Final',
     drivers: 'Roborace champions · P2 in A2RL Season 1',
-    blurb: 'The home team — with the longest autonomous-racing pedigree on the grid: racing since 2018, champions of Roborace in 2022, P2 in A2RL\'s inaugural 2024 race with the first-ever autonomous overtake on an F1 circuit, then taken out of last season\'s six-car Grand Final by contact from behind. Imola, in the university\'s 25th-anniversary year, is the rematch.',
+    blurb: 'The home team — with the longest autonomous-racing pedigree on the grid: racing since 2018, champions of Roborace in 2022, P2 in A2RL\'s inaugural 2024 race with the first-ever autonomous overtake on an F1 circuit, then taken out of last season\'s six-car Grand Final by contact from behind. After Imola, the team heads back to Yas Marina for October testing — fielding two cars for the first time: #8 "Constructor AI" and its brand-new sister car.',
   },
   {
     id: 'tum',

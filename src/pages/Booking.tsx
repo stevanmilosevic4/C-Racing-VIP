@@ -4,10 +4,10 @@ import { useSynced, useToast } from '../hooks'
 import { logActivity } from '../activity'
 import { BOOKINGS_KEY, emailBookingNotification, type BookingRecord } from '../data/bookings'
 
-// Real bookable days (from the series plan): testing 21–27 Jul and
-// 2–11 Aug 2026, plus finals week 31 Aug – 4 Sep (garage base; the car
-// runs only once or twice, so track action isn't guaranteed).
-// Exact daily run-plan is set closer to the date — guests pick a preferred day.
+// Bookable days: the October testing window at Yas Marina, Abu Dhabi.
+// Guests are welcome on any test day — a team member accompanies every
+// visit, and names & dates are confirmed with the crew in advance.
+// 11–14 Oct are the prime days: Track Time 14:00–00:00, two cars running.
 function testingDays(): { id: string; label: string; window: string }[] {
   const days: { id: string; label: string; window: string }[] = []
   const fmt = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: '2-digit', month: 'short' })
@@ -15,11 +15,20 @@ function testingDays(): { id: string; label: string; window: string }[] {
     const date = new Date(Date.UTC(y, m - 1, d))
     days.push({ id: `${y}-${m}-${d}`, label: fmt.format(date), window })
   }
-  // Bookable: race day only — garage tours & VIP visits happen on 5 September.
-  push(2026, 9, 5, 'Race Day')
+  push(2026, 10, 8, 'First track day · pro-driver seminar')
+  push(2026, 10, 9, 'Static day at the track')
+  push(2026, 10, 10, 'Sim Sprint Final')
+  push(2026, 10, 11, 'Track Time 14:00–00:00 · two cars — best days')
+  push(2026, 10, 12, 'Track Time 14:00–00:00 · best days')
+  push(2026, 10, 13, 'Track Time 14:00–00:00 · best days')
+  push(2026, 10, 14, 'Track Time 14:00–00:00 · best days')
+  push(2026, 10, 16, 'Track Time 14:00–00:00')
+  push(2026, 10, 17, 'Track Time 14:00–00:00')
+  push(2026, 10, 19, 'Track Time 14:00–00:00 · final day')
   return days
 }
 const DAYS = testingDays()
+const DEFAULT_DAY = '2026-10-11'
 
 // What guests can experience on a testing-day visit.
 const ACTIVITIES = [
@@ -39,7 +48,11 @@ export default function BookingPage() {
   const { msg, show } = useToast()
   const [booking, setBooking] = useSynced<Booking | null>(`cxa2rl.booking:${user?.name ?? 'guest'}`, null)
   const [, setAllBookings] = useSynced<BookingRecord[]>(BOOKINGS_KEY, [])
-  const [dayId, setDayId] = useState<string>(booking?.dayId ?? DAYS[0].id)
+  // A booking carried over from Imola has a day outside this window —
+  // treat it as unset so the form starts on a valid October day.
+  const [dayId, setDayId] = useState<string>(
+    booking?.dayId && DAYS.some((d) => d.id === booking.dayId) ? booking.dayId : DEFAULT_DAY
+  )
   const [people, setPeople] = useState(booking?.people ?? 1)
   const [activities, setActivities] = useState<string[]>(booking?.activities ?? [])
   const [note, setNote] = useState(booking?.note ?? '')
@@ -82,9 +95,9 @@ export default function BookingPage() {
 
   return (
     <div className="wrap">
-      <div className="eyebrow">Testing Days</div>
+      <div className="eyebrow">Abu Dhabi · October Testing</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Book a Visit</h1>
-      <p className="page-sub">Garage tours and VIP visits happen on <b>race day — Saturday 5 September</b> — before the 18:30 final: see the car and the garage up close, meet the engineers, and settle into the lounge for the race. Pick what you’d like to do and how many you are; we’ll confirm your schedule.</p>
+      <p className="page-sub">Come see the team at work at <b>Yas Marina</b> during the October testing window — for the first time with <b>two Constructor cars</b>. Guests are welcome on any test day; a team member accompanies every visit, so we confirm names and dates with the crew in advance. The prime days are <b>11–14 October</b>, when Track Time runs 14:00–midnight. Pick your day and what you’d like to do; we’ll confirm your schedule.</p>
 
       {booking && day && (
         <div className="card" style={{ padding: 18, marginTop: 22, borderLeft: '4px solid var(--green)', display: 'flex', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
@@ -117,8 +130,8 @@ export default function BookingPage() {
           <h2 style={{ fontSize: 18, marginBottom: 16 }}>Your visit</h2>
           <label className="field"><span>Guest</span><input value={user?.name ?? ''} readOnly /></label>
           <label className="field"><span>Day</span>
-            <select value={dayId || DAYS[0].id} onChange={(e) => setDayId(e.target.value)}>
-              {DAYS.map((d) => <option key={d.id} value={d.id}>{d.label} — tours before the 18:30 final</option>)}
+            <select value={dayId || DEFAULT_DAY} onChange={(e) => setDayId(e.target.value)}>
+              {DAYS.map((d) => <option key={d.id} value={d.id}>{d.label} — {d.window}</option>)}
             </select>
           </label>
           <label className="field"><span>How many people</span>

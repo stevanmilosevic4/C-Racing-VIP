@@ -40,9 +40,9 @@ export default function Predict() {
       <div className="eyebrow">Podium Bet · Bragging rights only</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Place Your Bet</h1>
       <p className="page-sub">
-        Who crosses the line first at Imola? Call the full finishing order — drag the teams into the order you
-        back them to finish. Lock it in before lights-out on race day and we’ll see how sharp your instincts are.
-        No money, no stakes — just paddock glory.
+        Who crosses the line first when the lights next go out? Call the full finishing order — drag the teams
+        into the order you back them to finish, and we’ll see how sharp your instincts are when the season’s
+        next race comes around. No money, no stakes — just paddock glory.
       </p>
 
       {/* BET SLIP — your podium */}

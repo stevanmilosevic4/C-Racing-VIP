@@ -74,6 +74,9 @@ function BackBar() {
 // the shared backend (keyed by email), so it never re-appears, on any
 // device. Guests can still answer or update later from their Profile.
 const PROMPTED_KEY = 'cxa2rl.hotelPrompted'
+// Imola-era prompt (Imola hotels + race-week WhatsApp group) — switched off
+// for the Abu Dhabi testing leg. Flip to true to re-enable for a future race.
+const HOTEL_PROMPT_ENABLED = false
 function HotelGate() {
   const { user } = useAuth()
   const [hotels] = useSynced<Record<string, HotelRecord>>(HOTELS_KEY, {})
@@ -84,6 +87,7 @@ function HotelGate() {
   const seen = Boolean(prompted?.[key])
 
   useEffect(() => {
+    if (!HOTEL_PROMPT_ENABLED) return
     if (open) return // never interfere once showing (saving mid-flow flips `answered`)
     if (!user || user.role !== 'vip' || answered || seen) return
     try { if (sessionStorage.getItem('cxa2rl.hotelPromptSeen')) return } catch { /* ignore */ }

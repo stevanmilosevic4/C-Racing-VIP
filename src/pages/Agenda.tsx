@@ -5,7 +5,7 @@ export default function Agenda() {
     <div className="wrap">
       <div className="eyebrow">Series Agenda</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Agenda</h1>
-      <p className="page-sub">From relaxed testing days to the Imola finals — and on to Abu Dhabi. Deliberately flexible: test runs are decided in the moment, so there are no fixed timestamps. Pick your day, tell us how many you are via <b>Book a Visit</b>, and we'll arrange your tour guide.</p>
+      <p className="page-sub">The season moves to <b>Yas Marina, Abu Dhabi</b> for the October testing window — with two Constructor cars for the first time. Guests are welcome on any test day, with a team member accompanying every visit. Pick your day and tell us how many you are via <b>Book a Visit</b>, and we'll confirm your schedule with the crew.</p>
 
       <div className="photo-band">
         <img src="/gallery/971.jpg" alt="The pit lane at dusk" loading="lazy" />
