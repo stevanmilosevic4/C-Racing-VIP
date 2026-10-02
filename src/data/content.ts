@@ -44,7 +44,7 @@ export const SPOTLIGHTS: Spotlight[] = [
     badge: 'Constructor',
     badgeClass: 'tag-amber',
     title: 'Constructor University on the grid',
-    body: 'The build, the long nights, and the autonomy stack that took navy & red to P2 in the league\'s first season and the six-car Grand Final in its second. Next stop: Imola.',
+    body: 'The build, the long nights, and the autonomy stack that took navy & red to P2 in the league\'s first season and the six-car Grand Final in its second — and to Imola for A2RL\'s international debut. Next stop: home again, Yas Marina.',
     meta: 'Behind the scenes',
     img: '/gallery/741.jpg',
   },
@@ -72,45 +72,44 @@ export const CREW: Crew[] = [
   { id: 'c9', name: 'Danila Buival', role: 'Autonomous Driving Engineer · Intern', color: '#b73a2b', fact: 'On the team building the future of autonomous racing, one lap at a time.' },
 ]
 
-export const IMOLA = {
-  // Gallery — set `img` to a file in /public (e.g. '/imola-autodromo.jpg') to show a photo.
+export const ABU_DHABI = {
+  // Gallery — real shots; drop more photos into /public and point `img` at them.
   gallery: [
-    { caption: 'Autodromo Enzo e Dino Ferrari — the main straight on race day', img: '/Autodromo Imola.jpg' },
-    { caption: 'Rocca Sforzesca — the medieval fortress in Imola’s old town', img: '/Old town Imola.webp' },
-    { caption: 'Bologna — the regional capital, 35 km away', img: '/Emilia Romagna.webp' },
+    { caption: 'Yas Marina Circuit — A2RL\'s home track, racing under floodlights', img: '/Yas Marina.jpg' },
+    { caption: 'The pit lane at dusk — Track Time runs 14:00 to midnight', img: '/gallery/971.jpg' },
+    { caption: 'Constructor in the Yas Marina garage', img: '/gallery/741.jpg' },
   ],
   intro:
-    'Imola sits in the Emilia-Romagna region of northern Italy, on the river Santerno between Bologna and the Adriatic coast. A compact, walkable town of about 70,000, it is known worldwide for one thing above all — its racing circuit — but there is a medieval heart, a Sforza castle, and some of Italy\'s best food waiting just beyond the paddock.',
+    'Abu Dhabi is the capital of the United Arab Emirates — a modern island city on the Arabian Gulf, and the birthplace of A2RL. The action happens on Yas Island: a purpose-built entertainment district where the circuit, hotels, theme parks and the marina all sit within a few minutes of each other. In October the weather is warm and dry, which is exactly why our track running goes from afternoon deep into the floodlit night.',
   facts: [
-    { n: '1953', t: 'The circuit opened', d: 'The Autodromo first hosted racing in 1953, named later for Enzo Ferrari and his son Dino.' },
-    { n: '~70k', t: 'Population', d: 'A relaxed town that swells with hundreds of thousands of fans on a race weekend.' },
-    { n: '4.9 km', t: 'Circuit length', d: 'Anti-clockwise, old-school, and one of the few classic tracks left on the calendar.' },
-    { n: '5 zones', t: 'Wine country', d: 'You are in the heart of Sangiovese and Albana di Romagna country.' },
+    { n: '2009', t: 'Yas Marina opens', d: 'Purpose-built on Yas Island, the circuit has hosted Formula 1\'s season finale — the Abu Dhabi Grand Prix — since 2009.' },
+    { n: '5.28 km', t: 'Circuit length', d: '16 corners since the 2021 reconfiguration, famous for twilight racing under floodlights with the W hotel straddling the track.' },
+    { n: '2024', t: 'A2RL was born here', d: 'The first-ever A2RL race ran at Yas Marina in April 2024 — Constructor took P2 and the first autonomous overtake on an F1 circuit.' },
+    { n: '~33°C', t: 'October days', d: 'Warm and sunny with mild evenings — Track Time runs 14:00–00:00 so the fastest laps come after dark.' },
   ],
   todo: [
-    { h: 'Rocca Sforzesca', p: 'The 14th-century Sforza fortress in the old town — moat, towers, and a small museum. The medieval counterweight to all that carbon fibre.' },
-    { h: 'Walk the old circuit roads', p: 'Tamburello, Villeneuve, the Variante Alta — even off a race weekend you can feel the history walking the parkland the track runs through.' },
-    { h: 'Piazza Matteotti & the centro', p: 'Aperitivo in the main square, porticoes, gelato, and the daily rhythm of an Emilian town.' },
-    { h: 'Eat Romagnolo', p: 'Piadina flatbread, tortellini in brodo, tagliatelle al ragù, and Sangiovese. This is arguably the best food region in Italy.' },
+    { h: 'Yas Island itself', p: 'Ferrari World (home of the world\'s fastest roller coaster), Warner Bros. World, Yas Waterworld, SeaWorld and Yas Mall — all a few minutes from the paddock. Evenings end at Yas Bay\'s waterfront restaurants.' },
+    { h: 'Sheikh Zayed Grand Mosque', p: 'One of the world\'s largest and most beautiful mosques — 82 domes, reflective pools and white marble. Go at sunset; free entry, modest dress required (provided on site).' },
+    { h: 'Louvre Abu Dhabi', p: 'Jean Nouvel\'s floating dome on Saadiyat Island, with its famous "rain of light" — a world-class museum 25 minutes from Yas.' },
+    { h: 'The Corniche & Qasr Al Watan', p: 'Eight kilometres of waterfront promenade downtown, plus the working presidential palace — opulent, vast, and open to visitors.' },
   ],
   nearby: [
-    { city: 'Bologna', dist: '~35 km · 30 min', note: 'The regional capital — porticoes, towers, and the oldest university in the world.' },
-    { city: 'Faenza', dist: '~16 km · 15 min', note: 'World-famous for ceramics ("faience" is named after it).' },
-    { city: 'Ravenna', dist: '~50 km · 45 min', note: 'Byzantine mosaics, a UNESCO World Heritage city, and Dante\'s tomb.' },
-    { city: 'Modena', dist: '~70 km · 50 min', note: 'Balsamic vinegar, Ferrari, Pavarotti, and Osteria Francescana.' },
-    { city: 'Florence', dist: '~100 km · 1h', note: 'The Renaissance capital, an easy day trip over the Apennines.' },
+    { city: 'Yas Island', dist: 'you are here', note: 'Circuit, hotels, theme parks, mall and marina — everything within ~10 minutes.' },
+    { city: 'Saadiyat Island', dist: '~20 min', note: 'Louvre Abu Dhabi, white-sand beaches and the cultural district.' },
+    { city: 'Downtown & Corniche', dist: '~30 min', note: 'The city centre — Qasr Al Hosn, Emirates Palace and the waterfront.' },
+    { city: 'Dubai', dist: '~1 h', note: 'Burj Khalifa, the Dubai Mall and the marina — an easy day trip up the coast.' },
+    { city: 'Al Ain', dist: '~90 min', note: 'The UNESCO-listed oasis city at the foot of Jebel Hafeet — the green side of the Emirates.' },
   ],
 }
 
 export type F1Event = { yr: string; title: string; note: string }
 export const F1_HISTORY: F1Event[] = [
-  { yr: '1980', title: 'First Italian GP at Imola', note: 'Imola hosted the Italian Grand Prix once, in 1980, before Monza returned to the calendar.' },
-  { yr: '1981', title: 'San Marino GP begins', note: 'From 1981 the circuit hosted the San Marino Grand Prix — Italy\'s "second" F1 race, named for the nearby microstate.' },
-  { yr: '1994', title: 'A weekend that changed F1', note: 'The darkest weekend in the sport: the loss of Roland Ratzenberger and Ayrton Senna led to sweeping, lasting safety reforms.' },
-  { yr: '2006', title: 'End of the San Marino GP', note: 'The last San Marino Grand Prix was held in 2006 before Imola dropped off the calendar.' },
-  { yr: '2020', title: 'F1 returns', note: 'Imola came back as the Emilia-Romagna Grand Prix — a fan and driver favourite for its old-school character — and ran every season through 2025.' },
-  { yr: '2025', title: 'The last Grand Prix (for now)', note: 'The May 2025 Emilia-Romagna GP proved to be the final F1 race at Imola: the circuit dropped off the 2026 calendar, its slot taken by the new Madrid street race.' },
-  { yr: '2026', title: 'The big comeback — autonomous racing', note: 'Top-level racing returns to the Santerno valley: the A2RL autonomous racing series brings its testing days and finals to Imola. A historic circuit opens a brand-new chapter — no one behind the wheel.' },
+  { yr: '2009', title: 'Yas Marina opens', note: 'The circuit debuts as Formula 1\'s first day-into-night race and becomes the championship\'s season finale.' },
+  { yr: '2010', title: 'The first title decider', note: 'Four drivers arrive with a shot at the championship; Sebastian Vettel leaves as F1\'s youngest-ever world champion. Yas Marina becomes the place where seasons are settled.' },
+  { yr: '2021', title: 'The most dramatic finale in F1 history', note: 'Verstappen passes Hamilton on the final lap of the final race for the title. The same year, the circuit is reconfigured — 16 faster, more open corners built for overtaking.' },
+  { yr: '2024', title: 'A2RL — a new kind of racing is born', note: 'The world\'s first full-size autonomous racing league launches at Yas Marina: Super Formula cars, no drivers. Constructor finishes P2 with the first-ever autonomous overtake on an F1 circuit.' },
+  { yr: '2025', title: 'The six-car Grand Final', note: 'The largest autonomous race ever run — six driverless SF23s wheel-to-wheel under the Yas Marina lights.' },
+  { yr: '2026', title: 'The series comes home', note: 'After A2RL\'s first international race at Imola, the season returns to Yas Marina — and from October testing, Constructor fields two cars for the first time.' },
 ]
 
 // Constructor's road in autonomous racing — shown below the crew.
@@ -120,7 +119,8 @@ export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
   { yr: '2022', title: 'Champions of Roborace', note: 'After winning multiple races and leading most of the 2021 season, the team takes the Roborace Season Beta title. Before A2RL even existed, Constructor Racing were already autonomous racing champions.' },
   { yr: '2024', title: 'A2RL arrives — P2, and the first overtake', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, nobody driving. Constructor finishes second, 27 seconds behind the winner, and pulls off the first-ever autonomous overtake on an F1 circuit along the way.' },
   { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina. Racing hard until hit from behind mid-corner by a rival\'s failed overtake, the car is classified sixth. The pace was real; the finish never came.' },
-  { yr: '2026', title: 'Imola — unfinished business', note: 'A2RL goes international for the first time, and Constructor arrives at the Autodromo fighting through qualification for a place on the grid — in the university\'s 25th-anniversary year. Testing in July and August. Finals, 5 September. Be there for the rematch.' },
+  { yr: '2026', title: 'Imola — the international debut', note: 'A2RL goes international for the first time, and Constructor takes on the Autodromo Enzo e Dino Ferrari in the university\'s 25th-anniversary year — a summer of testing crowned by the 5 September final, with more than a hundred VIP guests in the crew.' },
+  { yr: '2026', title: 'Back home — two cars at Yas Marina', note: 'October testing in Abu Dhabi marks a Constructor first: two cars, with #8 "Constructor AI" joined by its brand-new sister car, building to the season finale where it all began.' },
 ]
 
 export const TICKET_PERKS = [

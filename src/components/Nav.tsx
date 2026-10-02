@@ -11,7 +11,7 @@ const VIP_LINKS = [
   { to: '/predict', label: 'Podium Bet' },
   { to: '/crew', label: 'Crew' },
   { to: '/book', label: 'Book a Visit' },
-  { to: '/imola', label: 'Imola' },
+  { to: '/abudhabi', label: 'Abu Dhabi' },
 ]
 
 const ADMIN_LINKS = [

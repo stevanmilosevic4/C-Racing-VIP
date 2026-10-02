@@ -5,7 +5,7 @@ export default function Participants() {
     <div className="wrap">
       <div className="eyebrow">The Grid · Racing Teams</div>
       <h1 className="page-title" style={{ marginTop: 10 }}>Race Teams</h1>
-      <p className="page-sub">The real 2026 A2RL field headed for Imola — up to five autonomous SF23s on 5 September. TUM, PoliMOVE and Unimore qualified on last season’s results; Kinetiz and Constructor Racing fight through qualification for the remaining grid spots.</p>
+      <p className="page-sub">The 2026 A2RL field — five teams of autonomous SF23s, from the Imola international debut to the season finale back home at Yas Marina. Reigning champions TUM, PoliMOVE, Unimore, Kinetiz and Constructor Racing — which from October testing runs two cars.</p>
 
       <div className="photo-band">
         <img src="/gallery/AR2.jpeg" alt="A2RL cars on track" loading="lazy" />

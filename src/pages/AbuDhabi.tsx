@@ -1,18 +1,18 @@
-import { IMOLA, F1_HISTORY } from '../data/content'
+import { ABU_DHABI, F1_HISTORY } from '../data/content'
 
-export default function Imola() {
+export default function AbuDhabi() {
   return (
     <div className="wrap">
-      <section className="imola-hero">
-        <div className="kick" style={{ color: '#1e9bf0', fontWeight: 800, letterSpacing: '.18em', textTransform: 'uppercase', fontSize: 12 }}>Host City</div>
-        <h1 style={{ fontSize: 'clamp(38px,7vw,64px)', fontWeight: 900, marginTop: 12 }}>Imola</h1>
-        <p style={{ color: 'rgba(255,255,255,.75)', marginTop: 14, maxWidth: 620, lineHeight: 1.65 }}>{IMOLA.intro}</p>
+      <section className="imola-hero" style={{ backgroundImage: 'linear-gradient(rgba(10,18,38,.78), rgba(10,18,38,.86)), url("/Yas Marina.jpg")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="kick" style={{ color: '#1e9bf0', fontWeight: 800, letterSpacing: '.18em', textTransform: 'uppercase', fontSize: 12 }}>Host City · Yas Marina</div>
+        <h1 style={{ fontSize: 'clamp(38px,7vw,64px)', fontWeight: 900, marginTop: 12 }}>Abu Dhabi</h1>
+        <p style={{ color: 'rgba(255,255,255,.75)', marginTop: 14, maxWidth: 620, lineHeight: 1.65 }}>{ABU_DHABI.intro}</p>
       </section>
 
       {/* FACTS */}
       <div className="section-head"><div><div className="eyebrow">Interesting facts</div><h2 style={{ marginTop: 8 }}>Know before you go</h2></div></div>
       <div className="grid cols-4">
-        {IMOLA.facts.map((f) => (
+        {ABU_DHABI.facts.map((f) => (
           <div key={f.t} className="card fact-card">
             <div className="n">{f.n}</div>
             <div className="t">{f.t}</div>
@@ -23,7 +23,7 @@ export default function Imola() {
 
       {/* PHOTOS */}
       <div className="grid cols-3" style={{ marginTop: 40 }}>
-        {IMOLA.gallery.map((g) => (
+        {ABU_DHABI.gallery.map((g) => (
           <div key={g.caption} className="card spot">
             <div className="media" style={g.img ? { backgroundImage: `url("${encodeURI(g.img)}")`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
               {!g.img && <span className="ph">{g.caption}</span>}
@@ -40,7 +40,7 @@ export default function Imola() {
       {/* WHAT TO DO */}
       <div className="section-head"><div><div className="eyebrow">What to do</div><h2 style={{ marginTop: 8 }}>Beyond the paddock</h2></div></div>
       <div className="grid cols-2">
-        {IMOLA.todo.map((t) => (
+        {ABU_DHABI.todo.map((t) => (
           <div key={t.h} className="card todo-card">
             <h3>{t.h}</h3>
             <p>{t.p}</p>
@@ -49,9 +49,9 @@ export default function Imola() {
       </div>
 
       {/* NEARBY */}
-      <div className="section-head"><div><div className="eyebrow">Day trips</div><h2 style={{ marginTop: 8 }}>Cities nearby</h2></div></div>
+      <div className="section-head"><div><div className="eyebrow">Getting around</div><h2 style={{ marginTop: 8 }}>From Yas Island</h2></div></div>
       <div className="grid cols-2">
-        {IMOLA.nearby.map((n) => (
+        {ABU_DHABI.nearby.map((n) => (
           <div key={n.city} className="nearby">
             <div>
               <b style={{ display: 'block', marginBottom: 3 }}>{n.city}</b>
@@ -62,8 +62,8 @@ export default function Imola() {
         ))}
       </div>
 
-      {/* F1 HISTORY */}
-      <div className="section-head"><div><div className="eyebrow">Heritage</div><h2 style={{ marginTop: 8 }}>Formula 1 at Imola</h2></div></div>
+      {/* CIRCUIT HISTORY */}
+      <div className="section-head"><div><div className="eyebrow">Heritage</div><h2 style={{ marginTop: 8 }}>Yas Marina — where seasons are settled</h2></div></div>
       <div className="card" style={{ padding: '8px 24px' }}>
         {F1_HISTORY.map((e) => (
           <div key={e.yr} className="f1-row">
