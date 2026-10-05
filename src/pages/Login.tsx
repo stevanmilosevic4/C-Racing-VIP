@@ -153,6 +153,7 @@ export default function Login() {
           <h1 style={{ marginTop: 14 }}>Autonomous racing,<br />Imola → Abu Dhabi.</h1>
           <p className="lead">Your VIP home for the A2RL series — countdown, agenda, garage visits, the teams, and now the October testing window at Yas Marina, where Constructor runs two cars for the first time.</p>
           <div className="pills">
+            <span className="pill">Imola Final · P2 🥈</span>
             <span className="pill">Testing · 5–19 Oct</span>
             <span className="pill">Two cars · from 11 Oct</span>
             <span className="pill">Track Time · 14:00–00:00</span>

@@ -42,6 +42,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* IMOLA P2 — celebration strip */}
+      <div className="cr-best" style={{ marginTop: 22, padding: '20px 24px' }}>
+        <div className="eyebrow" style={{ color: '#8fc1ff' }}>Imola result · 5 September</div>
+        <h3 style={{ fontSize: 20, marginTop: 6 }}>🥈 P2 at A2RL’s first international Grand Final</h3>
+        <p style={{ color: 'rgba(255,255,255,.8)', fontSize: 14, lineHeight: 1.6, marginTop: 6, maxWidth: 720 }}>
+          Constructor crossed the line second at the Autodromo Enzo e Dino Ferrari — on the podium at the
+          league’s international debut, with our VIP crew watching from the lounge. Next: two cars at Yas Marina.
+        </p>
+      </div>
+
       {/* 25 YEARS BANNER */}
       <div className="uni-banner" style={{ marginTop: 22 }}>
         <img className="cu-logo" src="/cu-25-white.png" alt="Constructor University · 25 Years" />

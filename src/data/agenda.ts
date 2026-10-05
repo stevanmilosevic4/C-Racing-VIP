@@ -50,8 +50,8 @@ export const PHASES: Phase[] = [
     accent: 'green',
     dates: 'Completed · 5 September 2026',
     title: 'Imola — The Grand Final',
-    summary: 'A2RL\'s international debut at the Autodromo Enzo e Dino Ferrari — thank you for being part of it.',
-    tier: 'Season memory',
+    summary: 'A2RL\'s international debut at the Autodromo Enzo e Dino Ferrari — and a podium: Constructor finished P2. Thank you for being part of it.',
+    tier: 'Season memory · P2 🥈',
     items: [],
   },
 ]

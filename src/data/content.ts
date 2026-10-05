@@ -109,7 +109,7 @@ export const F1_HISTORY: F1Event[] = [
   { yr: '2021', title: 'The most dramatic finale in F1 history', note: 'Verstappen passes Hamilton on the final lap of the final race for the title. The same year, the circuit is reconfigured — 16 faster, more open corners built for overtaking.' },
   { yr: '2024', title: 'A2RL — a new kind of racing is born', note: 'The world\'s first full-size autonomous racing league launches at Yas Marina: Super Formula cars, no drivers. Constructor finishes P2 with the first-ever autonomous overtake on an F1 circuit.' },
   { yr: '2025', title: 'The six-car Grand Final', note: 'The largest autonomous race ever run — six driverless SF23s wheel-to-wheel under the Yas Marina lights.' },
-  { yr: '2026', title: 'The series comes home', note: 'After A2RL\'s first international race at Imola, the season returns to Yas Marina — and from October testing, Constructor fields two cars for the first time.' },
+  { yr: '2026', title: 'The series comes home', note: 'After Constructor\'s P2 at A2RL\'s first international race at Imola, the season returns to Yas Marina — and from October testing, Constructor fields two cars for the first time.' },
 ]
 
 // Constructor's road in autonomous racing — shown below the crew.
@@ -119,7 +119,7 @@ export const CONSTRUCTOR_RACING_HISTORY: RacingMilestone[] = [
   { yr: '2022', title: 'Champions of Roborace', note: 'After winning multiple races and leading most of the 2021 season, the team takes the Roborace Season Beta title. Before A2RL even existed, Constructor Racing were already autonomous racing champions.' },
   { yr: '2024', title: 'A2RL arrives — P2, and the first overtake', note: 'The Abu Dhabi Autonomous Racing League runs its first race at Yas Marina — full-size Super Formula cars, nobody driving. Constructor finishes second, 27 seconds behind the winner, and pulls off the first-ever autonomous overtake on an F1 circuit along the way.' },
   { yr: '2025', title: 'The world-first six-car Grand Final', note: 'Constructor Racing makes the grid for the largest autonomous race ever run — six driverless SF23s wheel-to-wheel at Yas Marina. Racing hard until hit from behind mid-corner by a rival\'s failed overtake, the car is classified sixth. The pace was real; the finish never came.' },
-  { yr: '2026', title: 'Imola — the international debut', note: 'A2RL goes international for the first time, and Constructor takes on the Autodromo Enzo e Dino Ferrari in the university\'s 25th-anniversary year — a summer of testing crowned by the 5 September final, with more than a hundred VIP guests in the crew.' },
+  { yr: '2026', title: 'Imola — the international debut', note: 'A2RL goes international for the first time, and Constructor takes on the Autodromo Enzo e Dino Ferrari in the university\'s 25th-anniversary year — a summer of testing crowned by the 5 September final, watched by more than a hundred VIP guests — and P2 on the line: a podium at A2RL\'s international debut.' },
   { yr: '2026', title: 'Back home — two cars at Yas Marina', note: 'October testing in Abu Dhabi marks a Constructor first: two cars, with #8 "Constructor AI" joined by its brand-new sister car, building to the season finale where it all began.' },
 ]
 
