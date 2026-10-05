@@ -8,7 +8,8 @@ const VIP_LINKS = [
   { to: '/agenda', label: 'Agenda' },
   { to: '/participants', label: 'Teams' },
   { to: '/guide', label: 'Race Guide' },
-  { to: '/predict', label: 'Podium Bet' },
+  // Podium Bet hidden for the testing leg — restore this line for the next race.
+  // { to: '/predict', label: 'Podium Bet' },
   { to: '/crew', label: 'Crew' },
   { to: '/book', label: 'Book a Visit' },
   { to: '/abudhabi', label: 'Abu Dhabi' },

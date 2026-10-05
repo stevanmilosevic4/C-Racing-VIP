@@ -15,7 +15,7 @@ import Agenda from './pages/Agenda'
 import Participants from './pages/Participants'
 import AbuDhabi from './pages/AbuDhabi'
 import Guide from './pages/Guide'
-import Predict from './pages/Predict'
+// import Predict from './pages/Predict' // Podium Bet hidden for the testing leg
 import Profile from './pages/Profile'
 import Crew from './pages/Crew'
 import Booking from './pages/Booking'
@@ -149,7 +149,9 @@ export default function App() {
           <Route path="/abudhabi" element={<Protected role="vip"><AbuDhabi /></Protected>} />
           <Route path="/imola" element={<Navigate to="/abudhabi" replace />} />
           <Route path="/guide" element={<Protected role="vip"><Guide /></Protected>} />
-          <Route path="/predict" element={<Protected role="vip"><Predict /></Protected>} />
+          {/* Podium Bet hidden during the testing leg — swap the redirect back
+              for <Protected role="vip"><Predict /></Protected> for the next race. */}
+          <Route path="/predict" element={<Navigate to="/" replace />} />
           <Route path="/profile" element={<Protected role="vip"><Profile /></Protected>} />
           <Route path="/ticket" element={<Navigate to="/profile" replace />} />
           <Route path="/crew" element={<Protected role="vip"><Crew /></Protected>} />
