@@ -50,10 +50,8 @@ export const PHASES: Phase[] = [
     accent: 'green',
     dates: 'Completed · 5 September 2026',
     title: 'Imola — The Grand Final',
-    summary: 'The chapter that brought us here: race week at the Autodromo Enzo e Dino Ferrari, a VIP crew of over a hundred guests, and the 18:30 final under the Imola evening sky. Thank you for being part of it — Abu Dhabi is next.',
+    summary: 'A2RL\'s international debut at the Autodromo Enzo e Dino Ferrari — thank you for being part of it.',
     tier: 'Season memory',
-    items: [
-      { time: '5 Sep', what: 'A2RL Imola Final — watched from the Constructor VIP lounge', where: 'Autodromo Enzo e Dino Ferrari' },
-    ],
+    items: [],
   },
 ]
