@@ -13,18 +13,6 @@ export default function Home() {
 
   return (
     <div className="wrap">
-      {/* TEMPORARY — big scan-to-register QR for today's event. Remove this
-          whole block (and public/qr-lead.jpg) to restore the normal page. */}
-      <section className="card" style={{ marginTop: 18, padding: '28px 20px', textAlign: 'center' }}>
-        <div className="eyebrow">Scan to connect</div>
-        <h2 style={{ fontSize: 'clamp(22px,4vw,30px)', marginTop: 8 }}>📲 Point your camera here</h2>
-        <img
-          src="/qr-lead.jpg"
-          alt="QR code — Constructor University registration"
-          style={{ display: 'block', margin: '12px auto 0', width: 'min(92vw, 560px)', height: 'auto' }}
-        />
-      </section>
-
       {/* HERO */}
       <section className="hero">
         <svg className="speed-lines" viewBox="0 0 1200 400" preserveAspectRatio="none">
